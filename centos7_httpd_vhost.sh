@@ -34,11 +34,11 @@ echo '--HttpdConf---------------------'
 ls -dl "${v_httpd_conf}"*
 
 # mkdir vhost rootdir
-v_vhosts_fqdn_docroot="/var/www/${v_fqdn}"
+v_vhost_fqdn_docroot="/var/www/${v_fqdn}"
 echo '--FqdnDocumentRoot--------------'
-mkdir -p "${v_vhosts_fqdn_docroot}"
-ls -ld "${v_vhosts_fqdn_docroot}"*
-[ -d "${v_vhosts_fqdn_docroot}" ] || { echo "[ERROR]: $(basename "${v_vhosts_fqdn_docroot}"): Something wrong about DocumentRoot."; exit 1; }
+mkdir -p "${v_vhost_fqdn_docroot}"
+ls -ld "${v_vhost_fqdn_docroot}"*
+[ -d "${v_vhost_fqdn_docroot}" ] || { echo "[ERROR]: $(basename "${v_vhost_fqdn_docroot}"): Something wrong about DocumentRoot."; exit 1; }
 
 # gen fqdn crt & key
 v_fqdn_key=/etc/pki/tls/certs/${v_fqdn}.key
@@ -51,18 +51,18 @@ openssl x509 -days 3650 -req -signkey ${v_fqdn_key} <${v_fqdn_csr} >${v_fqdn_crt
 
 # edit fqdn conf
 v_httpd_conf_d_dir="/etc/httpd/conf.d"
-v_httpd_vhosts_fqdn_conf="${v_httpd_conf_d_dir}/httpd-vhosts-${v_fqdn}.conf"
+v_httpd_vhost_fqdn_conf="${v_httpd_conf_d_dir}/httpd-vhosts-${v_fqdn}.conf"
 [ -d "${v_httpd_conf_d_dir}" ] || { echo "[ERROR]: $(basename ${v_httpd_conf_d_dir}): Something wrong about Directory."; exit 1; }
-[ -f "${v_httpd_vhosts_fqdn_conf}" ] || touch "${v_httpd_vhosts_fqdn_conf}"
-cp -p "${v_httpd_vhosts_fqdn_conf}" "${v_httpd_vhosts_fqdn_conf}${v_backup_suffix}"
-cat <<__EOD__ >"${v_httpd_vhosts_fqdn_conf}"
+[ -f "${v_httpd_vhost_fqdn_conf}" ] || touch "${v_httpd_vhost_fqdn_conf}"
+cp -p "${v_httpd_vhost_fqdn_conf}" "${v_httpd_vhost_fqdn_conf}${v_backup_suffix}"
+cat <<__EOD__ >"${v_httpd_vhost_fqdn_conf}"
 # Edit 20170220
 
 ## http
 NameVirtualhost *:80
 <VirtualHost *:80>
     ServerName ${v_fqdn}
-    DocumentRoot ${v_vhosts_fqdn_docroot}
+    DocumentRoot ${v_vhost_fqdn_docroot}
 
     ErrorLog logs/${v_fqdn}-error_log
     CustomLog logs/${v_fqdn}-access_log combined
@@ -72,7 +72,7 @@ NameVirtualhost *:80
 NameVirtualhost *:443
 <VirtualHost *:443>
     ServerName ${v_fqdn}
-    DocumentRoot ${v_vhosts_fqdn_docroot}
+    DocumentRoot ${v_vhost_fqdn_docroot}
 
     SSLEngine on
     SSLCertificateFile ${v_fqdn_crt}
@@ -82,9 +82,9 @@ NameVirtualhost *:443
     CustomLog logs/${v_fqdn}-access_log combined
 </VirtualHost>
 __EOD__
-[ "$(diff "${v_httpd_vhosts_fqdn_conf}" "${v_httpd_vhosts_fqdn_conf}${v_backup_suffix}")" ] || \mv -f "${v_httpd_vhosts_fqdn_conf}${v_backup_suffix}" "${v_httpd_vhosts_fqdn_conf}"
+[ "$(diff "${v_httpd_vhost_fqdn_conf}" "${v_httpd_vhost_fqdn_conf}${v_backup_suffix}")" ] || \mv -f "${v_httpd_vhost_fqdn_conf}${v_backup_suffix}" "${v_httpd_vhost_fqdn_conf}"
 echo '--HttpdVhostsFqdnConf-----------'
-ls -l "${v_httpd_vhosts_fqdn_conf}"*
+ls -l "${v_httpd_vhost_fqdn_conf}"*
 
 # check conf error
 echo '--HttpdConfError----------------'
