@@ -3,29 +3,29 @@
 # check env.
 if ! egrep --quiet "CentOS.*7|Red.*7" /etc/system-release
 then
-        echo "This program supports only CentOS 7 or RedHat Enterprise Linux 7."
-        exit 1
+	echo "This program supports only CentOS 7 or RedHat Enterprise Linux 7."
+	exit 1
 fi
 if [ $(whoami) != "root" ]
 then
-        echo "This program needs to be executed by root user."
-        exit 1
+	echo "This program needs to be executed by root user."
+	exit 1
 fi
 
 # arguments
 if [ $# -ge 1 ]
 then
-        v_fqdn=$1
+	v_fqdn=$1
 else
-        echo "$(basename $0) must have at least one argument."
-        exit 1
+	echo "$(basename $0) must have at least one argument."
+	exit 1
 fi
 
 # install httpd
 echo '--Httpd-------------------------'
 if ! rpm -q httpd openssl mod_ssl
 then
-        yum -y install httpd openssl mod_ssl
+	yum -y install httpd openssl mod_ssl
 fi
 
 # status httpd
@@ -48,11 +48,11 @@ v_logrotate_httpd="/etc/logrotate.d/httpd"
 echo '--MakeDocumentRoot--------------'
 if [ -d "${v_docroot}" ]
 then
-        mkdir -p "${v_vhosts_fqdn_docroot}"
-        ls -ld "${v_docroot}" "${v_docroot}"/*
+	mkdir -p "${v_vhosts_fqdn_docroot}"
+	ls -ld "${v_docroot}" "${v_docroot}"/*
 else
-        echo 'httpd.conf: Something wrong about DocumentRoot.'
-        exit 1
+	echo 'httpd.conf: Something wrong about DocumentRoot.'
+	exit 1
 fi
 
 # edit vhosts conf
