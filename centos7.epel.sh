@@ -16,4 +16,5 @@ then
 fi
 
 # disable default-enable
-yum-config-manager --disable epel*
+yum-config-manager --disable epel* >/dev/null 2>&1
+echo 'epel.repo is disabled as default'
