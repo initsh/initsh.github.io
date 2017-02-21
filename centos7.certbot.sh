@@ -18,7 +18,7 @@ fi
 echo
 echo
 echo
-echo '-- Let's Encrypt! --------------'
+echo "-- Let's Encrypt ---------------"
 echo 'EMAIL=mail@www.example.com'
 echo 'WEBROOT=/var/www/www.example.com'
 echo 'FQDN=www.example.com'
