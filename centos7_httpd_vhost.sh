@@ -45,9 +45,9 @@ v_fqdn_key=/etc/pki/tls/certs/${v_fqdn}.key
 v_fqdn_csr=/etc/pki/tls/certs/${v_fqdn}.csr
 v_fqdn_crt=/etc/pki/tls/certs/${v_fqdn}.crt
 echo '--GenerateSslKeys---------------'
-openssl genrsa 2048 >${v_fqdn_key}
-openssl req -new -key ${v_fqdn_key} -subj "/C=JP/CN=${v_fqdn}" >${v_fqdn_csr}
-openssl x509 -days 3650 -req -signkey ${v_fqdn_key} <${v_fqdn_csr} >${v_fqdn_crt}
+[ -f "${v_fqdn_key}" ] || openssl genrsa 2048 >${v_fqdn_key}
+[ -f "${v_fqdn_csr}" ] || openssl req -new -key ${v_fqdn_key} -subj "/C=JP/CN=${v_fqdn}" >${v_fqdn_csr}
+[ -f "${v_fqdn_crt}" ] || openssl x509 -days 3650 -req -signkey ${v_fqdn_key} <${v_fqdn_csr} >${v_fqdn_crt}
 
 # edit fqdn conf
 v_httpd_conf_d_dir="/etc/httpd/conf.d"
