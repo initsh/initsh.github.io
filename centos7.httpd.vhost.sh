@@ -13,10 +13,6 @@ then
 	yum -y install httpd openssl mod_ssl
 fi
 
-# status httpd
-echo '--StatusHttpd-------------------'
-systemctl status httpd
-
 # varibale
 v_fqdn=$1
 v_date="$(date +%Y%m%d)"
@@ -125,6 +121,10 @@ cat <<'__EOD__' >${v_logrotate_httpd}
 __EOD__
 echo '--logrotate.d/httpd-------------'
 ls -dl "${v_logrotate_httpd}"*
+
+# status httpd
+echo '--StatusHttpd-------------------'
+systemctl status httpd
 
 
 #EOF
