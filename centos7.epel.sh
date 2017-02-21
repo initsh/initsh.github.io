@@ -18,7 +18,7 @@ then
 fi
 
 # disable default-enable
-echo '--DisableAsDefault--------------'
+echo '--DisableRepoAsDefault----------'
 yum-config-manager --disable epel* >/dev/null 2>&1
 ls -ld /etc/yum.repos.d/epel*
 
