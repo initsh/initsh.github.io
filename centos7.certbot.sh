@@ -9,6 +9,7 @@
 . <(curl -Ls initsh.github.io/centos7.epel.sh)
 
 # install certbot
+echo '--InstallCertbot----------------'
 if ! rpm -q certbot
 then
 	yum --enablerepo=* -y install certbot
