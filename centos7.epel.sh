@@ -20,6 +20,6 @@ fi
 # disable default-enable
 echo '--DisableAsDefault--------------'
 yum-config-manager --disable epel* >/dev/null 2>&1
-ls -ld /etc/yum.repo.d/epel*
+ls -ld /etc/yum.repos.d/epel*
 
 #EOF
