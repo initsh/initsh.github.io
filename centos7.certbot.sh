@@ -16,15 +16,11 @@ then
 fi
 
 # Let's Encrypt!
-echo
-echo '--------------------------------'
 echo '--LetsEncrypt-------------------'
-echo '--------------------------------'
 echo 'EMAIL="mail@www.example.com"'
 echo 'WEBROOT="/var/www/www.example.com"'
 echo 'FQDN="www.example.com"'
 echo 'certbot certonly --webroot --email "${EMAIL}" -w "${WEBROOT}" -d "${FQDN}"'
 echo 'ls -dl /etc/letsencrypt/live/*'
-echo
 
 #EOF
