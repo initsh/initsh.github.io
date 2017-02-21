@@ -37,7 +37,7 @@ ls -dl "${v_httpd_conf}"*
 v_vhost_fqdn_docroot="/var/www/${v_fqdn}"
 echo '--FqdnDocumentRoot--------------'
 mkdir -p "${v_vhost_fqdn_docroot}"
-ls -ld "${v_vhost_fqdn_docroot}"*
+ls -dl "${v_vhost_fqdn_docroot}"*
 [ -d "${v_vhost_fqdn_docroot}" ] || { echo "[ERROR]: $(basename "${v_vhost_fqdn_docroot}"): Something wrong about DocumentRoot."; exit 1; }
 
 # gen fqdn crt & key
@@ -48,6 +48,7 @@ echo '--GenerateSslKeys---------------'
 [ -f "${v_fqdn_key}" ] || openssl genrsa 2048 >${v_fqdn_key}
 [ -f "${v_fqdn_csr}" ] || openssl req -new -key ${v_fqdn_key} -subj "/C=JP/CN=${v_fqdn}" >${v_fqdn_csr}
 [ -f "${v_fqdn_crt}" ] || openssl x509 -days 3650 -req -signkey ${v_fqdn_key} <${v_fqdn_csr} >${v_fqdn_crt}
+ls -dl "${v_fqdn_key}" "${v_fqdn_csr}" "${v_fqdn_crt}"
 
 # edit fqdn conf
 v_httpd_conf_d_dir="/etc/httpd/conf.d"
@@ -84,7 +85,7 @@ NameVirtualhost *:443
 __EOD__
 [ "$(diff "${v_httpd_vhost_fqdn_conf}" "${v_httpd_vhost_fqdn_conf}${v_backup_suffix}")" ] || \mv -f "${v_httpd_vhost_fqdn_conf}${v_backup_suffix}" "${v_httpd_vhost_fqdn_conf}"
 echo '--HttpdVhostsFqdnConf-----------'
-ls -l "${v_httpd_vhost_fqdn_conf}"*
+ls -dl "${v_httpd_vhost_fqdn_conf}"*
 
 # check conf error
 echo '--HttpdConfError----------------'
