@@ -1,13 +1,19 @@
 #!/bin/bash
 
-v_git_repo_fqdn='initsh.github.io'
-v_git_dir="github.com/initsh/${v_git_repo_fqdn}"
-v_initsh="github.com/initsh/${v_git_repo_fqdn}/initsh"
+# Edit 20170222
 
-curl -Ls "${v_git_dir}" \
+# ls
+v_github_pages='initsh.github.io'
+v_git_dir="github.com/initsh/${v_github_pages}"
+
+curl -LRs "${v_git_dir}" \
 | egrep '<a href="/[^/]+/[^/]+/blob/master/.*.sh" ' \
 | sed -r -e 's/^.*<a href="\/[^\/]+\/[^\/]+\/blob\/master\/([^"]*)" .*$/'"${v_git_repo_fqdn}"'\/\1/g'
 
+# install
+v_initsh="${v_github_pages}/initsh"
+v_bin_file="/usr/local/bin/initsh"
 
+[ -f "${v_bin_file}" ] || { curl -LRs "${v_initsh}" -o "${v_bin_file}"; chmod 755 "${v_tmp_file}"; }
 
 #EOF
