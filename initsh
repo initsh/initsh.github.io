@@ -25,14 +25,16 @@ curl -LRs "${v_initsh_url}" -o "${v_tmp_file}" \
 if [ $# -eq 0 ]
 then
 	echo "${v_git_ls}"
+	exit 0
 else
 	v_sh_name="$(echo "${v_git_ls}" | egrep "^$1" | head -n 1)"
-	echo '"${v_sh_name}"='"${v_sh_name}"
-	echo '"$(basename "$0")"='"$(basename "$0")"
-	if [ -n "${v_sh_name}" ] && [ "${v_sh_name}" -ne "$(basename "$0")" ]
+	if [ -n "${v_sh_name}" ] && [ "${v_sh_name}" != "$(basename "$0")" ]
 	then
 		v_arg_1="$2"
 		bash <(curl -LRs "${v_github_pages}/${v_sh_name}") "${v_arg_1}"
+	else
+		echo "${v_git_ls}"
+		exit 0
 	fi
 fi
 
