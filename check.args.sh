@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ ! $# -ge 1 ]
 then
-	echo "$(basename $0) must have at least one argument."
+	echo "This script must have at least 1 argument."
 	exit 1
 fi
 
