@@ -1,7 +1,25 @@
 #!/bin/bash
-v_epel_dir='http://dl.fedoraproject.org/pub/epel/6/x86_64/'
-v_epel_url="${v_epel_dir}$(curl -LRs $v_epel_dir | sed -r -e '/epel-release/!d' -e 's/^.*href="(epel-release.*\.rpm)".*$/\1/g')"
-yum -y install yum-utils "${v_epel_url}"
-yum-config-manager --disable epel*
+
+# variable
+v_epel_url='https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm'
+
+# install yum-utils
+echo '--InstallYumUtils---------------'
+if ! rpm -q yum-utils
+then
+	yum -y install yum-utils
+fi
+
+# install epel-release
+echo '--InstallEpelRepo---------------'
+if ! rpm -q epel-release
+then
+	yum -y install "${v_epel_url}"
+fi
+
+# disable default-enable
+echo '--DisableRepoAsDefault----------'
+yum-config-manager --disable epel* >/dev/null 2>&1
+ls -ld /etc/yum.repos.d/epel*
 
 #EOF
