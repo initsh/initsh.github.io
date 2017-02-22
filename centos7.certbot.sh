@@ -36,7 +36,7 @@ then
 	v_email_addr="$1"
 	v_fqdn="$2"
 	v_webroot_dir="$3"
-	certbot certonly --non-interactive --agree-tos --email "${v_email_addr} -d "${v_fqdn}" --webroot -w "${v_webroot_dir}""
+	certbot certonly --non-interactive --agree-tos --email "${v_email_addr}" -d "${v_fqdn}" --webroot -w "${v_webroot_dir}"
 	echo '--Certificate-------------------'
 	ls -dl "/etc/letsencrypt/live/${v_fqdn}/"*
 else
