@@ -26,9 +26,9 @@ then
 fi
 
 # Let's Encrypt!
-if [ -n "${echo "$1" | egrep '[^@]+@[^@\.]+\.[^@\.]+' ] \
-&& [ -n "${echo "$2" | egrep '[^\.]+\.[^\.]+' ] \
-&& [ -n "${echo "$3" | egrep '^/[^/]*' ]
+if [ -n "$(echo "$1" | egrep '[^@]+@[^@\.]+\.[^@\.]+')" ] \
+&& [ -n "$(echo "$2" | egrep '[^\.]+\.[^\.]+')" ] \
+&& [ -d "$3" ] 
 then
 	echo '--Parameters--------------------'
 	echo '{"v_fqdn": "'"$1"'", "v_webroot_dir": "'"$2"'", "v_email_addr": "'"$3"'"}' | jq .
