@@ -27,7 +27,7 @@ then
 	echo "${v_git_ls}"
 else
 	v_sh_name="$(echo "${v_git_ls}" | grep "$1" | head -n 1)"
-	if [ -n "${v_sh_name}" ]
+	if [ -n "${v_sh_name}" ] && [ "${v_sh_name}" -ne "$0" ]
 	then
 		v_arg_1="$2"
 		bash <(curl -LRs "${v_github_pages}/${v_sh_name}") "${v_arg_1}"
