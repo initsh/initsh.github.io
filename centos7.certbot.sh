@@ -14,7 +14,7 @@ if ! rpm -q certbot
 then
 	yum --enablerepo=* -y install certbot
 fi
-if ! rpm -q certbot
+if ! rpm --quiet -q certbot
 then
 	yum --enablerepo=extra,optional,epel -y install certbot
 fi
