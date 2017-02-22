@@ -15,8 +15,8 @@ v_initsh="${v_github_pages}/initsh"
 v_tmp_file="/tmp/initsh"
 v_bin_file="/usr/bin/initsh"
 
-curl -LRs "${v_initsh}" -o "${v_tmp_file}"
-chmod 755 "${v_tmp_file}"
-\mv -f "${v_tmp_file}" "${v_bin_file}"
+curl -LRs "${v_initsh}" -o "${v_tmp_file}" \
+&& chmod 755 "${v_tmp_file}" \
+&& \mv -f "${v_tmp_file}" "${v_bin_file}"
 
 #EOF
