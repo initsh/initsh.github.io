@@ -27,6 +27,7 @@ then
 	echo "${v_git_ls}"
 else
 	v_sh_name="$(echo "${v_git_ls}" | egrep "^$1" | head -n 1)"
+	echo '$0='$0
 	if [ -n "${v_sh_name}" ] && [ "${v_sh_name}" -ne "$0" ]
 	then
 		v_arg_1="$2"
