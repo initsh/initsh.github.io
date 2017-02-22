@@ -24,7 +24,8 @@ echo '--LetsEncrypt-------------------'
 echo 'EMAIL="mail@www.example.com"'
 echo 'WEBROOT="/var/www/www.example.com"'
 echo 'FQDN="www.example.com"'
-echo 'certbot certonly --non-interactive --agree-tos --webroot --email "${EMAIL}" -w "${WEBROOT}" -d "${FQDN}"'
+#echo 'certbot certonly --non-interactive --agree-tos --webroot -w "${WEBROOT}" -d "${FQDN}" --email "${EMAIL}"'
+echo 'certbot certonly --non-interactive --agree-tos --webroot -w "${WEBROOT}" -d "${FQDN}"'
 echo 'ls -dl "/etc/letsencrypt/live/${FQDN}/"*'
 
 #EOF
