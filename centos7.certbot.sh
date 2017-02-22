@@ -4,7 +4,6 @@
 [ "$(curl -LRs initsh.github.io -o /dev/null -w '%{http_code}')" -eq 200 ] || { echo "[ERROR]: $(basename $0): Can't reach initsh.github.io"; exit 1; }
 . <(curl -LRs initsh.github.io/check.centos7.sh)
 . <(curl -LRs initsh.github.io/check.root.sh)
-. <(curl -LRs initsh.github.io/check.args.sh)
 
 # install jq epel-release
 . <(curl -LRs initsh.github.io/centos7.jq.sh)
