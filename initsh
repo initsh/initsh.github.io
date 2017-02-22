@@ -9,33 +9,7 @@ v_git_dir="github.com/initsh/${v_github_pages}"
 v_git_ls="$(
 	curl -LRs "${v_git_dir}" \
 	| egrep '<a href="/[^/]+/[^/]+/blob/master/.*.sh" ' \
-	| sed -r -e 's/^.*<a href="\/[^\/]+\/[^\/]+\/blob\/master\/([^"]*)" .*$/curl -LRs '"${v_github_pages}"'\/\1/g'
+	| sed -r -e 's/^.*<a href="\/[^\/]+\/[^\/]+\/blob\/master\/([^"]*)" .*$/bash <(curl -LRs '"${v_github_pages}"'\/\1)/g'
 )"
-
-# install
-v_initsh_url="${v_github_pages}/initsh"
-v_tmp_file="/tmp/initsh"
-v_bin_file="/usr/bin/initsh"
-
-curl -LRs "${v_initsh_url}" -o "${v_tmp_file}" \
-&& chmod 755 "${v_tmp_file}" \
-&& \mv -f "${v_tmp_file}" "${v_bin_file}"
-
-# initsh
-if [ $# -eq 0 ]
-then
-	echo "${v_git_ls}"
-	exit 0
-else
-	v_sh_name="$(echo "${v_git_ls}" | egrep "${v_github_pages}/$1" | head -n 1)"
-	if [ -n "${v_sh_name}" ] && [ "${v_sh_name}" != "$(basename "$0")" ]
-	then
-		v_arg_1="$2"
-		bash <(curl -LRs "${v_github_pages}/${v_sh_name}") "${v_arg_1}"
-	else
-		echo "${v_git_ls}"
-		exit 0
-	fi
-fi
 
 #EOF
