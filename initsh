@@ -14,6 +14,6 @@ curl -LRs "${v_git_dir}" \
 v_initsh="${v_github_pages}/initsh"
 v_bin_file="/usr/local/bin/initsh"
 
-[ -f "${v_bin_file}" ] || { curl -LRs "${v_initsh}" -o "${v_bin_file}"; chmod 755 "${v_tmp_file}"; }
+[ -f "${v_bin_file}" ] || { curl -LRs "${v_initsh}" -o "${v_bin_file}"; chmod 755 "${v_bin_file}"; }
 
 #EOF
