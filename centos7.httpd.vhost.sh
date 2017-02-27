@@ -109,8 +109,10 @@ cat <<'__EOD__' >${v_logrotate_httpd}
 /var/log/httpd/*log {
     daily
     rotate 90
+    create
     ifempty
     missingok
+    dateext
     compress
     delaycompress
     sharedscripts
