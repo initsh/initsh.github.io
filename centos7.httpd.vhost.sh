@@ -107,13 +107,13 @@ cat <<'__EOD__' >${v_logrotate_httpd}
 #}
 # Edit 20170220
 /var/log/httpd/*log {
-    missingok
-    ifempty
     daily
     rotate 90
+    ifempty
+    missingok
     compress
-    sharedscripts
     delaycompress
+    sharedscripts
     postrotate
         /bin/systemctl reload httpd.service > /dev/null 2>/dev/null || true
     endscript
