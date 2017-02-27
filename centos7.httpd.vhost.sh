@@ -108,7 +108,7 @@ cat <<'__EOD__' >${v_logrotate_httpd}
 # Edit 20170220
 /var/log/httpd/*log {
     missingok
-    notifempty
+    ifempty
     daily
     rotate 90
     compress
