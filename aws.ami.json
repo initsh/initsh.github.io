@@ -1,5 +1,7 @@
 {
-	"ami-name": "CentOS Linux 7 x86_64 HVM",
-	"ami-id": "ami-eec1c380",
-	"bookmark": "https://ap-northeast-1.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-1#LaunchInstanceWizard:ami=ami-eec1c380"
+	"name": "CentOS Linux 7 x86_64 HVM",
+	"info": {
+		"ami-id": "ami-eec1c380",
+		"bookmark": "https://ap-northeast-1.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-1#LaunchInstanceWizard:ami=ami-eec1c380"
+	}
 }
