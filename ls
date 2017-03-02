@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Edit 20170222
+# Edit 20170303
 
 # ls
 v_github_pages='initsh.github.io'
