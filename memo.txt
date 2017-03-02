@@ -10,7 +10,7 @@
 # groupadd -g "$USERID" "$USERNAME"
 # useradd -u "$USERID" -g "$USERID" "$USERNAME"
 # usermod -G wheel "$USERNAME"
-# echo -e "# Edit 20170303\n${USERNAME}	ALL=(ALL)	NOPASSWD: ALL" >/etc/sudoers.d/"$USERNAME"
+# echo -e "# Edit 20170303\n${USERNAME} ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/"$USERNAME"
 
 ####
 ## firewall-cmd rich-rule
