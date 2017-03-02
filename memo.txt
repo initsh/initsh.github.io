@@ -1,0 +1,5 @@
+
+## firewall-cmd rich-rule
+# firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="888.888.888.888/32" port protocol="tcp" port="25565" accept"
+# firewall-cmd --reload
+# firewall-cmd --list-rich-rule
