@@ -53,7 +53,7 @@ then
 	echo '# ls -ld "/etc/letsencrypt/live/${v_fqdn}/"*' | StdoutLog
 	ls -dl "/etc/letsencrypt/live/${v_fqdn}/"* | StdoutLog
 else
-	v_web_server="$(ss -lntp | awk '{print $6,$4}' | egrep '443$' | sed -e 's/users:(("\([^"]+\)".*/\1/g')"
+	v_web_server="$(ss -lntp | awk '{print $6,$4}' | egrep '443$' | sed -r -e 's/users:.."([^"]+)".*/\1/g')"
 	echo "# systemctl stop ${v_web_server}" >/dev/stderr
 	echo "# certbot certonly --non-interactive --agree-tos --email ${v_email_addr} -d ${v_fqdn} --standalone-supported-challenges tls-sni-01" >/dev/stderr
 	echo "# systemctl start ${v_web_server}" >/dev/stderr
