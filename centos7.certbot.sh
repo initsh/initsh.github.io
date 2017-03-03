@@ -48,8 +48,8 @@ echo '{"v_fqdn": "'"$v_email_addr"'", "v_email_addr": "'"$v_fqdn"'"}' | jq . | S
 # install cert
 if [ -z "$(ss -lntp | awk '$0=$4' | egrep '443$')" ]
 then
-	echo 'certbot certonly --non-interactive --agree-tos --email "${v_email_addr}" -d "${v_fqdn}" --standalone-supported-challenges tls-sni-01' | StdoutLog
-	certbot certonly --non-interactive --agree-tos --email "${v_email_addr}" -d "${v_fqdn}" --standalone-supported-challenges tls-sni-01 | StdoutLog
+	echo 'certbot certonly --non-interactive --agree-tos --email "${v_email_addr}" -d "${v_fqdn}" --preferred-challenges tls-sni-01' | StdoutLog
+	certbot certonly --non-interactive --agree-tos --email "${v_email_addr}" -d "${v_fqdn}" --preferred-challenges tls-sni-01 | StdoutLog
 	echo '# ls -ld "/etc/letsencrypt/live/${v_fqdn}/"*' | StdoutLog
 	ls -dl "/etc/letsencrypt/live/${v_fqdn}/"* | StdoutLog
 else
