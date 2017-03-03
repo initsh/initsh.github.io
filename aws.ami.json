@@ -1,6 +1,5 @@
 {
-	"Type": "CentOS",
-	"Statement": [
+	"CentOS": [
 		{
 			"Name": "CentOS Linux 7 x86_64 HVM EBS 1602",
 			"Id": "ami-eec1c380",
