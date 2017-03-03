@@ -17,7 +17,7 @@ then
 fi
 if [ -n "$(echo "$2" | egrep '[^\.]+\.[^\.]+')" ]
 then
-	echo '[ERROR]: $2 needs web server's fqdn.'
+	echo '[ERROR]: $2 needs web server\'s fqdn.'
 	exit 1
 fi
 
@@ -53,7 +53,7 @@ then
 	echo '# ls -ld "/etc/letsencrypt/live/${v_fqdn}/"*' | StdoutLog
 	ls -dl "/etc/letsencrypt/live/${v_fqdn}/"* | StdoutLog
 else
-	v_web_server="$(ss -lntp | awk '{print $6,$4}' | egrep '443$' | awk -F '"' '{print $2}')"
+	v_web_server="$(ss -lntp | awk '{print $6,$4}' | egrep '443$' | sed -r -e 's/users:\(\("([^"]*)".*/\1/g')"
 	echo "# systemctl stop ${v_web_server}" >/dev/stderr
 	echo "# certbot certonly --non-interactive --agree-tos --email ${v_email_addr} -d ${v_fqdn} --standalone-supported-challenges tls-sni-01" >/dev/stderr
 	echo "# systemctl start ${v_web_server}" >/dev/stderr
