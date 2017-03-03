@@ -10,12 +10,12 @@
 . <(curl -LRs initsh.github.io/functions.sh)
 
 # check args
-if [ -n "$(echo "$1" | egrep '[^@]+@[^@\.]+\.[^@\.]+')" ]
+if [ -z "$(echo "$1" | egrep '[^@]+@[^@\.]+\.[^@\.]+')" ]
 then
 	echo '[ERROR]: $1 needs e-mail address.'
 	exit 1
 fi
-if [ -n "$(echo "$2" | egrep '[^\.]+\.[^\.]+')" ]
+if [ -z "$(echo "$2" | egrep '[^\.]+\.[^\.]+')" ]
 then
 	echo "[ERROR]: \$2 needs web server's fqdn."
 	exit 1
