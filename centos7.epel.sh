@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. <(curl -LRs initsh.github.io/check.centos6.sh)
+. <(curl -LRs initsh.github.io/check.centos7.sh)
 . <(curl -LRs initsh.github.io/check.root.sh)
 
 # functions
