@@ -28,7 +28,7 @@ yum -y install vim-enhanced	| StdoutLog
 if [ "$(jq --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 then
 	echo '# curl $url -o /usr/bin/jq' | StdoutLog
-	curl -LR https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -o /tmp/jq | StdoutLog
+	curl -LRs https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -o /tmp/jq | StdoutLog
 	{ chmod 755 /tmp/jq; \mv -f /tmp/jq /usr/bin; ls -dl /usr/bin/jq*; } | StdoutLog
 	if [ "$(jq --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 	then
