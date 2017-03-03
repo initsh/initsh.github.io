@@ -15,4 +15,20 @@
 			}
 		}
 	}
+        "ubuntu": {
+		"v1604": {
+			"ami": {
+				"name": "Ubuntu Server 16.04 LTS (HVM), SSD Volume Type",
+				"id": "ami-1bfdb67c",
+				"bookmark": "https://ap-northeast-1.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-1#LaunchInstanceWizard:ami=ami-1bfdb67c"
+			}
+		},
+		"v1404": {
+			"ami": {
+				"name": "Ubuntu Server 14.04 LTS (HVM), SSD Volume Type",
+				"id": "ami-71d79f16",
+				"bookmark": "https://ap-northeast-1.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-1#LaunchInstanceWizard:ami=ami-71d79f16"
+			}
+		}
+	}
 }
