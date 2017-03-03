@@ -6,87 +6,87 @@
 # functions
 . <(curl -LRs initsh.github.io/functions.sh)
 
-if ! rpm -q yum-utils
+if ! rpm -q yum-utils | StdoutLog
 then
 	yum -y install yum-utils | StdoutLog
 fi
 
-if ! rpm -q expect
+if ! rpm -q expect | StdoutLog
 then
 	yum -y install expect | StdoutLog
 fi
 
-if ! rpm -q net-tools
+if ! rpm -q net-tools | StdoutLog
 then
 	yum -y install net-tools | StdoutLog
 fi
 
-if ! rpm -q bind-utils
+if ! rpm -q bind-utils | StdoutLog
 then
 	yum -y install bind-utils | StdoutLog
 fi
 
-if ! rpm -q traceroute
+if ! rpm -q traceroute | StdoutLog
 then
 	yum -y install traceroute | StdoutLog
 fi
 
-if ! rpm -q nmap
+if ! rpm -q nmap | StdoutLog
 then
 	yum -y install nmap | StdoutLog
 fi
 
-if ! rpm -q nc
+if ! rpm -q nc | StdoutLog
 then
 	yum -y install nc | StdoutLog
 fi
 
-if ! rpm -q tcpdump
+if ! rpm -q tcpdump | StdoutLog
 then
 	yum -y install tcpdump | StdoutLog
 fi
 
-if ! rpm -q mailx
+if ! rpm -q mailx | StdoutLog
 then
 	yum -y install mailx | StdoutLog
 fi
 
-if ! rpm -q lsof
+if ! rpm -q lsof | StdoutLog
 then
 	yum -y install lsof | StdoutLog
 fi
 
-if ! rpm -q parted
+if ! rpm -q parted | StdoutLog
 then
 	yum -y install parted | StdoutLog
 fi
 
-if ! rpm -q openssh-clients
+if ! rpm -q openssh-clients | StdoutLog
 then
 	yum -y install openssh-clients | StdoutLog
 fi
 
-if ! rpm -q telnet
+if ! rpm -q telnet | StdoutLog
 then
 	yum -y install telnet | StdoutLog
 fi
 
-if ! rpm -q wget
+if ! rpm -q wget | StdoutLog
 then
 	yum -y install wget | StdoutLog
 fi
 
-if ! rpm -q zip
+if ! rpm -q zip | StdoutLog
 then
 	yum -y install zip | StdoutLog
 fi
 
-if ! rpm -q unzip
+if ! rpm -q unzip | StdoutLog
 then
 	yum -y install unzip | StdoutLog
 fi
 
-if ! rpm -q vim-enhanced
+if ! rpm -q vim-enhanced | StdoutLog
 then
 	yum -y install vim-enhanced | StdoutLog
 fi
