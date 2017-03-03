@@ -12,12 +12,12 @@
 # check args
 if [ -z "$(echo "$1" | egrep '[^@]+@[^@\.]+\.[^@\.]+')" ]
 then
-	echo '[ERROR]: $1 needs e-mail address.'
+	echo "$(date -Is)"' [ERROR]: $1 needs e-mail address.'
 	exit 1
 fi
 if [ -z "$(echo "$2" | egrep '[^\.]+\.[^\.]+')" ]
 then
-	echo "[ERROR]: \$2 needs web server's fqdn."
+	echo "$(date -Is)"" [ERROR]: \$2 needs web server's fqdn."
 	exit 1
 fi
 
