@@ -22,4 +22,13 @@
 # firewall-cmd --list-all
 # firewall-cmd --permanent --remove-rich-rule="rule family="ipv4" source address="133.130.118.190/32" port port="25565" protocol="tcp" accept"
 
+
+####
+## listen port
+# nc -l 49795
+## access port
+# nc -p 49795 888.888.888.888 443
+
+
+
 #EOF
