@@ -4,14 +4,14 @@
 			"ami": {
 				"name": "CentOS Linux 7 x86_64 HVM EBS 1602",
 				"id": "ami-eec1c380",
-				"ami-bookmark": "https://ap-northeast-1.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-1#LaunchInstanceWizard:ami=ami-eec1c380"
+				"bookmark": "https://ap-northeast-1.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-1#LaunchInstanceWizard:ami=ami-eec1c380"
 			}
 		},
 		"v6": {
 			"ami": {
 				"name": "CentOS Linux 6 x86_64 HVM EBS 1602",
-				"ami-id": "ami-fa3d3f94",
-				"ami-bookmark": "https://ap-northeast-1.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-1#LaunchInstanceWizard:ami=ami-fa3d3f94"
+				"id": "ami-fa3d3f94",
+				"bookmark": "https://ap-northeast-1.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-1#LaunchInstanceWizard:ami=ami-fa3d3f94"
 			}
 		}
 	}
