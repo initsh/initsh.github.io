@@ -7,17 +7,17 @@
 v_epel_url='https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm'
 
 # install yum-utils
-echo '--InstallYumUtils---------------'
+echo 'yum -y install yum-utils' | awk '{print "'$(date -Is)' "$0}' >>${HOME}/initsh.log
 if ! rpm -q yum-utils
 then
-	yum -y install yum-utils
+	yum -y install yum-utils | awk '{print "'$(date -Is)' "$0}' >>${HOME}/initsh.log
 fi
 
 # install epel-release
 echo '--InstallEpelRepo---------------'
 if ! rpm -q epel-release
 then
-	yum -y install "${v_epel_url}"
+	yum -y install "${v_epel_url}" | awk '{print "'$(date -Is)' "$0}' >>${HOME}/initsh.log
 fi
 
 # disable default-enable
