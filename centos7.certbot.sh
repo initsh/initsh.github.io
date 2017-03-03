@@ -4,55 +4,60 @@
 [ "$(curl -LRs initsh.github.io -o /dev/null -w '%{http_code}')" -eq 200 ] || { echo "[ERROR]: $(basename $0): Can't reach initsh.github.io"; exit 1; }
 . <(curl -LRs initsh.github.io/check.centos7.sh)
 . <(curl -LRs initsh.github.io/check.root.sh)
+. <(curl -LRs initsh.github.io/check.args.sh)
 
-# install jq epel-release net-tools
---InstallDependence-------------------'
-. <(curl -LRs initsh.github.io/centos7.jq.sh)
-. <(curl -LRs initsh.github.io/centos7.epel.sh)
-if ! rpm --quiet -q net-tools
-then
-	yum -y install net-tools
-fi
+# functions
+. <(curl -LRs initsh.github.io/functions.sh)
 
-# install certbot
-echo '--InstallCertbot----------------'
-if ! rpm -q certbot
+# check args
+if [ -n "$(echo "$1" | egrep '[^@]+@[^@\.]+\.[^@\.]+')" ]
 then
-	yum --enablerepo=* -y install certbot
+	echo '[ERROR]: $1 needs e-mail address.'
+	exit 1
 fi
-if ! rpm --quiet -q certbot
+if [ -n "$(echo "$2" | egrep '[^\.]+\.[^\.]+')" ]
 then
-	yum --enablerepo=extra,optional,epel -y install certbot
-fi
-if ! rpm --quiet -q certbot
-then
-	echo "[ERROR]: Can't install certbot."
+	echo '[ERROR]: $2 needs web server's fqdn.'
 	exit 1
 fi
 
-# Let's Encrypt!
-if [ -n "$(echo "$1" | egrep '[^@]+@[^@\.]+\.[^@\.]+')" ] \
-&& [ -n "$(echo "$2" | egrep '[^\.]+\.[^\.]+')" ] \
-&& [ -n "$(netstat -lntp | awk '$0=$4' | egrep '443$')" ]
+# install utils epel-release
+. <(curl -LRs initsh.github.io/centos7.utils.sh)
+. <(curl -LRs initsh.github.io/centos7.epel.sh)
+
+# install certbot
+if ! rpm -q certbot | StdoutLog
 then
-	echo '--Parameters--------------------'
-	echo '{"v_fqdn": "'"$1"'", "v_webroot_dir": "'"$2"'", "v_email_addr": "'"$3"'"}' | jq .
-	echo '--LetsEncrypt-------------------'
-	v_email_addr="$1"
-	v_fqdn="$2"
-	certbot certonly --non-interactive --agree-tos --email "${v_email_addr}" -d "${v_fqdn}" --standalone-supported-challenges tls-sni-01
-	echo '--Certificate-------------------'
-	ls -dl "/etc/letsencrypt/live/${v_fqdn}/"*
+	echo 'yum --enablerepo=* -y install certbot'			| StdoutLog
+	yum --enablerepo=* -y install certbot				| StdoutLog
+	echo 'yum --enablerepo=extra,optional,epel -y install certbot'	| StdoutLog
+	yum --enablerepo=extra,optional,epel -y install certbot		| StdoutLog
+	if ! rpm --quiet -q certbot | StdoutLog
+	then
+		echo "[ERROR]: failed to install certbot." | StdoutLog
+		exit 1
+	fi
+fi
+
+
+# vars
+v_email_addr="$1"
+v_fqdn="$2"
+
+echo '{"v_fqdn": "'"$v_email_addr"'", "v_email_addr": "'"$v_fqdn"'"}' | jq . | StdoutLog
+
+if [ -z "$(ss -lntp | awk '$0=$4' | egrep '443$')" ]
+then
+	echo 'certbot certonly --non-interactive --agree-tos --email "${v_email_addr}" -d "${v_fqdn}" --standalone-supported-challenges tls-sni-01' | StdoutLog
+	certbot certonly --non-interactive --agree-tos --email "${v_email_addr}" -d "${v_fqdn}" --standalone-supported-challenges tls-sni-01 | StdoutLog
+	echo '# ls -ld "/etc/letsencrypt/live/${v_fqdn}/"*' | StdoutLog
+	ls -dl "/etc/letsencrypt/live/${v_fqdn}/"* | StdoutLog
 else
-	v_web_server="$(netstat -lntp | awk '{print $7,$4}' | egrep '443$' | sed -r -e 's/[0-9]+\/(.+) .+/\1/g')"
-	echo '--LetsEncrypt-------------------'
-	echo 'EMAIL="example@email.addr"'
-	echo 'WEBROOT="/var/www/www.example.com"'
-	echo 'FQDN="www.example.com"'
-	echo "systemctl stop ${v_web_server}"
-	echo 'certbot certonly --non-interactive --agree-tos --email "${v_email_addr} -d "${FQDN}" --standalone-supported-challenges tls-sni-01'
-	echo "systemctl start ${v_web_server}"
-	echo 'ls -dl "/etc/letsencrypt/live/${FQDN}/"*'
+	v_web_server="$(ss -lntp | awk '{print $6,$4}' | egrep '443$' | sed -r -e 's/users:\(\("([^"]+)".*/\1/g')"
+	echo "# systemctl stop ${v_web_server}" >/dev/stderr
+	echo "# certbot certonly --non-interactive --agree-tos --email ${v_email_addr} -d ${v_fqdn} --standalone-supported-challenges tls-sni-01" >/dev/stderr
+	echo "# systemctl start ${v_web_server}" >/dev/stderr
+	echo '# ls -dl "/etc/letsencrypt/live/${FQDN}/"*' >/dev/stderr
 fi
 
 #EOF
