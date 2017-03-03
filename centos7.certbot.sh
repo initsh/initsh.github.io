@@ -17,7 +17,7 @@ then
 fi
 if [ -n "$(echo "$2" | egrep '[^\.]+\.[^\.]+')" ]
 then
-	echo '[ERROR]: $2 needs web server\'s fqdn.'
+	echo "[ERROR]: \$2 needs web server's fqdn."
 	exit 1
 fi
 
