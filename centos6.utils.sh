@@ -96,10 +96,10 @@ if [ "$(jq --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 then
 	echo '# curl $url -o /usr/bin/jq' | StdoutLog
 	curl -LRs https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -o /tmp/jq | StdoutLog
-	chmod 755 /tmp/jq; | StdoutLog
-	\mv -f /tmp/jq /usr/bin; | StdoutLog
-	ls -dl /usr/bin/jq*; | StdoutLog
-	ls -dl /usr/bin/jq*;
+	chmod 755 /tmp/jq | StdoutLog
+	\mv -f /tmp/jq /usr/bin | StdoutLog
+	ls -dl /usr/bin/jq* | StdoutLog
+	ls -dl /usr/bin/jq*
 	if [ "$(jq --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 	then
 		echo '[ERROR] failed to install /usr/bin/jq' | StdoutLog
