@@ -15,7 +15,7 @@ yum -y install yum-utils | StdoutLog
 
 # install epel-release
 echo "# yum -y install ${v_epel_url}" | StdoutLog
-yum -y install "${v_epel_url}" | StdoutLog
+yum -y install "${v_epel_url}" 2>/dev/stdout | StdoutLog
 
 # disable default-enable
 echo '# yum-config-manager --disable epel*' | StdoutLog
