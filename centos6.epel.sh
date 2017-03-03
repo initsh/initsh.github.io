@@ -1,5 +1,8 @@
 #!/bin/bash
 
+. <(curl -LRs initsh.github.io/check.centos6.sh)
+. <(curl -LRs initsh.github.io/check.root.sh)
+
 # variable
 v_epel_url='https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm'
 
