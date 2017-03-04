@@ -51,9 +51,9 @@ v_fqdn_key=/etc/pki/tls/certs/${v_fqdn}.key
 v_fqdn_csr=/etc/pki/tls/certs/${v_fqdn}.csr
 v_fqdn_crt=/etc/pki/tls/certs/${v_fqdn}.crt
 echo "[INFO]: Generate SSL Keys." | StdoutLog
-[ -f "${v_fqdn_key}" ] || openssl genrsa 2048 >${v_fqdn_key} | StdoutLog
-[ -f "${v_fqdn_csr}" ] || openssl req -new -key ${v_fqdn_key} -subj "/C=JP/CN=${v_fqdn}" >${v_fqdn_csr} | StdoutLog
-[ -f "${v_fqdn_crt}" ] || openssl x509 -days 3650 -req -signkey ${v_fqdn_key} <${v_fqdn_csr} >${v_fqdn_crt} | StdoutLog
+[ -f "${v_fqdn_key}" ] || openssl genrsa 2048 >${v_fqdn_key} 2>/dev/stdout | StdoutLog
+[ -f "${v_fqdn_csr}" ] || openssl req -new -key ${v_fqdn_key} -subj "/C=JP/CN=${v_fqdn}" >${v_fqdn_csr} 2>/dev/stdout | StdoutLog
+[ -f "${v_fqdn_crt}" ] || openssl x509 -days 3650 -req -signkey ${v_fqdn_key} <${v_fqdn_csr} >${v_fqdn_crt} 2>/dev/stdout | StdoutLog
 ls -dl "${v_fqdn_key}" "${v_fqdn_csr}" "${v_fqdn_crt}" | StdoutLog
 
 # edit fqdn conf
@@ -93,7 +93,7 @@ __EOD__
 ls -dl "${v_httpd_vhost_fqdn_conf}"* | StdoutLog
 
 # check conf error
-echo '[INFO]: Check conf.'
+echo '[INFO]: Check conf.' | StdoutLog
 v_judge="$(httpd -S >/dev/null 2>/dev/stdout)"
 if [ "${v_judge}" ]
 then
