@@ -48,12 +48,14 @@ echo '{"v_fqdn": "'"$v_fqdn"'", "v_email_addr": "'"$v_email_addr"'"}' | jq . | S
 # install cert
 if [ -z "$(ss -lntp | awk '$0=$4' | egrep '443$')" ]
 then
+
 	v_expect_num="$(expect -c "
 set timeout 10
 spawn certbot certonly --agree-tos --email "${v_email_addr}" -d "${v_fqdn}" --preferred-challenges tls-sni-01
 expect \"(press 'c' to cancel):\"
 send \"c\n\"
 " | awk -F: '/standalone/{print $1}')"
+
 	expect -c "
 set timeout 10
 spawn certbot certonly --agree-tos --email "${v_email_addr}" -d "${v_fqdn}" --preferred-challenges tls-sni-01
@@ -62,7 +64,8 @@ send \"${v_expect_num}\n\"
 expect \"(press 'c' to cancel): \"
 send \"c\n\"
 interact
-"
+" | StdoutLog
+
 	echo "# certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01" >/dev/stderr
 	echo "# ls -dl /etc/letsencrypt/live/${v_fqdn}/*" >/dev/stderr
 else
