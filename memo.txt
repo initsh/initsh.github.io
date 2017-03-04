@@ -1,7 +1,6 @@
 ####
 ## edit PS1 for timestamp
-# echo "$PS1" >>~/PS1."$(date +%Y%m%d)"
-# [ "$(echo "$PS1" | grep date)" ] || PS1="$(echo "$v_ps1" | sed -r -e 's/\\h/\\h $(date +%H:%M:%S)/g')"
+# [ "$(echo "$PS1" | grep date)" ] || PS1="$(echo "$PS1" | sed -r -e 's/\\h/\\h $(date +%H:%M:%S)/g')"
 
 ####
 ## useradd admin
