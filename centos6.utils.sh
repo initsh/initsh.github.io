@@ -5,6 +5,7 @@
 
 # functions
 . <(curl -LRs initsh.github.io/functions.sh)
+echo "[INFO]: Start centos6.utils.sh" | StdoutLog
 
 if ! rpm -q yum-utils | StdoutLog
 then
@@ -95,15 +96,14 @@ fi
 if [ "$(jq --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 then
 	echo '# curl $url -o /usr/bin/jq' | StdoutLog
-	curl -LRs https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -o /tmp/jq | StdoutLog
-	chmod 755 /tmp/jq | StdoutLog
-	\mv -f /tmp/jq /usr/bin | StdoutLog
+	curl -LRs https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -o /tmp/jq
+	chmod 755 /tmp/jq
+	\mv -f /tmp/jq /usr/bin
 	ls -dl /usr/bin/jq* | StdoutLog
-	ls -dl /usr/bin/jq*
 	if [ "$(jq --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 	then
 		echo '[ERROR] failed to install /usr/bin/jq' | StdoutLog
-		echo '[ERROR] failed to install /usr/bin/jq'
+		echo '[ERROR] failed to install /usr/bin/jq' 1>/dev/stderr
 		exit 1
 	fi
 fi
