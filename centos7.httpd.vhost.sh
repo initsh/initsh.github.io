@@ -8,7 +8,7 @@
 
 # functions
 . <(curl -LRs initsh.github.io/functions.sh)
-echo "[INFO]: Start." | StdoutLog
+echo "[INFO]: Start centos7.httpd.vhost.sh" | StdoutLog
 
 # install httpd
 if ! rpm -q openssl | StdoutLog
