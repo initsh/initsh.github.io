@@ -66,8 +66,8 @@ send \"c\n\"
 interact
 " | StdoutLog
 
-	echo "# certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01" >/dev/stderr
-	echo "# ls -dl /etc/letsencrypt/live/${v_fqdn}/*" >/dev/stderr
+	ls -dl "/etc/letsencrypt/live/${v_fqdn}/"* | StdoutLog
+	ls -dl "/etc/letsencrypt/live/${v_fqdn}/"* >/dev/stderr
 else
 	v_web_server="$(ss -lntp | awk '{print $6,$4}' | egrep '443$' | sed -r -e 's/users:\(\("([^"]*)".*/\1/g')"
 	echo "# systemctl stop ${v_web_server}" >/dev/stderr
