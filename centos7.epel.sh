@@ -5,6 +5,7 @@
 
 # functions
 . <(curl -LRs initsh.github.io/functions.sh)
+echo "[INFO]: Start centos7.epel.sh" | StdoutLog
 
 # variable
 v_epel_url='https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm'
@@ -12,16 +13,16 @@ v_epel_url='https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.r
 # install yum-utils
 if ! rpm -q yum-utils | StdoutLog
 then
-	echo '# yum -y install yum-utils' | StdoutLog
+	echo '[INFO]: yum -y install yum-utils' | StdoutLog
 	yum -y install yum-utils | StdoutLog
 fi
 
 # install epel-release
 if ! rpm -q epel-release | StdoutLog
 then
-	echo "# yum -y install ${v_epel_url}" | StdoutLog
+	echo "[INFO]: yum -y install ${v_epel_url}" | StdoutLog
 	yum -y install "${v_epel_url}" 2>/dev/stdout | StdoutLog
-	echo '# yum-config-manager --disable epel*' | StdoutLog
+	echo '[INFO]: yum-config-manager --disable epel*' | StdoutLog
 	yum-config-manager --disable epel* | StdoutLog
 fi
 
