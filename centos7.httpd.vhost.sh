@@ -48,7 +48,7 @@ ls -dl "${v_fqdn_key}" "${v_fqdn_csr}" "${v_fqdn_crt}"
 
 # edit fqdn conf
 v_httpd_conf_d_dir="/etc/httpd/conf.d"
-v_httpd_vhost_fqdn_conf="${v_httpd_conf_d_dir}/httpd-vhosts-${v_fqdn}.conf"
+v_httpd_vhost_fqdn_conf="${v_httpd_conf_d_dir}/httpd-vhost-${v_fqdn}.conf"
 [ -d "${v_httpd_conf_d_dir}" ] || { echo "[ERROR]: $(basename ${v_httpd_conf_d_dir}): Something wrong about Directory."; exit 1; }
 [ -f "${v_httpd_vhost_fqdn_conf}" ] || touch "${v_httpd_vhost_fqdn_conf}"
 cp -p "${v_httpd_vhost_fqdn_conf}" "${v_httpd_vhost_fqdn_conf}${v_backup_suffix}"
@@ -80,7 +80,7 @@ NameVirtualhost *:443
 </VirtualHost>
 __EOD__
 [ "$(diff "${v_httpd_vhost_fqdn_conf}" "${v_httpd_vhost_fqdn_conf}${v_backup_suffix}")" ] || \mv -f "${v_httpd_vhost_fqdn_conf}${v_backup_suffix}" "${v_httpd_vhost_fqdn_conf}"
-echo '--HttpdVhostsFqdnConf-----------'
+echo '--HttpdVhostFqdnConf-----------'
 ls -dl "${v_httpd_vhost_fqdn_conf}"*
 
 # check conf error
