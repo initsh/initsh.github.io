@@ -99,9 +99,9 @@ echo '[INFO]: Check conf.' | StdoutLog
 v_judge="$(httpd -S >/dev/null 2>/dev/stdout)"
 if [ "${v_judge}" ]
 then
-	echo "${v_judge}" | StdoutLog
+	echo "[WARN]: ${v_judge}" | StdoutLog
 else
-	echo "Nothing." | StdoutLog
+	echo "[INFO]: Nothing." | StdoutLog
 fi
 
 # status httpd
