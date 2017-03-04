@@ -75,9 +75,9 @@ else
 	if [ -z "$(echo "$3" | egrep '^/[^/]*')" ]
 	then
 		v_web_server="$(ss -lntp | awk '{print $6,$4}' | egrep '443$' | sed -r -e 's/users:\(\("([^"]*)".*/\1/g')"
-		echo "$(date -Is)"" [ERROR]: \$2 needs web server's document root..."
-		echo "$(date -Is)"" [ERROR]: OR run the following command."
-		echo "# certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01 --pre-hook \"systemctl stop ${v_web_server}\" --post-hook \"systemctl start ${v_web_server}\"" >/dev/stderr
+		echo "$(date -Is) [ERROR]: ""\$2 needs web server's document root..."
+		echo "$(date -Is) [ERROR]: ""OR run the following command."
+		echo "$(date -Is) [ERROR]: ""# certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01 --pre-hook \"systemctl stop ${v_web_server}\" --post-hook \"systemctl start ${v_web_server}\"" >/dev/stderr
 		exit 1
 	fi
 	v_fqdn_docroot="$3"
