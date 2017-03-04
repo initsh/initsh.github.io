@@ -29,10 +29,10 @@ fi
 # install certbot
 if ! rpm -q certbot | StdoutLog
 then
-	echo 'yum --enablerepo=* -y install certbot'			| StdoutLog
-	yum --enablerepo=* -y install certbot				| StdoutLog
-	echo 'yum --enablerepo=extra,optional,epel -y install certbot'	| StdoutLog
-	yum --enablerepo=extra,optional,epel -y install certbot		| StdoutLog
+	echo '[INFO]: yum --enablerepo=* -y install certbot'			| StdoutLog
+	yum --enablerepo=* -y install certbot					| StdoutLog
+	echo '[INFO]: yum --enablerepo=extra,optional,epel -y install certbot'	| StdoutLog
+	yum --enablerepo=extra,optional,epel -y install certbot			| StdoutLog
 	if ! rpm --quiet -q certbot | StdoutLog
 	then
 		echo "[ERROR]: failed to install certbot." | StdoutLog
@@ -49,6 +49,8 @@ echo '{"v_fqdn": "'"$v_fqdn"'", "v_email_addr": "'"$v_email_addr"'"}' | jq . | S
 # install cert
 if [ -z "$(ss -lntp | awk '$0=$4' | egrep '443$')" ]
 then
+
+	echo '[INFO]: Generate SSL Keys' | StdoutLog
 
 	v_expect_num="$(expect -c "
 set timeout 10
