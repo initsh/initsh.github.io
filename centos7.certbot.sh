@@ -44,13 +44,13 @@ fi
 # vars
 v_email_addr="$1"
 v_fqdn="$2"
-echo '{"v_fqdn": "'"$v_fqdn"'", "v_email_addr": "'"$v_email_addr"'"}' | jq . | StdoutLog
 
 # install cert
 if [ -z "$(ss -lntp | awk '$0=$4' | egrep '443$')" ]
 then
 
 	echo '[INFO]: Generate SSL Keys' | StdoutLog
+	echo '{"v_fqdn": "'"$v_fqdn"'", "v_email_addr": "'"$v_email_addr"'"}' | jq . | StdoutLog
 
 	v_expect_num="$(expect -c "
 set timeout 10
@@ -72,11 +72,16 @@ interact
 	ls -dl "/etc/letsencrypt/live/${v_fqdn}/"* | StdoutLog
 	ls -dl "/etc/letsencrypt/live/${v_fqdn}/"* >/dev/stderr
 else
+	if [ -z "$(echo "$3" | egrep '^/[^/]*')" ]
+	then
+		echo "$(date -Is)"" [ERROR]: \$2 needs web server's document root."
+		exit 1
+	fi
+	v_fqdn_docroot="$3"
+	echo '[INFO]: Generate SSL Keys' | StdoutLog
+	echo '{"v_fqdn": "'"$v_fqdn"'", "v_email_addr": "'"$v_email_addr"'", "v_fqdn_docroot": "'"$v_fqdn_docroot"'"}' | jq . | StdoutLog
 	v_web_server="$(ss -lntp | awk '{print $6,$4}' | egrep '443$' | sed -r -e 's/users:\(\("([^"]*)".*/\1/g')"
-	#echo "# systemctl stop ${v_web_server}" >/dev/stderr
-	#echo "# certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01" >/dev/stderr
-	#echo "# systemctl start ${v_web_server}" >/dev/stderr
-	echo "# certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01 --pre-hook \"systemctl stop ${v_web_server}\" --post-hook \"systemctl start ${v_web_server}\"" >/dev/stderr
+	certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --webroot ${v_fqdn_docroot} | StdoutLog
 	echo "# ls -dl /etc/letsencrypt/live/${v_fqdn}/*" >/dev/stderr
 fi
 
