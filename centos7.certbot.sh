@@ -81,8 +81,9 @@ else
 	echo '[INFO]: Generate SSL Keys' | StdoutLog
 	echo '{"v_fqdn": "'"$v_fqdn"'", "v_email_addr": "'"$v_email_addr"'", "v_fqdn_docroot": "'"$v_fqdn_docroot"'"}' | jq . | StdoutLog
 	v_web_server="$(ss -lntp | awk '{print $6,$4}' | egrep '443$' | sed -r -e 's/users:\(\("([^"]*)".*/\1/g')"
-	certbot certonly --agree-tos --email ${v_email_addr} --webroot ${v_fqdn_docroot} -d ${v_fqdn} | StdoutLog
-	echo "# ls -dl /etc/letsencrypt/live/${v_fqdn}/*" >/dev/stderr
+	certbot certonly --agree-tos --email ${v_email_addr} --webroot -w ${v_fqdn_docroot} -d ${v_fqdn} 2>/dev/stdout | StdoutLog
+	ls -dl "/etc/letsencrypt/live/${v_fqdn}/"* | StdoutLog
+	ls -dl "/etc/letsencrypt/live/${v_fqdn}/"* >/dev/stderr
 fi
 
 #EOF
