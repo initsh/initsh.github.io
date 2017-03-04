@@ -96,4 +96,7 @@ interact
 	ls -dl "/etc/letsencrypt/live/${v_fqdn}/"* >/dev/stderr
 fi
 
+# notice
+echo "[NOTICE]: Please edit web server's conf for SSL Keys." 1>/dev/stderr
+
 #EOF
