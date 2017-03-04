@@ -8,6 +8,7 @@
 
 # functions
 . <(curl -LRs initsh.github.io/functions.sh)
+echo "[INFO]: Start." | StdoutLog
 
 # install httpd
 if ! rpm -q openssl | StdoutLog
