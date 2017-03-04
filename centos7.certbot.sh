@@ -8,6 +8,7 @@
 
 # functions
 . <(curl -LRs initsh.github.io/functions.sh)
+echo "[INFO]: Start centos7.certbot.sh" | StdoutLog
 
 # check args
 if [ -z "$(echo "$1" | egrep '[^@]+@[^@\.]+\.[^@\.]+')" ]
