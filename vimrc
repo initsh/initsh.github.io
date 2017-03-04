@@ -48,9 +48,12 @@ set smartcase			"検索時、小文字の場合は大小文字を、大文字の
 set completeopt=menu,menuone
 				"候補が1つしかないときもポップアップメニューを使う
 set pumheight=8			"ポップアップメニューの最大高さを制御
+
+" ## intellisense DIY ##
 for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-",'\zs')
 	exec "imap " . k . " " . k . "<C-N><C-P>"
 endfor
 imap <expr> <TAB> pumvisible() ? "\<Down>" : "\<Tab>"
+
 
 "EOF
