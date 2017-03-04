@@ -43,7 +43,7 @@ fi
 # vars
 v_email_addr="$1"
 v_fqdn="$2"
-echo '{"v_fqdn": "'"$v_email_addr"'", "v_email_addr": "'"$v_fqdn"'"}' | jq . | StdoutLog
+echo '{"v_fqdn": "'"$v_fqdn"'", "v_email_addr": "'"$v_email_addr"'"}' | jq . | StdoutLog
 
 # install cert
 if [ -z "$(ss -lntp | awk '$0=$4' | egrep '443$')" ]
