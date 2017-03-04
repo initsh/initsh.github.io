@@ -101,7 +101,7 @@ if [ "${v_judge}" ]
 then
 	echo "[WARN]: ${v_judge}" | StdoutLog
 else
-	echo "[INFO]: Nothing." | StdoutLog
+	echo "[INFO]: No Error." | StdoutLog
 fi
 
 # status httpd
