@@ -53,14 +53,14 @@ then
 	echo '{"v_email_addr": "'"$v_email_addr"'", "v_fqdn": "'"$v_fqdn"'"}' | jq . | StdoutLog
 
 	v_expect_num="$(expect -c "
-set timeout 10
+set timeout 20
 spawn certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01
 expect \"(press 'c' to cancel): \"
 send \"c\n\"
 " | awk -F: '/standalone/{print $1}')"
 
 	expect -c "
-set timeout 10
+set timeout 20
 spawn certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01
 expect \"(press 'c' to cancel): \"
 send \"${v_expect_num}\n\"
@@ -81,8 +81,15 @@ else
 	echo '[INFO]: Generate SSL Keys' | StdoutLog
 	echo '{"v_email_addr": "'"$v_email_addr"'", "v_fqdn": "'"$v_fqdn"'", "v_fqdn_docroot": "'"$v_fqdn_docroot"'"}' | jq . | StdoutLog
 	v_web_server="$(ss -lntp | awk '{print $6,$4}' | egrep '443$' | sed -r -e 's/users:\(\("([^"]*)".*/\1/g')"
-	#certbot certonly --agree-tos --email ${v_email_addr} --webroot -w ${v_fqdn_docroot} -d ${v_fqdn} 2>/dev/stdout | StdoutLog
-	certbot certonly --agree-tos --email ${v_email_addr} --webroot -w ${v_fqdn_docroot} -d ${v_fqdn}
+
+	expect -c "
+set timeout 20
+spawn certbot certonly --agree-tos --email ${v_email_addr} --webroot -w ${v_fqdn_docroot} -d ${v_fqdn}
+expect \"(press 'c' to cancel): \"
+send \"c\n\"
+interact
+" 2>/dev/stdout | StdoutLog
+
 	ls -dl "/etc/letsencrypt/live/${v_fqdn}/"* | StdoutLog
 	ls -dl "/etc/letsencrypt/live/${v_fqdn}/"* >/dev/stderr
 fi
