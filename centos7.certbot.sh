@@ -53,14 +53,14 @@ then
 	echo '{"v_email_addr": "'"$v_email_addr"'", "v_fqdn": "'"$v_fqdn"'"}' | jq . | StdoutLog
 
 	v_expect_num="$(expect -c "
-set timeout 20
+set timeout 10
 spawn certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01
 expect \"(press 'c' to cancel): \"
 send \"c\n\"
 " | awk -F: '/standalone/{print $1}')"
 
 	expect -c "
-set timeout 20
+set timeout 10
 spawn certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01
 expect \"(press 'c' to cancel): \"
 send \"${v_expect_num}\n\"
@@ -83,7 +83,7 @@ else
 	v_web_server="$(ss -lntp | awk '{print $6,$4}' | egrep '443$' | sed -r -e 's/users:\(\("([^"]*)".*/\1/g')"
 
 	expect -c "
-set timeout 20
+set timeout 10
 spawn certbot certonly --agree-tos --email ${v_email_addr} --webroot -w ${v_fqdn_docroot} -d ${v_fqdn}
 expect \"(press 'c' to cancel): \"
 send \"c\n\"
