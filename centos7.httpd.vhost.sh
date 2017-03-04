@@ -32,12 +32,12 @@ v_backup_suffix="_${v_date}_${v_time}.backup"
 
 # edit conf
 v_httpd_conf="/etc/httpd/conf/httpd.conf"
+echo "[INFO]: Edit ${v_httpd_conf}" | StdoutLog
 [ -f ${v_httpd_conf} ] || touch ${v_httpd_conf}
 cp -p ${v_httpd_conf} ${v_httpd_conf}${v_backup_suffix}
 # edit edit edit edit
 # if no diff, overwrite file.
 [ "$(diff ${v_httpd_conf} ${v_httpd_conf}${v_backup_suffix})" ] || \mv -f ${v_httpd_conf}${v_backup_suffix} ${v_httpd_conf}
-echo "[INFO]: Edit ${v_httpd_conf}" | StdoutLog
 ls -dl "${v_httpd_conf}"* | StdoutLog
 
 # mkdir vhost rootdir
@@ -48,10 +48,10 @@ ls -dl "${v_vhost_fqdn_docroot}"* | StdoutLog
 [ -d "${v_vhost_fqdn_docroot}" ] || { echo "[ERROR]: $(basename "${v_vhost_fqdn_docroot}"): Something wrong about DocumentRoot." | StdoutLog; exit 1; }
 
 # gen fqdn crt & key
+echo "[INFO]: Generate SSL Keys." | StdoutLog
 v_fqdn_key=/etc/pki/tls/certs/${v_fqdn}.key
 v_fqdn_csr=/etc/pki/tls/certs/${v_fqdn}.csr
 v_fqdn_crt=/etc/pki/tls/certs/${v_fqdn}.crt
-echo "[INFO]: Generate SSL Keys." | StdoutLog
 [ -f "${v_fqdn_key}" ] || openssl genrsa 2048 >${v_fqdn_key} 2>/dev/stdout | StdoutLog
 [ -f "${v_fqdn_csr}" ] || openssl req -new -key ${v_fqdn_key} -subj "/C=JP/CN=${v_fqdn}" >${v_fqdn_csr} 2>/dev/stdout | StdoutLog
 [ -f "${v_fqdn_crt}" ] || openssl x509 -days 3650 -req -signkey ${v_fqdn_key} <${v_fqdn_csr} >${v_fqdn_crt} 2>/dev/stdout | StdoutLog
@@ -60,6 +60,7 @@ ls -dl "${v_fqdn_key}" "${v_fqdn_csr}" "${v_fqdn_crt}" | StdoutLog
 # edit fqdn conf
 v_httpd_conf_d_dir="/etc/httpd/conf.d"
 v_httpd_vhost_fqdn_conf="${v_httpd_conf_d_dir}/httpd-vhost-${v_fqdn}.conf"
+echo "[INFO]: Edit ${v_httpd_vhost_fqdn_conf}" | StdoutLog
 [ -d "${v_httpd_conf_d_dir}" ] || { echo "[ERROR]: $(basename ${v_httpd_conf_d_dir}): Something wrong about Directory." | StdoutLog; exit 1; }
 [ -f "${v_httpd_vhost_fqdn_conf}" ] || touch "${v_httpd_vhost_fqdn_conf}"
 cp -p "${v_httpd_vhost_fqdn_conf}" "${v_httpd_vhost_fqdn_conf}${v_backup_suffix}"
