@@ -111,7 +111,7 @@ fi
 echo '[INFO]: Status.' | StdoutLog
 systemctl status httpd | StdoutLog
 
-# reload httpd
+# notice
 echo '[NOTICE]: Run the following command for reload conf.' 1>/dev/stderr
 echo '[NOTICE]: # systemctl restart httpd' 1>/dev/stderr
 
