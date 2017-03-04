@@ -65,7 +65,7 @@ echo "[INFO]: Edit ${v_httpd_vhost_fqdn_conf}" | StdoutLog
 [ -f "${v_httpd_vhost_fqdn_conf}" ] || touch "${v_httpd_vhost_fqdn_conf}"
 cp -p "${v_httpd_vhost_fqdn_conf}" "${v_httpd_vhost_fqdn_conf}${v_backup_suffix}"
 cat <<__EOD__ >"${v_httpd_vhost_fqdn_conf}"
-# Edit 20170220
+# Edit 20170304
 
 ## http
 NameVirtualhost *:80
@@ -85,7 +85,9 @@ NameVirtualhost *:443
 
     SSLEngine on
     SSLCertificateFile ${v_fqdn_crt}
+#    SSLCertificateFile /etc/letsencrypt/live/${v_fqdn}/cert.pem
     SSLCertificateKeyFile ${v_fqdn_key}
+#    SSLCertificateKeyFile /etc/letsencrypt/live/${v_fqdn}/privkey.pem
 
     ErrorLog logs/${v_fqdn}-error_log
     CustomLog logs/${v_fqdn}-access_log combined
