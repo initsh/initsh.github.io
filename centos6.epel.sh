@@ -20,9 +20,9 @@ fi
 # install epel-release
 if ! rpm -q epel-release | StdoutLog
 then
-	echo "[INFO]:  yum -y install ${v_epel_url}" | StdoutLog
+	echo "[INFO]: yum -y install ${v_epel_url}" | StdoutLog
 	yum -y install "${v_epel_url}" 2>/dev/stdout | StdoutLog
-	echo '[INFO]:  yum-config-manager --disable epel*' | StdoutLog
+	echo '[INFO]: yum-config-manager --disable epel*' | StdoutLog
 	yum-config-manager --disable epel* | StdoutLog
 fi
 
