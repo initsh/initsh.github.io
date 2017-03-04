@@ -47,6 +47,6 @@ alias tail='TailHighlight'
 
 #EOF
 __EOD__
-[ "$(diff "${v_profile_d}" "${v_profile_d$v_backup_suffix}")" ] || \mv -f "${v_profile_d}${v_backup_suffix}" "${v_profile_d}"
+[ "$(diff "${v_profile_d}" "${v_profile_d}${v_backup_suffix}")" ] || \mv -f "${v_profile_d}${v_backup_suffix}" "${v_profile_d}"
 
 #EOF
