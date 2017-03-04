@@ -16,5 +16,9 @@ rem #        Optional arguments:
 rem #            /critical - Perform critical update. This option will close all running LX processes when the update completes.
 rem #
 
-rem C:\> lxrun /install /y
-rem C:\> lxrun /uninstall /y
+echo "C:\> lxrun /install /y"
+echo "C:\> lxrun /uninstall /y"
+echo "[Windows] + [U]"
+echo "Insert [developer]"
+
+rem EOF
