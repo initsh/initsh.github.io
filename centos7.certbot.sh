@@ -67,7 +67,7 @@ send \"${v_expect_num}\n\"
 expect \"(press 'c' to cancel): \"
 send \"c\n\"
 interact
-" | StdoutLog
+" 2>/dev/stdout | StdoutLog
 
 	ls -dl "/etc/letsencrypt/live/${v_fqdn}/"* | StdoutLog
 	ls -dl "/etc/letsencrypt/live/${v_fqdn}/"* >/dev/stderr
