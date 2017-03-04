@@ -50,7 +50,7 @@ if [ -z "$(ss -lntp | awk '$0=$4' | egrep '443$')" ]
 then
 
 	echo '[INFO]: Generate SSL Keys' | StdoutLog
-	echo '{"v_fqdn": "'"$v_fqdn"'", "v_email_addr": "'"$v_email_addr"'"}' | jq . | StdoutLog
+	echo '{"v_email_addr": "'"$v_email_addr"'", "v_fqdn": "'"$v_fqdn"'"}' | jq . | StdoutLog
 
 	v_expect_num="$(expect -c "
 set timeout 10
@@ -79,7 +79,7 @@ else
 	fi
 	v_fqdn_docroot="$3"
 	echo '[INFO]: Generate SSL Keys' | StdoutLog
-	echo '{"v_fqdn": "'"$v_fqdn"'", "v_email_addr": "'"$v_email_addr"'", "v_fqdn_docroot": "'"$v_fqdn_docroot"'"}' | jq . | StdoutLog
+	echo '{"v_email_addr": "'"$v_email_addr"'", "v_fqdn": "'"$v_fqdn"'", "v_fqdn_docroot": "'"$v_fqdn_docroot"'"}' | jq . | StdoutLog
 	v_web_server="$(ss -lntp | awk '{print $6,$4}' | egrep '443$' | sed -r -e 's/users:\(\("([^"]*)".*/\1/g')"
 	#certbot certonly --agree-tos --email ${v_email_addr} --webroot -w ${v_fqdn_docroot} -d ${v_fqdn} 2>/dev/stdout | StdoutLog
 	certbot certonly --agree-tos --email ${v_email_addr} --webroot -w ${v_fqdn_docroot} -d ${v_fqdn}
