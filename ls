@@ -12,7 +12,10 @@ v_initsh_list="$(
 	| sed -r -e 's/^.*<a href="\/[^\/]+\/[^\/]+\/blob\/master\/([^"]*)" .*$/curl -LRs '"${v_github_pages}"'\/\1)/g'
 )"
 
-echo "alias initsh-ls='curl -LRs \"${v_github_pages}/ls\" | bash'"
+# ls
 echo "${v_initsh_list}"
+
+# alias
+echo "alias initsh-ls='curl -LRs ${v_github_pages}/ls | bash'"
 
 #EOF
