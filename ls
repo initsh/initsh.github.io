@@ -3,7 +3,7 @@
 # Edit 20170303
 
 # ls
-v_github_pages='https://initsh.github.io'
+v_github_pages='initsh.github.io'
 v_git_dir="github.com/initsh/${v_github_pages}"
 
 v_initsh_list="$(
