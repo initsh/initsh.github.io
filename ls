@@ -17,12 +17,13 @@ v_initsh_list="$(
 echo
 echo "[bash]"
 echo "${v_initsh_list}" | awk '{print "    "$0}'
-echo
 
 # alias
+echo
 echo "[alias]"
 echo "alias initsh-ls='curl -LRs ${v_github_pages}/ls | bash'" | awk '{print "    "$0}'
-echo
 
+# \n
+echo
 
 #EOF
