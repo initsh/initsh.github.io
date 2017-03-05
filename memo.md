@@ -12,7 +12,7 @@
     [ "$(grep "$USERNAME" "$(su "$USERNAME" -c 'echo "$HOME"/.ssh/authorized_keys')" 2>/dev/null)" ] || echo 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAiY5TMcDeniTRzrhf+gL0Ma8Bm0Jn33XUUAmzNZ2InY/G08kFV7K3MHuKX47tf1/mCg7cRKrfZ6IkCr7jzvoD28sNVM74ZMatj5KV1NmPHJttjTH4ThozMtbQRWR8tUlkj+wppv5sHaFipq73GMUZrX5RcQPdFJqYFDCUSVoIP94d/DoStWXOvMxfld8GNLLpY3pTfqOMiQDST4LvixwYVBo1lHt0LF8lp8qH4uRBLT5u7uzm/VoF6nGvYl60/XFqLz/i4u58UZybIpJzDK7+bkFV2G3+bP3tNCtzjNMPXDocvSmP7rW7dnEQqYZY+6IUSioQrQ0Ry+I+pnNpTXg5dw== '"$USERNAME">>"$(su "$USERNAME" -c 'echo "$HOME"/.ssh/authorized_keys')"
 
 ## firewall-cmd rich-rule
-    firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="888.888.888.888/32" port protocol="tcp" port="25565" accept"
+    firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="888.888.888.888/32" port port="25565" protocol="tcp" accept"
     firewall-cmd --reload
     firewall-cmd --list-rich-rule
     firewall-cmd --list-all
