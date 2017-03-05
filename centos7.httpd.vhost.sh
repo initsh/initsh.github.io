@@ -13,7 +13,7 @@ v_script_name="centos7.httpd.vhost.sh"
 	. <(curl -LRs initsh.github.io/check.centos7.sh)
 	. <(curl -LRs initsh.github.io/check.root.sh)
 	. <(curl -LRs initsh.github.io/check.args.sh)
-
+	
 	# install httpd
 	if ! rpm --quiet -q openssl
 	then
