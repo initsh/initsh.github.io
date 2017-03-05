@@ -18,6 +18,6 @@ v_initsh_list="$(
 echo "${v_initsh_list}"
 
 # alias
-echo "alias initsh-ls='curl -LRs ${v_repo_name}/ls | bash'"
+echo "alias initsh-ls='curl -LRs https://raw.githubusercontent.com/${v_git_user}/${v_repo_name}/master/ls | bash'"
 
 #EOF
