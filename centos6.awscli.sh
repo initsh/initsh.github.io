@@ -8,9 +8,9 @@ v_script_name="centos6.awscli.sh"
 
 {
 	LogInfo "Start \"${v_script_name}\"."
-
+	
 	v_url_getpip="https://bootstrap.pypa.io/get-pip.py"
-
+	
 	# pip
 	if [ "$(pip --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 	then
@@ -22,7 +22,7 @@ v_script_name="centos6.awscli.sh"
 			exit 1
 		fi
 	fi
-
+	
 	# awscli
 	if [ "$(aws --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 	then
@@ -34,7 +34,7 @@ v_script_name="centos6.awscli.sh"
 			exit 1
 		fi
 	fi
-
+	
 	LogInfo "End \"${v_script_name}\"."
 } >>"${v_log_file}"
 
