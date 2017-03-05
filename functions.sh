@@ -9,11 +9,6 @@ v_backup_suffix="_${v_date}_${v_time}.backup"
 v_log_file="${HOME}/initsh.log"
 
 # functions
-function StdoutLog()
-{
-	cat - | awk '{print "'$(date -Is)' "$0}' >>${HOME}/initsh.log
-}
-
 function LogInfo()
 {
 	echo "$1" | awk '{print "'"$(date -Is)"' [INFO]: "$0}' | tee /dev/stderr
@@ -28,5 +23,6 @@ function LogError()
 {
 	echo "$1" | awk '{print "'"$(date -Is)"' [ERROR]: "$0}' | tee /dev/stderr
 }
+
 
 # EOF
