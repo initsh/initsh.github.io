@@ -39,7 +39,7 @@ v_script_name="centos7.certbot.sh"
 		yum --enablerepo=extra,optional,epel -y install certbot
 		if ! rpm -q certbot
 		then
-			echo "$(date -Is) [ERROR]: Failed to install certbot." | tee /dev/stderr
+			LogError "Failed to install certbot."
 			exit 1
 		fi
 	fi
@@ -75,9 +75,9 @@ interact
 		if [ -z "$(echo "$3" | egrep '^/[^/]*')" ]
 		then
 			v_web_server="$(ss -lntp | awk '{print $6,$4}' | egrep '443$' | sed -r -e 's/users:\(\("([^"]*)".*/\1/g')"
-			echo "$(date -Is) [ERROR]: ""\$2 needs web server's document root..." | tee /dev/stderr
-			echo "$(date -Is) [ERROR]: ""OR run the following command." | tee /dev/stderr
-			echo "$(date -Is) [ERROR]: ""# certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01 --pre-hook \"systemctl stop ${v_web_server}\" --post-hook \"systemctl start ${v_web_server}\"" | tee /dev/stderr
+			LogError "\$2 needs web server's document root..."
+			LogError "OR run the following command."
+			LogError "# certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01 --pre-hook \"systemctl stop ${v_web_server}\" --post-hook \"systemctl start ${v_web_server}\""
 			exit 1
 		fi
 		
@@ -98,9 +98,9 @@ interact
 	fi
 	
 	# notice
-	LogInfo "SSL Keys..."
-	LogInfo "$(ls -dl "/etc/letsencrypt/live/${v_fqdn}/"*)"
-	LogInfo "Please edit web server's conf for SSL Keys."
+	LogNotice "SSL Keys..."
+	LogNotice "$(ls -dl "/etc/letsencrypt/live/${v_fqdn}/"*)"
+	LogNotice "Please edit web server's conf for SSL Keys."
 	
 	LogInfo "End \"${v_script_name}\"."
 } >>"${v_log_file}"
