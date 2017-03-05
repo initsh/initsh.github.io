@@ -2,7 +2,8 @@
 
 |設定値|説明|備考|
 |--:|:--|:--|
-|create 644 user group|||
+|create|create new (empty) log files after rotating old ones|必須|
+|create 0644 user group|ローテーション後に空のログファイルを新規作成。<br>ファイルのパーミッション、ユーザー名、グループ名を指定可能。||
 |daily|日次でログローテーションを行う|必須|
 |weekly|週次でログローテーションを行う||
 |monthly|月次でログローテーションを行う||
@@ -14,9 +15,22 @@
 |delaycompress|ログの圧縮を次回のローテーション時まで遅らせる。<br>compressと共に指定。|必須|
 |sharedscripts|複数指定したログファイル(`*log`など)に対し、<br>postrotateまたはprerotateで記述したコマンドを実行|必須|
 
+# Ex.
 
-
-
+    /var/log/httpd/*log {
+        create
+        daily
+        rotate 90
+        ifempty
+        missingok
+        dateext
+        compress
+        delaycompress
+        sharedscripts
+        postrotate
+            /bin/systemctl reload httpd.service > /dev/null 2>/dev/null || true
+        endscript
+    }
 
 
 
