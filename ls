@@ -13,10 +13,12 @@ v_initsh_list="$(
 )"
 
 # ls
-echo "${v_initsh_list}"
+echo "[${v_github_pages}]"
+echo "    ${v_initsh_list}"
 
 # alias
 echo
+echo "[alias]"
 echo "alias initsh-ls='curl -LRs ${v_github_pages}/ls | bash'"
 
 
