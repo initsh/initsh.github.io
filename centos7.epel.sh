@@ -22,7 +22,7 @@ v_script_name="centos7.epel.sh"
 		LogInfo "bash# yum -y install yum-utils"
 		yum -y install yum-utils
 	else
-		LogInfo "\"yum-utils\" already installed."
+		LogInfo "Package \"yum-utils\" already installed."
 	fi
 	
 	# install epel-release
@@ -33,7 +33,7 @@ v_script_name="centos7.epel.sh"
 		LogInfo "bash# yum-config-manager --disable epel*"
 		yum-config-manager --disable epel*
 	else
-		LogInfo "\"epel-release\" already installed."
+		LogInfo "Package \"epel-release\" already installed."
 	fi
 		
 	LogInfo "End \"${v_script_name}\"."
