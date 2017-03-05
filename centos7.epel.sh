@@ -17,14 +17,14 @@ v_script_name="centos7.epel.sh"
 	v_epel_url="https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm"
 	
 	# install yum-utils
-	if ! rpm -q yum-utils
+	if ! rpm --quiet -q yum-utils
 	then
 		LogInfo "bash# yum -y install yum-utils"
 		yum -y install yum-utils
 	fi
 	
 	# install epel-release
-	if ! rpm -q epel-release
+	if ! rpm --quiet -q epel-release
 	then
 		LogInfo "bash# yum -y install ${v_epel_url}"
 		yum -y install "${v_epel_url}"
