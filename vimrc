@@ -1,6 +1,6 @@
 " vimrc
 
-" Edit 20170305
+" Edit 20170306
 
 "## common ##
 syntax on			"シンタックス
@@ -25,8 +25,7 @@ set wildmode=list		"コマンドライン保管を拡張2
 "## backup ##
 set backup			"バックアップファイルを作成
 set writebackup			"取得するバックアップを編集前のファイルとする
-set backupdir=$HOME/.vimbackup
-				"バックアップ作成ディレクトリを設定
+set backupdir=$HOME/.vimbackup	"バックアップ作成ディレクトリを設定
 call system("mkdir $HOME/.vimbackup")
 				"バックアップ作成ディレクトリを作成
 au BufWritePre * let &bex = '_' . strftime("%Y%m%d_%H%M%S") . '.backup'
@@ -50,7 +49,7 @@ set smartcase			"検索時、小文字の場合は大小文字を、大文字の
 set completeopt=menu,menuone	"候補が1つしかないときもポップアップメニューを使う
 set pumheight=8			"ポップアップメニューの最大高さを制御
 
-" ## intellisense DIY ##
+" ## intellisense 2 ##
 for k in split("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-",'\zs')
 	exec "imap " . k . " " . k . "<C-N><C-P>"
 endfor
