@@ -16,7 +16,7 @@ function StdoutLog()
 
 function LogInfo()
 {
-	echo "$(date -Is) [INFO]: $1" | tee /dev/stderr
+	echo "$1" | awk '{print "'"$(date -Is)"' [INFO]: "$0}' | tee /dev/stderr
 }
 
 # EOF
