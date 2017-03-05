@@ -37,9 +37,9 @@ v_script_name="centos7.certbot.sh"
 		yum --enablerepo=* -y install certbot
 		LogInfo "bash# yum --enablerepo=extra,optional,epel -y install certbot"
 		yum --enablerepo=extra,optional,epel -y install certbot
-		if ! rpm --quiet -q certbot
+		if ! rpm -q certbot
 		then
-			echo "$(date -Is) [ERROR]: failed to install certbot." | tee /dev/stderr
+			echo "$(date -Is) [ERROR]: Failed to install certbot." | tee /dev/stderr
 			exit 1
 		fi
 	fi
@@ -49,9 +49,10 @@ v_script_name="centos7.certbot.sh"
 	v_fqdn="$2"
 	
 	# install cert
+	LogInfo "Generate SSL Keys."
+	
 	if [ -z "$(ss -lntp | awk '$0=$4' | egrep '443$')" ]
 	then
-		LogInfo "Generate SSL Keys."
 		LogInfo "$(echo '{"v_email_addr": "'"${v_email_addr}"'", "v_fqdn": "'"${v_fqdn}"'"}' | jq .)"
 		
 		v_expect_num="$(expect -c "
@@ -71,7 +72,6 @@ send \"c\n\"
 interact
 " | tee /dev/stderr
 		
-		ls -dl "/etc/letsencrypt/live/${v_fqdn}/"* | tee /dev/stderr
 	else
 		if [ -z "$(echo "$3" | egrep '^/[^/]*')" ]
 		then
@@ -92,11 +92,12 @@ expect \"(press 'c' to cancel): \"
 send \"c\n\"
 interact
 " | tee /dev/stderr
-		
-		ls -dl "/etc/letsencrypt/live/${v_fqdn}/"* | tee /dev/stderr
+	
 	fi
 	
 	# notice
+	LogIngo "SSL Keys..."
+	LogInfo "$(ls -dl "/etc/letsencrypt/live/${v_fqdn}/"*)"
 	LogInfo "Please edit web server's conf for SSL Keys."
 	
 	LogInfo "End \"${v_script_name}\"."
