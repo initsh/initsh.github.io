@@ -15,13 +15,11 @@ v_script_name="centos7.httpd.vhost.sh"
 	. <(curl -LRs initsh.github.io/check.args.sh)
 
 	# install httpd
-#	if ! rpm --quiet -q openssl
-	if rpm --quiet -q openssl
+	if ! rpm --quiet -q openssl
 	then
 		LogInfo "bash# yum -y install openssl"
 		yum -y install openssl
-#		if ! rpm -q openssl
-		if rpm -q openssl
+		if ! rpm -q openssl
 		then
 			LogError "Failed to install openssl."
 			exit 1
