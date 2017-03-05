@@ -10,6 +10,7 @@ v_script_name="centos7.utils.sh"
 	LogInfo "Start \"${v_script_name}\"."
 	LogInfo "Redirect."
 curl -LRs "initsh.github.io/centos6.utils.sh" | bash
+	LogInfo "End \"${v_script_name}\"."
 } >>"${v_log_file}"
 
 
