@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Edit 20170306
 
 # variables
