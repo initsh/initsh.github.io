@@ -49,10 +49,9 @@ v_script_name="centos7.certbot.sh"
 	v_fqdn="$2"
 	
 	# install cert
-	LogInfo "Generate SSL Keys."
-	
 	if [ -z "$(ss -lntp | awk '$0=$4' | egrep '443$')" ]
 	then
+		LogInfo "Generate SSL Keys."
 		LogInfo "$(echo '{"v_email_addr": "'"${v_email_addr}"'", "v_fqdn": "'"${v_fqdn}"'"}' | jq .)"
 		
 		v_expect_num="$(expect -c "
@@ -81,7 +80,10 @@ interact
 			echo "$(date -Is) [ERROR]: ""# certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01 --pre-hook \"systemctl stop ${v_web_server}\" --post-hook \"systemctl start ${v_web_server}\"" | tee /dev/stderr
 			exit 1
 		fi
+		
+		# variables
 		v_fqdn_docroot="$3"
+		
 		LogInfo "Generate SSL Keys."
 		LogInfo "$(echo '{"v_email_addr": "'"${v_email_addr}"'", "v_fqdn": "'"${v_fqdn}"'", "v_fqdn_docroot": "'"${v_fqdn_docroot}"'"}' | jq .)"
 		
