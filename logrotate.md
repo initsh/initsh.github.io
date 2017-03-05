@@ -2,8 +2,7 @@
 
 |設定値|説明|備考|
 |--:|:--|:--|
-|create|create new (empty) log files after rotating old ones|必須|
-|create 0644 user group|ローテーション後に空のログファイルを新規作成。<br>ファイルのパーミッション、ユーザー名、グループ名を指定可能。||
+|create<br>create 0644 user group|古いログフィアルをローテーション後に、空のログファイルを新規作成。<br>ファイルのパーミッション、ユーザー名、グループ名を指定可能。|必須|
 |daily|日次でログローテーションを行う|必須|
 |weekly|週次でログローテーションを行う||
 |monthly|月次でログローテーションを行う||
