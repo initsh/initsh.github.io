@@ -4,7 +4,7 @@
 
 if [ ! $# -ge 1 ]
 then
-	echo "[ERROR]: This script must have at least 1 argument." | tee >/dev/stderr
+	echo "$(date -Is) [ERROR]: This script must have at least 1 argument." | tee >/dev/stderr
 	exit 1
 fi
 
