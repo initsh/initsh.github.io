@@ -14,7 +14,7 @@ function StdoutLog()
 
 function LogInfo()
 {
-	echo "$(date -Is) [INFO]: $1"
+	echo "$(date -Is) [INFO]: $1" | tee /dev/stderr
 }
 
 # EOF
