@@ -6,7 +6,7 @@
 
 v_git_user='initsh'
 v_repo_name='initsh.github.io'
-v_git_dir="github.com/initsh/${v_github_pages}"
+v_git_dir="github.com/${v_git_user}/${v_repo_name}"
 
 v_initsh_list="$(
 	curl -LRs "${v_git_dir}" \
