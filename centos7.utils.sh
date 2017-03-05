@@ -8,7 +8,6 @@ v_script_name="centos7.utils.sh"
 
 {
 	LogInfo "Start \"${v_script_name}\"."
-	
 	LogInfo "Redirect."
 } >"${v_log_file}"
 
