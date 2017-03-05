@@ -16,7 +16,9 @@
 |sharedscripts|複数指定したログファイル(`*log`など)に対し、<br>`postrotate`または`prerotate`で記述したコマンドを実行|必須|
 
 # Ex.
-
+    mkdir -p ~/.vimbackup
+    cp -p /etc/logrotate.d/httpd ~/.vimbackup/httpd$(date +"_%Y%m%d_%H%M%S.backup")
+    cat <<__EOD >/etc/logrotate.d/httpd
     /var/log/httpd/*log {
         daily
         rotate 90
@@ -31,6 +33,7 @@
             /bin/systemctl reload httpd.service > /dev/null 2>/dev/null || true
         endscript
     }
+    __EOD
 
 
 
