@@ -43,9 +43,9 @@ v_script_name="centos6.utils.sh"
 		yum -y install nmap
 	fi
 	
-	if ! rpm -q nc
+	if ! rpm -q nmap-ncat
 	then
-		yum -y install nc
+		yum -y install nmap-ncat
 	fi
 	
 	if ! rpm -q tcpdump
