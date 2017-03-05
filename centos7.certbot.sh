@@ -31,7 +31,7 @@ v_script_name="centos7.certbot.sh"
 	. <(curl -LRs initsh.github.io/centos7.epel.sh)
 	
 	# install certbot
-	if ! rpm -q certbot
+	if ! rpm --quiet -q certbot
 	then
 		LogInfo "bash# yum --enablerepo=* -y install certbot"
 		yum --enablerepo=* -y install certbot
