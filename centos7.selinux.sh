@@ -16,4 +16,4 @@ v_script_name="centos7.selinux.sh"
 } >"${v_log_file}"
 
 
-#EOF
+# EOF
