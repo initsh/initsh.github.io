@@ -1,29 +1,43 @@
 #!/bin/bash
 
-. <(curl -LRs initsh.github.io/check.centos6.sh)
-. <(curl -LRs initsh.github.io/check.root.sh)
+# Edit 20170306
+v_script_name="centos6.epel.sh"
 
 # functions
-. <(curl -LRs initsh.github.io/functions.sh)
-echo "[INFO]: Start centos6.epel.sh" | StdoutLog
+. <(curl -LRs initsh.github.io/functions.sh) || echo "$(date -Is) [ERROR]: Failed to load https://initsh.github.io/functions.sh"
 
-# variable
-v_epel_url='https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm'
+{
+	LogInfo "Start \"${v_script_name}\"."
+	
+	# checks
+	. <(curl -LRs initsh.github.io/check.centos6.sh)
+	. <(curl -LRs initsh.github.io/check.root.sh)
+	
+	# variable
+	v_epel_url="https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm"
+	
+	# install yum-utils
+	if ! rpm -q yum-utils
+	then
+		LogInfo "bash# yum -y install yum-utils"
+		yum -y install yum-utils
+	else
+		LogInfo "\"yum-utils\" already installed."
+	fi
+	
+	# install epel-release
+	if ! rpm -q epel-release
+	then
+		LogInfo "bash# yum -y install ${v_epel_url}"
+		yum -y install "${v_epel_url}"
+		LogInfo "bash# yum-config-manager --disable epel*"
+		yum-config-manager --disable epel*
+	else
+		LogInfo "\"epel-release\" already installed."
+	fi
+		
+	LogInfo "End \"${v_script_name}\"."
+} >"${v_log_file}"
 
-# install yum-utils
-if ! rpm -q yum-utils | StdoutLog
-then
-	echo '[INFO]: yum -y install yum-utils' | StdoutLog
-	yum -y install yum-utils | StdoutLog
-fi
 
-# install epel-release
-if ! rpm -q epel-release | StdoutLog
-then
-	echo "[INFO]: yum -y install ${v_epel_url}" | StdoutLog
-	yum -y install "${v_epel_url}" 2>/dev/stdout | StdoutLog
-	echo '[INFO]: yum-config-manager --disable epel*' | StdoutLog
-	yum-config-manager --disable epel* | StdoutLog
-fi
-
-#EOF
+# EOF
