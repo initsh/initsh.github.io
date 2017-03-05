@@ -1,5 +1,3 @@
 # initsh
 
-    alias initsh-ls='curl -LRs initsh.github.io/ls | bash'
-    initsh-ls
-
+    # bash <(curl -LRs initsh.github.io/ls)
