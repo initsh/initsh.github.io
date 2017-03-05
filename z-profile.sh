@@ -1,5 +1,7 @@
 # profile.d
 
+# Edit 20170306
+
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
 
