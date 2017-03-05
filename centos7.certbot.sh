@@ -98,7 +98,7 @@ interact
 	fi
 	
 	# notice
-	LogIngo "SSL Keys..."
+	LogInfo "SSL Keys..."
 	LogInfo "$(ls -dl "/etc/letsencrypt/live/${v_fqdn}/"*)"
 	LogInfo "Please edit web server's conf for SSL Keys."
 	
