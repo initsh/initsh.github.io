@@ -19,4 +19,14 @@ function LogInfo()
 	echo "$1" | awk '{print "'"$(date -Is)"' [INFO]: "$0}' | tee /dev/stderr
 }
 
+function LogNotice()
+{
+	echo "$1" | awk '{print "'"$(date -Is)"' [NOTICE]: "$0}' | tee /dev/stderr
+}
+
+function LogError()
+{
+	echo "$1" | awk '{print "'"$(date -Is)"' [ERROR]: "$0}' | tee /dev/stderr
+}
+
 # EOF
