@@ -13,6 +13,8 @@ v_initsh_list="$(
 	| sed -r -e 's/^.*<a href="\/[^\/]+\/[^\/]+\/blob\/master\/([^"]*)" .*$/<(curl -LRs '"${v_github_pages}"'\/\1)/g'
 )"
 
+echo
+
 # ls
 echo "[bash]"
 echo "${v_initsh_list}" | awk '{print "    "$0}'
