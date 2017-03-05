@@ -11,7 +11,7 @@ v_script_name="centos6.selinux.sh"
 
 	v_selinux_conf="/etc/selinux/config"
 
-	setenforce 0
+	[ "$(getenforce | grep "^Disabled")" ] || setenforce 0
 	\cp -p "${v_selinux_conf}" "${v_selinux_conf}${v_backup_suffix:?}"
 	sed -r -e 's/^[ \t]*(SELINUX=[^d].+)/#\1\n# '"${v_comment}"'\nSELINUX=disabled/g' "${v_selinux_conf}" -i
 	[ "$(diff "${v_selinux_conf}${v_backup_suffix}" "${v_selinux_conf}")" ] || \mv -f "${v_selinux_conf}${v_backup_suffix}" "${v_selinux_conf}"
