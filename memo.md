@@ -3,7 +3,7 @@
 
 ## useradd admin
     USERNAME="initsh"
-    USERID="49795"
+    USERID="55500"
     groupadd -g "$USERID" "$USERNAME"
     useradd -u "$USERID" -g "$USERID" "$USERNAME"
     usermod -G wheel "$USERNAME"
@@ -20,9 +20,9 @@
 
 ## nmap-ncat
     # nc -l <ListenPort>
-    nc -l 49795
+    nc -l 55500
     # nc -p <SourcePort> <RemoteHost> <RemotePort>
-    nc -p 49794 888.888.888.888 49795
+    nc -p 55500 888.888.888.888 443
 
 
 
