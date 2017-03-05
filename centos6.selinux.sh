@@ -18,6 +18,6 @@ v_script_name="centos6.selinux.sh"
 	ls -dl "${v_selinux_conf}"*
 
 	LogInfo "End \"${v_script_name}\"."
-} >"${v_log_file}"
+} >>"${v_log_file}"
 
 # EOF
