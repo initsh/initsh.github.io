@@ -1,22 +1,16 @@
-#!/bin/bash
-v_backup_suffix=$(date +'_%Y%m%d_%H%M%S.org')
-v_profile_d=/etc/profile.d/z-profile.sh
-[ -f ${v_profile_d} ] || touch ${v_profile_d}
-\cp -p ${v_profile_d} ${v_profile_d}${v_backup_suffix:?}
-cat <<'__EOD__' >${v_profile_d}
-# profile
+# profile.d
 
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
 
 # commands
-cat <<__INIT__
+cat <<__EOD__
 
         date | $(date -Is)
     hostname | $(uname -n)
       whoami | $(id)
 
-__INIT__
+__EOD__
 
 # aliases
 alias rm='rm -i'
@@ -45,8 +39,5 @@ alias head='HeadHighlight'
 TailHighlight() { tail $@ | sed -r -e 's/^(==>.+<==)$/'$'\e[31m''\1'$'\e[0m''/g'; }
 alias tail='TailHighlight'
 
-#EOF
-__EOD__
-[ "$(diff "${v_profile_d}" "${v_profile_d}${v_backup_suffix}")" ] || \mv -f "${v_profile_d}${v_backup_suffix}" "${v_profile_d}"
 
-#EOF
+# EOF
