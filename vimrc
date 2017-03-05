@@ -47,8 +47,7 @@ set ignorecase			"検索時、大文字小文字を無視
 set smartcase			"検索時、小文字の場合は大小文字を、大文字の場合は大文字のみを検索(ignorecase併用)
 
 "## intellisense ##
-set completeopt=menu,menuone
-				"候補が1つしかないときもポップアップメニューを使う
+set completeopt=menu,menuone	"候補が1つしかないときもポップアップメニューを使う
 set pumheight=8			"ポップアップメニューの最大高さを制御
 
 " ## intellisense DIY ##
