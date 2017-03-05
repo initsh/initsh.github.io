@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Edit 20170306
+
 # variables
 v_date="$(date +%Y%m%d)"
 v_time="$(date +%H%M%S)"
