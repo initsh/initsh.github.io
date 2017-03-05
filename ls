@@ -1,6 +1,5 @@
 #!/bin/bash
-
-# Edit 20170303
+# Edit 20170306
 
 # variables
 v_github_user='initsh'
