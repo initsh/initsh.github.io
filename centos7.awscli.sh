@@ -8,9 +8,7 @@ v_script_name="centos7.awscli.sh"
 
 {
 	LogInfo "Start \"${v_script_name}\"."
-	
 	LogInfo "Redirect."
-	
 } >>"${v_log_file}"
 
 curl -LRs "initsh.github.io/centos6.awscli.sh" | bash
