@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Edit 20170306
-v_script_name="centos7.selinux.sh"
+v_script_name="centos7.utils.sh"
 
 # functions
 . <(curl -LRs initsh.github.io/functions.sh) || echo "$(date -Is) [ERROR]: Failed to load https://initsh.github.io/functions.sh"
