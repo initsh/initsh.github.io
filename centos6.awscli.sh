@@ -33,7 +33,4 @@ v_script_name="centos6.awscli.sh"
 } >"${v_log_file}"
 
 
-
-
-
-#EOF
+# EOF
