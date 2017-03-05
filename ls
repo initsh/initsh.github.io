@@ -26,4 +26,4 @@ echo "alias initsh-ls='curl -LRs ${v_github_pages}/ls | bash'" | awk '{print "  
 # \n
 echo
 
-#EOF
+# EOF
