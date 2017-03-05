@@ -31,7 +31,7 @@ v_script_name="centos6.epel.sh"
 		LogInfo "bash# yum-config-manager --disable epel*"
 		yum-config-manager --disable epel*
 	fi
-		
+	
 	LogInfo "End \"${v_script_name}\"."
 } >>"${v_log_file}"
 
