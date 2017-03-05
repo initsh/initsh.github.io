@@ -24,6 +24,8 @@
     # nc -p <SourcePort> <RemoteHost> <RemotePort>
     nc -p 55500 888.888.888.888 443
 
+## awscli
+    pip install -U awscli
 
 
 # EOF
