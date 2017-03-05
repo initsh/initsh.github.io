@@ -13,7 +13,7 @@ v_script_name="centos7.awscli.sh"
 	curl -LRs "initsh.github.io/centos6.awscli.sh" | bash
 	
 	LogInfo "End \"${v_script_name}\"."
-} >"${v_log_file}"
+} >>"${v_log_file}"
 
 
 # EOF
