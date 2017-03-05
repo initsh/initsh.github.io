@@ -13,87 +13,87 @@ v_script_name="centos6.utils.sh"
 	. <(curl -LRs initsh.github.io/check.root.sh)
 	. <(curl -LRs initsh.github.io/check.x86_64.sh)
 	
-	if ! rpm -q yum-utils
+	if ! rpm --quiet -q yum-utils
 	then
 		yum -y install yum-utils
 	fi
 	
-	if ! rpm -q expect
+	if ! rpm --quiet -q expect
 	then
 		yum -y install expect
 	fi
 	
-	if ! rpm -q net-tools
+	if ! rpm --quiet -q net-tools
 	then
 		yum -y install net-tools
 	fi
 	
-	if ! rpm -q bind-utils
+	if ! rpm --quiet -q bind-utils
 	then
 		yum -y install bind-utils
 	fi
 	
-	if ! rpm -q traceroute
+	if ! rpm --quiet -q traceroute
 	then
 		yum -y install traceroute
 	fi
 	
-	if ! rpm -q nmap
+	if ! rpm --quiet -q nmap
 	then
 		yum -y install nmap
 	fi
 	
-	if ! rpm -q nmap-ncat
+	if ! rpm --quiet -q nmap-ncat
 	then
 		yum -y install nmap-ncat
 	fi
 	
-	if ! rpm -q tcpdump
+	if ! rpm --quiet -q tcpdump
 	then
 		yum -y install tcpdump
 	fi
 	
-	if ! rpm -q mailx
+	if ! rpm --quiet -q mailx
 	then
 		yum -y install mailx
 	fi
 	
-	if ! rpm -q lsof
+	if ! rpm --quiet -q lsof
 	then
 		yum -y install lsof
 	fi
 	
-	if ! rpm -q parted
+	if ! rpm --quiet -q parted
 	then
 		yum -y install parted
 	fi
 	
-	if ! rpm -q openssh-clients
+	if ! rpm --quiet -q openssh-clients
 	then
 		yum -y install openssh-clients
 	fi
 	
-	if ! rpm -q telnet
+	if ! rpm --quiet -q telnet
 	then
 		yum -y install telnet
 	fi
 	
-	if ! rpm -q wget
+	if ! rpm --quiet -q wget
 	then
 		yum -y install wget
 	fi
 	
-	if ! rpm -q zip
+	if ! rpm --quiet -q zip
 	then
 		yum -y install zip
 	fi
 	
-	if ! rpm -q unzip
+	if ! rpm --quiet -q unzip
 	then
 		yum -y install unzip
 	fi
 	
-	if ! rpm -q vim-enhanced
+	if ! rpm --quiet -q vim-enhanced
 	then
 		yum -y install vim-enhanced
 	fi
