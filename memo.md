@@ -25,6 +25,7 @@
     nc -p 55500 888.888.888.888 443
 
 ## awscli
+    python <(curl -Ls "https://bootstrap.pypa.io/get-pip.py")
     pip install -U awscli
 
 
