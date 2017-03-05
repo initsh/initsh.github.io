@@ -69,7 +69,7 @@ send \"${v_expect_num}\n\"
 expect \"(press 'c' to cancel): \"
 send \"c\n\"
 interact
-" | tee /dev/stderr
+"
 		
 	else
 		if [ -z "$(echo "$3" | egrep '^/[^/]*')" ]
@@ -93,7 +93,7 @@ spawn certbot certonly --agree-tos --email ${v_email_addr} --webroot -w ${v_fqdn
 expect \"(press 'c' to cancel): \"
 send \"c\n\"
 interact
-" | tee /dev/stderr
+"
 	
 	fi
 	
