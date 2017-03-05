@@ -16,7 +16,7 @@
     firewall-cmd --reload
     firewall-cmd --list-rich-rule
     firewall-cmd --list-all
-    firewall-cmd --permanent --remove-rich-rule="rule family="ipv4" source address="133.130.118.190/32" port port="25565" protocol="tcp" accept"
+    firewall-cmd --permanent --remove-rich-rule="rule family="ipv4" source address="888.888.888.888/32" port port="25565" protocol="tcp" accept"
 
 ## nmap-ncat
     # nc -l <ListenPort>
