@@ -9,6 +9,10 @@ v_script_name="centos7.epel.sh"
 {
 	LogInfo "Start \"${v_script_name}\"."
 	
+	# checks
+	. <(curl -LRs initsh.github.io/check.centos7.sh)
+	. <(curl -LRs initsh.github.io/check.root.sh)
+	
 	# variable
 	v_epel_url="https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm"
 	
