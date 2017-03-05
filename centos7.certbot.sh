@@ -100,7 +100,7 @@ interact
 	LogInfo "Please edit web server's conf for SSL Keys."
 	
 	LogInfo "End \"${v_script_name}\"."
-} >"${v_log_file}"
+} >>"${v_log_file}"
 
 
 # EOF
