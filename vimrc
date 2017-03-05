@@ -1,5 +1,7 @@
+""""""""""""""""""""""""""""""""
+""  user defined
+""""""""""""""""""""""""""""""""
 " Edit 20170305
-
 "## common ##
 syntax on			"シンタックス
 set showcmd			"入力中のコマンドを表示
@@ -25,6 +27,8 @@ set backup			"バックアップファイルを作成
 set writebackup			"取得するバックアップを編集前のファイルとする
 set backupdir=$HOME/.vimbackup
 				"バックアップ作成ディレクトリを設定
+call system("mkdir $HOME/.vimbackup")
+				"バックアップ作成ディレクトリを作成
 au BufWritePre * let &bex = '_' . strftime("%Y%m%d_%H%M%S") . '.backup'
 				"バックアップファイルの名称にタイムスタンプと.backup拡張子を付与する
 
