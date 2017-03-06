@@ -105,9 +105,11 @@ NameVirtualhost *:443
     DocumentRoot ${v_vhost_fqdn_docroot}
 
     SSLEngine on
+    # openssl
     SSLCertificateFile ${v_fqdn_crt}
-#    SSLCertificateFile /etc/letsencrypt/live/${v_fqdn}/cert.pem
     SSLCertificateKeyFile ${v_fqdn_key}
+    # Let's Encrypt
+#    SSLCertificateFile /etc/letsencrypt/live/${v_fqdn}/cert.pem
 #    SSLCertificateKeyFile /etc/letsencrypt/live/${v_fqdn}/privkey.pem
 
     ErrorLog logs/${v_fqdn}-error_log
