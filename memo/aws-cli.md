@@ -19,7 +19,7 @@
 
 ###### 【参考】VPC作成時の情報をファイルに保存
 
-    echo "$v_aws_vpc_create_json" >>vpc.json.create
+    echo "$v_aws_vpc_create_json" >vpc.json.create
 
 
 #### VPCにNameタグを設定 / 設定確認
