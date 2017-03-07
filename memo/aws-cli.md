@@ -3,13 +3,13 @@
 ## Prepare
     python <(curl -LRs "https://bootstrap.pypa.io/get-pip.py")
 
+###### 【参考】jqコマンドをインストール
+    curl -LR https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -o /tmp/jq ; chmod 755 /tmp/jq ; \mv -f /tmp/jq /usr/bin/jq ; ls -dl /usr/bin/jq*
+
+
 ## Setup AWS CLI
     pip install awscli
     aws configure
-
-
-###### 【参考】jqコマンドをインストール
-    curl -LR https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -o /tmp/jq ; chmod 755 /tmp/jq ; \mv -f /tmp/jq /usr/bin/jq ; ls -dl /usr/bin/jq*
 
 
 ## Setup VPC ([参考](http://www.simpline.co.jp/tech/?p=267))
