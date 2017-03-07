@@ -32,15 +32,15 @@
 #### vpcのidと同名のディレクトリを`$HOME`配下に作成 && 移動
 
     cd $HOME ; mkdir $v_aws_vpc_id ; cd $v_aws_vpc_id ; pwd
-    
-    # 【参考】VPC作成時の情報をファイルに保存
-    echo "$v_aws_vpc_create_json" >vpc.json.create
 
 
-#### VPCにNameタグを設定 / 設定確認
+#### VPCにNameタグを設定 / 設定をファイルに保存
 
     aws ec2 create-tags --resources $v_aws_vpc_id --tags Key=Name,Value=$v_aws_vpc_name
     aws ec2 describe-vpcs --vpc-id $v_aws_vpc_id | tee vpc.json
+    
+    # 【参考】VPC作成時の情報をファイルに保存
+    echo "$v_aws_vpc_create_json" >vpc.json.create
     
 
 #### VPCの設定を変更(VPC内の名前解決をサポート) / 設定確認
