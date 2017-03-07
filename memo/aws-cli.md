@@ -1,4 +1,6 @@
-# Install AWS CLI
+# AWS CLI
+
+## Install AWS CLI
     python <(curl -LRs "https://bootstrap.pypa.io/get-pip.py")
     pip install awscli
 
@@ -7,7 +9,7 @@
     curl -LR https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -o /tmp/jq ; chmod 755 /tmp/jq ; \mv -f /tmp/jq /usr/bin/jq ; ls -dl /usr/bin/jq*
 
 
-# VPC ([参考](http://www.simpline.co.jp/tech/?p=267))
+## VPC ([参考](http://www.simpline.co.jp/tech/?p=267))
 
 #### 変数を設定
 
