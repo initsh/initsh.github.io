@@ -1,8 +1,8 @@
 #### workdir
     v_aws_workdir=${HOME:?}/$(date +'aws_%Y%m%d_%H%M%S')
     mkdir ${v_aws_workdir:?} && cd $v_aws_workdir
-    ls -ld $HOME/aws_*
-    pwd
+    ls -ld $HOME/aws_*
+    pwd
 
 
 #### VPC作成
