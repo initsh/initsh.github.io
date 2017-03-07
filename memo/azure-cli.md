@@ -16,7 +16,7 @@
     su -l $v_username
     
 
-## Install Azure CLI ([参考](https://docs.microsoft.com/ja-jp/cli/azure/install-azure-cli))
+## Setup Azure CLI ([参考](https://docs.microsoft.com/ja-jp/cli/azure/install-azure-cli))
     curl -L https://aka.ms/InstallAzureCli | bash
 
 
