@@ -10,14 +10,17 @@
 ##### VPCを作成 / jsonからVPCのidを出力し、変数に格納 / 確認
 
     v_aws_vpc_create_json="$(aws ec2 create-vpc --region $v_region --cidr-block $v_aws_vpc_cidr | tee /dev/stderr)"
-    v_aws_vpc_id=$(echo "$v_aws_vpc_create_json" | sed -r -e '/VpcId/!d' -e 's/.*"VpcId": "([^"]+)".*/\1/g')
-    echo $v_aws_vpc_id
-    
+    v_aws_vpc_id=$(echo "$v_aws_vpc_create_json" | sed -r -e '/VpcId/!d' -e 's/.*"VpcId": "([^"]+)".*/\1/g' | tee /dev/stderr)
+
 
 #### vpcのidと同名のディレクトリを`$HOME`配下に作成 && 移動
 
     cd $HOME && mkdir $v_aws_vpc_id && cd $v_aws_vpc_id && pwd
-    
+
+###### 【参考】VPC作成時の情報をファイルに保存
+
+    echo "$v_aws_vpc_create_json" >>vpc.json.create
+
 
 #### VPCにNameタグを設定 / 設定確認
 
