@@ -11,7 +11,7 @@
     v_aws_vpc_id=$(aws ec2 create-vpc --region ap-northeast-1 --cidr-block $v_aws_vpc_cidr | sed -r -e '/VpcId/!d' -e 's/.*"VpcId": "([^"]+)".*/\1/g')
     
     # vpcのidと同名のディレクトリを作成
-    mkdir $v_aws_vpc_id && cd $v_aws_vpc_id
+    mkdir $v_aws_vpc_id && cd $v_aws_vpc_id && pwd
     
     # VPCにNameタグを追加
     aws ec2 create-tags --resources $v_aws_vpc_id --tags Key=Name,Value=$v_aws_vpc_name
