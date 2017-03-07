@@ -1,5 +1,12 @@
 # VPC
 
+###### 【参考】jqコマンドをインストール
+    curl -LRs https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -o /tmp/jq
+    chmod 755 /tmp/jq
+    \mv -f /tmp/jq /usr/bin/
+    ls -dl /usr/bin/jq*
+
+
 #### 変数を設定
 
     v_aws_vpc_cidr=10.0.0.0/16
