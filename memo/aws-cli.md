@@ -1,7 +1,9 @@
 # AWS CLI
 
-## Setup AWS CLI
+## Prepare
     python <(curl -LRs "https://bootstrap.pypa.io/get-pip.py")
+
+## Setup AWS CLI
     pip install awscli
     aws configure
 
