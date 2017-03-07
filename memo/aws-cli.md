@@ -97,11 +97,14 @@
     SUBNET_ID="$(echo "$SUBNET_CREATE_JSON" | sed -r -e /SubnetId/\!d -e 's/.*"[^"]+": "([^"]+)".*/\1/g' | tee /dev/stderr)"
 
 
+#### Auto Assign Public IPを設定
 
-#### SUBNETにNameタグを設定 / Auto Assign Public IPを設定 / 設定をファイルに保存
+    aws ec2 modify-subnet-attribute --subnet-id $SUBNET_ID --map-public-ip-on-launch
+
+
+#### SUBNETにNameタグを設定 / 設定をファイルに保存
 
     aws ec2 create-tags --resources $SUBNET_ID --tags Key=Name,Value=$SUBNET_NAME
-    aws ec2 modify-subnet-attribute --subnet-id $SUBNET_ID --map-public-ip-on-launch
     aws ec2 describe-subnets --subnet-ids $SUBNET_ID | tee $SUBNET_NAME.json
     
     # 【参考】SUBNET作成時の情報をファイルに保存
@@ -116,7 +119,6 @@
 
 
 
-###### VPC削除
-    aws ec2 delete-vpc --vpc-id $VPC_ID
+
 
 ###### EOF
