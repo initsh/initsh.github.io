@@ -8,12 +8,27 @@
 #### VPC作成
     v_aws_vpc_cidr=10.0.0.0/16
     v_aws_vpc_name=dev-vpc
+    
+    # create
     aws ec2 create-vpc --region ap-northeast-1 --cidr-block $v_aws_vpc_cidr >>vpc.json
-    v_aws_vpc_id=$(sed -r -e '/VpcId/!d' -e 's/.*"VpcId": "([^"]+)".*/\1/g' vpc.json)
-
-
-
-
+    
+    # get vpc-id
+    v_aws_vpc_id=$(sed -r -e '/VpcId/!d' -e 's/.*"VpcId": "([^"]+)".*/\1/g' vpc.json) 
+    
+    # modify properties
+    aws ec2 create-tags --resources $v_aws_vpc_id --tags Key=Name,Value=$v_aws_vpc_name
+    aws ec2 modify-vpc-attribute --vpc-id $v_aws_vpc_id --enable-dns-support
+    aws ec2 modify-vpc-attribute --vpc-id $v_aws_vpc_id --enable-dns-hostnames
+    
+    # check properties
+    aws ec2 describe-vpcs --vpc-id $v_aws_vpc_id
+    aws ec2 describe-vpc-attribute --vpc-id $v_aws_vpc_id --attribute enableDnsSupport
+    aws ec2 describe-vpc-attribute --vpc-id $v_aws_vpc_id --attribute enableDnsHostnames
+    
+    
+    
+    
+    /
 
 
 
