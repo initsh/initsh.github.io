@@ -4,7 +4,6 @@
 
     sudo su -
     
-    yum update -y
     yum install -y gcc libffi-devel python-devel openssl-devel
     
     $v_username=azure
