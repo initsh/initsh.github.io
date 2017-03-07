@@ -1,1 +1,3 @@
+|Azure          |AWS          |
+|:--------------|:------------|
 |VPNExpressRoute|DirectConnect|
