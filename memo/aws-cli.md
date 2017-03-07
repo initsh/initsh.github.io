@@ -1,6 +1,7 @@
 # AWS CLI
 
 ## Prepare
+    sudo -s
     python <(curl -LRs "https://bootstrap.pypa.io/get-pip.py")
 
 ###### 【参考】jqコマンドをインストール
