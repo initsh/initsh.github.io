@@ -1,3 +1,5 @@
-|Azure          |AWS          |
-|:--------------|:------------|
-|VPNExpressRoute|DirectConnect|
+|Azure|AWS|
+|:--|:--|
+|ExpressRoute|DirectConnect|
+|PublicIP|ElasticIP|
+|||
