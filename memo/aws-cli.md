@@ -18,30 +18,30 @@
 
 #### 変数を設定
 
-    VPC_CIDR=10.0.0.0/16
     VPC_NAME=dev-vpc
-    REGION=ap-northeast-1
+    VPC_CIDR=10.0.0.0/16
+    VPC_REGION=ap-northeast-1
+
+
+#### vpcのnameタグと同名のディレクトリを`$HOME`配下に作成 && 移動
+
+    cd $HOME ; mkdir $VPC_NAME ; cd $VPC_NAME ; pwd
 
 
 ##### VPCを作成 / jsonからVPCのidを出力し、変数に格納 / 確認
 
-    VPC_CREATE_JSON="$(aws ec2 create-vpc --region $REGION --cidr-block $VPC_CIDR | tee /dev/stderr)"
+    VPC_CREATE_JSON="$(aws ec2 create-vpc --region $VPC_REGION --cidr-block $VPC_CIDR | tee /dev/stderr)"
     VPC_ID="$(echo "$VPC_CREATE_JSON" | sed -r -e /VpcId/\!d -e 's/.*"[^"]+": "([^"]+)".*/\1/g' | tee /dev/stderr)"
-
-
-#### vpcのidと同名のディレクトリを`$HOME`配下に作成 && 移動
-
-    cd $HOME ; mkdir $VPC_ID ; cd $VPC_ID ; pwd
 
 
 #### VPCにNameタグを設定 / 設定をファイルに保存
 
     aws ec2 create-tags --resources $VPC_ID --tags Key=Name,Value=$VPC_NAME
-    aws ec2 describe-vpcs --vpc-id $VPC_ID | tee vpc.json
+    aws ec2 describe-vpcs --vpc-id $VPC_ID | tee $VPC_NAME.json
     
     # 【参考】VPC作成時の情報をファイルに保存
-    echo "$VPC_CREATE_JSON" | tee vpc.json.create
-    
+    echo "$VPC_CREATE_JSON" | tee $VPC_NAME.json.create
+
 
 #### VPCの設定を変更(VPC内の名前解決をサポート) / 設定確認
 
@@ -62,7 +62,7 @@
     IGW_NAME=dev-igw
 
 
-##### VPCを作成 / jsonからVPCのidを出力し、変数に格納 / 確認
+##### IGWを作成 / jsonからIGWのidを出力し、変数に格納 / 確認
 
     IGW_CREATE_JSON="$(aws ec2 create-internet-gateway | tee /dev/stderr)"
     IGW_ID="$(echo "$IGW_CREATE_JSON" | sed -r -e /InternetGatewayId/\!d -e 's/.*"[^"]+": "([^"]+)".*/\1/g' | tee /dev/stderr)"
@@ -72,13 +72,40 @@
     aws ec2 attach-internet-gateway --internet-gateway-id $IGW_ID --vpc-id $VPC_ID
 
 
-#### VPCにNameタグを設定 / 設定をファイルに保存
+#### IGWにNameタグを設定 / 設定をファイルに保存
 
     aws ec2 create-tags --resources $IGW_ID --tags Key=Name,Value=$IGW_NAME
-    aws ec2 describe-internet-gateways --filters "Name=internet-gateway-id,Values=$IGW_ID" | tee igw.json
+    aws ec2 describe-internet-gateways --filters "Name=internet-gateway-id,Values=$IGW_ID" | tee $IGW_NAME.json
     
-    # 【参考】VPC作成時の情報をファイルに保存
-    echo "$IGW_CREATE_JSON" | tee igw.json.create
+    # 【参考】IGW作成時の情報をファイルに保存
+    echo "$IGW_CREATE_JSON" | tee $IGW_NAME.json.create
+
+
+## Setup SUBNET ([参考](http://www.simpline.co.jp/tech/?p=267))
+
+#### SUBNET用変数を設定
+
+    SEQ=001
+    SUBNET_NAME=dev-subnet-$SEQ
+    SUBNET_CIDR=10.0.$(seq ${SEQ}).0/24
+    SUBNET_AZ=${VPC_REGION}a
+
+
+##### SUBNETを作成 / jsonからSUBNETのidを出力し、変数に格納 / 確認
+
+    SUBNET_CREATE_JSON="$(aws ec2 create-subnet --vpc-id $VPC_ID --cidr-block $SUBNET_CIDR --availability-zone $SUBNET_AZ | tee /dev/stderr)"
+    SUBNET_ID="$(echo "$SUBNET_CREATE_JSON" | sed -r -e /SubnetId/\!d -e 's/.*"[^"]+": "([^"]+)".*/\1/g' | tee /dev/stderr)"
+
+
+
+#### SUBNETにNameタグを設定 / Auto Assign Public IPを設定 / 設定をファイルに保存
+
+    aws ec2 create-tags --resources $SUBNET_ID --tags Key=Name,Value=$SUBNET_NAME
+    aws ec2 modify-subnet-attribute --subnet-id $SUBNET_ID --map-public-ip-on-launch
+    aws ec2 describe-subnets --subnet-ids $SUBNET_ID | tee $SUBNET_NAME.json
+    
+    # 【参考】SUBNET作成時の情報をファイルに保存
+    echo "$SUBNET_CREATE_JSON" | tee $SUBNET_NAME.json.create
 
 
 
@@ -87,5 +114,9 @@
 
 
 
+
+
+###### VPC削除
+    aws ec2 delete-vpc --vpc-id $VPC_ID
 
 ###### EOF
