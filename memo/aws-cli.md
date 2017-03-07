@@ -15,7 +15,7 @@
 
 #### vpcのidと同名のディレクトリを`$HOME`配下に作成 && 移動
 
-    cd $HOME && mkdir $v_aws_vpc_id && cd $v_aws_vpc_id && pwd
+    cd $HOME ; mkdir $v_aws_vpc_id ; cd $v_aws_vpc_id ; pwd
 
 ###### 【参考】VPC作成時の情報をファイルに保存
 
