@@ -40,7 +40,7 @@
     aws ec2 describe-vpcs --vpc-id $VPC_ID | tee vpc.json
     
     # 【参考】VPC作成時の情報をファイルに保存
-    echo "$VPC_CREATE_JSON" >vpc.json.create
+    echo "$VPC_CREATE_JSON" | tee vpc.json.create
     
 
 #### VPCの設定を変更(VPC内の名前解決をサポート) / 設定確認
@@ -68,13 +68,17 @@
     IGW_ID="$(echo "$IGW_CREATE_JSON" | sed -r -e /InternetGatewayId/\!d -e 's/.*"[^"]+": "([^"]+)".*/\1/g' | tee /dev/stderr)"
 
 
+#### VPCにIGWをアタッチ
+    aws ec2 attach-internet-gateway --internet-gateway-id $IGW_ID --vpc-id $VPC_ID
+
+
 #### VPCにNameタグを設定 / 設定をファイルに保存
 
     aws ec2 create-tags --resources $IGW_ID --tags Key=Name,Value=$IGW_NAME
-    aws ec2 describe-internet-gateways --igw-id $IGW_ID | tee igw.json
+    aws ec2 describe-internet-gateways --filters "Name=internet-gateway-id,Values=$IGW_ID" | tee igw.json
     
     # 【参考】VPC作成時の情報をファイルに保存
-    echo "$IGW_CREATE_JSON" >igw.json.create
+    echo "$IGW_CREATE_JSON" | tee igw.json.create
 
 
 
