@@ -16,7 +16,7 @@
     v_aws_vpc_id=$(sed -r -e '/VpcId/!d' -e 's/.*"VpcId": "([^"]+)".*/\1/g' vpc.json)
     
     # modify properties
-    aws ec2 create-tags --resources $v_aws_vpc_id --tags Key=Name,Value=$v_aws_vpc_name
+    aws ec2 create-tags --resources $v_aws_vpc_id --tags Key=Name,Value=$v_aws_vpc_name
     aws ec2 modify-vpc-attribute --vpc-id $v_aws_vpc_id --enable-dns-support
     aws ec2 modify-vpc-attribute --vpc-id $v_aws_vpc_id --enable-dns-hostnames
     
