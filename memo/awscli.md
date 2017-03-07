@@ -6,7 +6,7 @@
 
 
 #### VPC
-    # variables
+    # 変数を設定
     v_aws_vpc_cidr=10.0.0.0/16
     v_aws_vpc_name=dev-vpc
     
