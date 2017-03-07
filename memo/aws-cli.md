@@ -10,7 +10,7 @@
 ##### VPCを作成 / jsonからVPCのidを出力し、変数に格納 / 確認
 
     v_aws_vpc_create_json="$(aws ec2 create-vpc --region $v_aws_region --cidr-block $v_aws_vpc_cidr | tee /dev/stderr)"
-    v_aws_vpc_id=$(echo "$v_aws_vpc_create_json" | sed -r -e '/VpcId/!d' -e 's/.*"VpcId": "([^"]+)".*/\1/g' | tee /dev/stderr)
+    v_aws_vpc_id=$(echo "$v_aws_vpc_create_json" | sed -n -r -e '/VpcId/p' -e 's/.*"VpcId": "([^"]+)".*/\1/g' | tee /dev/stderr)
 
 
 #### vpcのidと同名のディレクトリを`$HOME`配下に作成 && 移動
