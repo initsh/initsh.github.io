@@ -1,6 +1,6 @@
 # Azure CLI
 
-## prepare
+## Prepare
 
     sudo su -
     
@@ -19,3 +19,8 @@
 ## Install Azure CLI ([参考](https://docs.microsoft.com/ja-jp/cli/azure/install-azure-cli))
     curl -L https://aka.ms/InstallAzureCli | bash
 
+
+
+
+
+###### EOF
