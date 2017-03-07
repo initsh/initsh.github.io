@@ -4,11 +4,12 @@
 
     v_aws_vpc_cidr=10.0.0.0/16
     v_aws_vpc_name=dev-vpc
+    v_region=ap-northeast-1
 
 
 ##### VPCを作成 / jsonからVPCのidを出力し、変数に格納
 
-    v_aws_vpc_create_json="$(aws ec2 create-vpc --region ap-northeast-1 --cidr-block $v_aws_vpc_cidr | tee /dev/stderr)"
+    v_aws_vpc_create_json="$(aws ec2 create-vpc --region $v_region --cidr-block $v_aws_vpc_cidr | tee /dev/stderr)"
     v_aws_vpc_id=$(echo "$v_aws_vpc_create_json" | sed -r -e '/VpcId/!d' -e 's/.*"VpcId": "([^"]+)".*/\1/g')
     
 
