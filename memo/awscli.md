@@ -1,6 +1,6 @@
 #### workdir
-    v_aws_dir="$(date +'aws_%Y%m%d_%H%M%S')"
-    mkdir ${HOME:?}/${v_aws_dir:?} && cd ${v_aws_dir:?}
+    v_aws_dir="${HOME:?}/$(date +'aws_%Y%m%d_%H%M%S')"
+    mkdir ${v_aws_dir:?} && cd ${v_aws_dir:?}
     ls -ld ${HOME:?}/aws_*
 
 
