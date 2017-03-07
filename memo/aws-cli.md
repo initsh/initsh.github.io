@@ -83,12 +83,15 @@
 
 ## Setup SUBNET ([参考](http://www.simpline.co.jp/tech/?p=267))
 
-#### SUBNET用変数を設定
+#### SUBNET用変数を設定 / 確認
 
     SEQ=001
     SUBNET_NAME=dev-subnet-$SEQ
     SUBNET_CIDR=10.0.$(seq ${SEQ}).0/24
     SUBNET_AZ=${VPC_REGION}a
+    #SUBNET_AZ=${VPC_REGION}c
+    
+    echo -e "$SUBNET_NAME\n$SUBNET_CIDR\n$SUBNET_AZ"
 
 
 ##### SUBNETを作成 / jsonからSUBNETのidを出力し、変数に格納 / 確認
