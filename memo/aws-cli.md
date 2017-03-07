@@ -1,8 +1,9 @@
 # AWS CLI
 
-## Install AWS CLI
+## Setup AWS CLI
     python <(curl -LRs "https://bootstrap.pypa.io/get-pip.py")
     pip install awscli
+    aws configure
 
 
 ###### 【参考】jqコマンドをインストール
