@@ -2,7 +2,7 @@
 
 ## Prepare
 
-    sudo su -
+    sudo -s
     
     yum install -y gcc libffi-devel python-devel openssl-devel
     
