@@ -71,7 +71,7 @@
 #### VPCにNameタグを設定 / 設定をファイルに保存
 
     aws ec2 create-tags --resources $IGW_ID --tags Key=Name,Value=$IGW_NAME
-    aws ec2 describe-vpcs --vpc-id $IGW_ID | tee vpc.json
+    aws ec2 describe-vpcs --vpc-id $IGW_ID | tee igw.json
     
     # 【参考】VPC作成時の情報をファイルに保存
     echo "$IGW_CREATE_JSON" >igw.json.create
