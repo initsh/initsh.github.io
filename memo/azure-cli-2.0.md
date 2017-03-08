@@ -8,10 +8,10 @@
     # 依存関係をインストール
     yum install -y gcc libffi-devel python-devel openssl-devel
     
-    # 【参考】Azure CLI 2.0 (az) 実行ユーザの作成
+    # 【参考】Azure CLI 2.0 (az) 実行ユーザの作成
     USERNAME=az
-    GROUP_ID=36500
-    USER_ID=36500
+    GROUP_ID=12600
+    USER_ID=12600
     groupadd -g $GROUP_ID
     useradd -u $USER_ID -g $GROUP_ID $v_username
     su - $USERNAME
