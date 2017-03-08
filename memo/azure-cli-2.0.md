@@ -60,10 +60,11 @@
     SUBNET_NAME=DevSubnet${SEQ}
     SUBNET_CIDR=192.168.$(seq ${SEQ}).0/24
     
+    # 
     az network vnet create --resource-group ${RG_NAME:?} -l ${RG_LOCATION:?} -n ${VNET_NAME:?} --address-prefix ${VNET_CIDR:?}
     
-    
-    az network vnet create --resource-group ${RG_NAME:?} -l ${RG_LOCATION:?} -n ${VNET_NAME:?} --subnet-name ${SUBNET_NAME:?} --subnet-prefix ${SUBNET_CIDR:?}
+    # 
+    az network vnet subnet create -g ${RG_NAME:?} -l ${RG_LOCATION:?} --vnet-name ${VNET_NAME:?} -n ${SUBNET_NAME:?} --address-prefix ${SUBNET_CIDR:?}
 
     
     
