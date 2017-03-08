@@ -36,6 +36,11 @@
     # アカウント情報を表示
     az account show
     
+    # 【参考】
+    az vm image list --all >az.vm.image.list.all.json &
+    jobs
+    disown
+    jobs
     
 ## Setup ResourceGroup
     
