@@ -42,9 +42,6 @@
     RG_NAME=DevResourceGroup
     RG_LOCATION=japaneast
     
-    #
-    echo 'centralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,northcentralus,southcentralus,westcentralus,northeurope,westeurope,japaneast,japanwest,brazilsouth,australiasoutheast,australiaeast,westindia,southindia,centralindia,canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth'
-    
     # 
     az group create -n ${RG_NAME} -l ${RG_LOCATION}
     
@@ -59,6 +56,36 @@
     
     
     
-    .
+    
+## Regions
+|Azure CLI 2.0 Regions|和名|
+|:--|:--|
+|centralus||
+|eastasia||
+|southeastasia||
+|eastus||
+|eastus2||
+|westus||
+|westus2||
+|northcentralus||
+|southcentralus||
+|westcentralus||
+|northeurope||
+|westeurope||
+|japaneast|東日本|
+|japanwest|西日本|
+|brazilsouth||
+|australiasoutheast||
+|australiaeast||
+|westindia||
+|southindia||
+|centralindia||
+|canadacentral||
+|canadaeast||
+|uksouth||
+|ukwest||
+|koreacentral||
+|koreasouth||
+
 
 ###### EOF
