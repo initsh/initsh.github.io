@@ -19,7 +19,11 @@
 
     curl -L https://aka.ms/InstallAzureCli | bash
 
-    az login | tee az.login.json
+    az login | tee ./az.login.json
+
+
+
+
 
 
 
