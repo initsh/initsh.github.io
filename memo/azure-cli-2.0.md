@@ -21,7 +21,7 @@
 ## Setup Azure CLI ([参考](https://docs.microsoft.com/ja-jp/cli/azure/install-azure-cli))
 
     # Azure CLI 2.0 (az) をインストール
-    curl -L https://aka.ms/InstallAzureCli | bash
+    curl -L https://aka.ms/InstallAzureCli | bash | tee ./az.install.log
     
     # シェルを再実行し、環境変数などを反映させる
     exec -l ${SHELL}
