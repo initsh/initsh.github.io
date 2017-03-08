@@ -36,10 +36,14 @@
     # アカウント情報を表示
     az account show
     
+## Setup ResourceGroup
     
+    # 
+    RG_NAME=DevResourceGroup
+    RG_LOCATION=eastjapan
     
-    
-    
+    # 
+    az group create -n ${RG_NAME} -l ${RG_LOCATION}
     
     
     
