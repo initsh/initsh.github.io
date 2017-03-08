@@ -21,7 +21,7 @@
     su - ${USER_NAME}
 
 
-## Setup Azure CLI ([参考](https://docs.microsoft.com/ja-jp/cli/azure/install-azure-cli))
+## Setup Azure CLI ([参考1](https://docs.microsoft.com/ja-jp/cli/azure/install-azure-cli))([参考2](ttps://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli))
 
     # Azure CLI 2.0 (az) をインストール
     curl -L https://aka.ms/InstallAzureCli | bash
@@ -35,8 +35,6 @@
     
     # アカウント情報を表示
     az account show
-    
-    
     
     
     
