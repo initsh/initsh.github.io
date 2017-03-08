@@ -49,7 +49,7 @@
     RG_LOCATION=japaneast
     
     # 
-    RG_CREATE_JSON="$(az group create --location ${RG_LOCATION} --name ${RG_NAME})"; echo "${RG_CREATE_JSON}"
+    az group create -l ${RG_LOCATION} -n ${RG_NAME}
     
 ## Setup VirtualNetwork
     
@@ -59,7 +59,8 @@
     SUBNET_NAME=DevSubnet
     SUBNET_CIDR=192.168.1.0/24
     
-    az network vnet create --resource-group ${RG_NAME} --location ${RG_LOCATION} --name ${VNET_NAME} --address-prefix ${VNET_CIDR} --subnet-name ${SUBNET_NAME} --subnet-prefix ${SUBNET_CIDR}
+    az network vnet create --resource-group ${RG_NAME} -l ${RG_LOCATION} -n ${VNET_NAME} --address-prefix ${VNET_CIDR} \
+      --subnet-name ${SUBNET_NAME} --subnet-prefix ${SUBNET_CIDR}
 
     
     
@@ -79,7 +80,7 @@
     VM_OS_TYPE=linux
     
     # 
-    VM_CREATE_JSON="$(az vm create -n ${VM_NAME} -g ${RG_NAME} --image ${VM_IMAGE} --admin-username ${VM_ADMIN_USER_NAME} )"; echo "${VM_CREATE_JSON}"
+    az vm create -n ${VM_NAME} -g ${RG_NAME} --image ${VM_IMAGE} --admin-username ${VM_ADMIN_USER_NAME}
     
     
     
