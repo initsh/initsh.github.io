@@ -16,14 +16,17 @@
     aws configure
 
 
+## Setup ProjectPrefix
+    v_pre=dev
+
 ## Setup VPC ([参考](http://www.simpline.co.jp/tech/?p=267))
 
     # 変数を設定
-    v_vpc_name=dev-vpc
+    v_vpc_name=${v_pre}-vpc
     v_vpc_cidr=10.0.0.0/16
     v_vpc_region=ap-northeast-1
     
-    # vpcのnameタグと同名のディレクトリを$HOME配下に作成 && 移動
+    # vpcのnameタグと同名のディレクトリを`$HOME`配下に作成 && 移動
     cd $HOME ; mkdir ${v_vpc_name} ; cd ${v_vpc_name} ; pwd
     
     # VPCを作成
@@ -57,7 +60,7 @@
 ## Setup IGW ([参考](http://www.simpline.co.jp/tech/?p=267))
 
     # IGW用変数を設定
-    v_igw_name=dev-igw
+    v_igw_name=${v_pre}-igw
     
     # IGWを作成
     v_igw_create_json="$(aws ec2 create-internet-gateway | tee /dev/stderr)"
@@ -82,7 +85,7 @@
 
     # SUBNET用変数を設定
     v_seq=001
-    v_subnet_name=dev-subnet-${v_seq}
+    v_subnet_name=${v_pre}-${v_seq}-subnet
     v_subnet_cidr=10.0.$(seq ${v_seq}).0/24
     v_subnet_az=${v_vpc_region}a
     #v_subnet_az=${v_vpc_region}c
