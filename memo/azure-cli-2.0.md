@@ -16,9 +16,9 @@
     GROUP_NAME=az
     GROUP_ID=12600
     USER_ID=12600
-    groupadd -g ${GROUP_ID} ${GROUP_NAME}
-    useradd -u ${USER_ID} -g ${GROUP_ID} ${USER_NAME}
-    su - ${USER_NAME}
+    groupadd -g ${GROUP_ID:?} ${GROUP_NAME:?}
+    useradd -u ${USER_ID:?} -g ${GROUP_ID:?} ${USER_NAME:?}
+    su - ${USER_NAME:?}
 
 
 ## Setup Azure CLI ([参考](https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli))
@@ -27,7 +27,7 @@
     curl -L https://aka.ms/InstallAzureCli | bash
     
     # シェルを再実行し、環境変数などを反映させる
-    exec -l ${SHELL}
+    exec -l ${SHELL:?}
     
     # azureへログイン (出力をファイル"az.login.json"として保存)
     # 実行後に表示されるURLにアクセスし、コードを入力の後、ログイン情報を入力
@@ -49,7 +49,7 @@
     RG_LOCATION=japaneast
     
     # 
-    az group create -l ${RG_LOCATION} -n ${RG_NAME}
+    az group create -l ${RG_LOCATION:?} -n ${RG_NAME:?}
     
 ## Setup VirtualNetwork
     
@@ -59,8 +59,8 @@
     SUBNET_NAME=DevSubnet
     SUBNET_CIDR=192.168.1.0/24
     
-    az network vnet create --resource-group ${RG_NAME} -l ${RG_LOCATION} -n ${VNET_NAME} \
-      --address-prefix ${VNET_CIDR} --subnet-name ${SUBNET_NAME} --subnet-prefix ${SUBNET_CIDR}
+    az network vnet create --resource-group ${RG_NAME:?} -l ${RG_LOCATION:?} -n ${VNET_NAME:?} \
+      --address-prefix ${VNET_CIDR:?} --subnet-name ${SUBNET_NAME:?} --subnet-prefix ${SUBNET_CIDR:?}
 
     
     
@@ -74,13 +74,13 @@
     
     # 
     SEQ=001
-    VM_NAME=DevVM${SEQ}
+    VM_NAME=DevVM${SEQ:?}
     VM_IMAGE=OpenLogic:CentOS:6.8:6.8.20170105
     VM_ADMIN_USER_NAME=azure-user
     VM_OS_TYPE=linux
     
     # 
-    az vm create -n ${VM_NAME} -g ${RG_NAME} --image ${VM_IMAGE} --admin-username ${VM_ADMIN_USER_NAME}
+    az vm create -n ${VM_NAME:?} -g ${RG_NAME:?} --image ${VM_IMAGE:?} --admin-username ${VM_ADMIN_USER_NAME:?}
     
     
     
