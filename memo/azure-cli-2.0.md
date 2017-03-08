@@ -6,7 +6,8 @@
     
     yum install -y gcc libffi-devel python-devel openssl-devel
     
-    $v_username=azure
+    # 【参考】Azure CLI 2.0 実行ユーザの作成
+    $v_username=az
     $v_gid=36500
     $v_uid=36500
     groupadd -g $v_gid
@@ -21,7 +22,7 @@
 
     az login | tee ./az.login.json
 
-
+    
 
 
 
