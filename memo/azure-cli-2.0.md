@@ -1,6 +1,6 @@
 # Azure CLI
 
-## Prepare
+## 準備
 
     # 特権ユーザに昇格
     sudo su -
@@ -21,7 +21,7 @@
     su - ${USER_NAME:?}
     
     
-## Setup Azure CLI ([参考](https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli))
+## Azure CLI 2.0 のセットアップ ([参考](https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli))
 
     # Azure CLI 2.0 (az) をインストール
     curl -L https://aka.ms/InstallAzureCli | bash
@@ -36,7 +36,7 @@
     az account show
     
     # 【参考】imageリストをファイルに保存
-    az vm image list --all >./az.vm.image.list.all.json &
+    az vm image list --all -o table >./az.vm.image.list.all.txt &
     
     
 ## 全リソースのプレフィックスを設定
@@ -45,9 +45,9 @@
     
     
 ## リソースグループ (ResourceGroup) 
-    
+
     # var
-    RG_NAME=${PRE:?}ResourceGroup
+    RG_NAME=${PRE:?}RG
     RG_LOCATION=japaneast
     
     # リソースグループの作成
@@ -57,22 +57,35 @@
 ## 仮想ネットワーク (VirtualNetwork)
 
     # var
-    VNET_NAME=${PRE:?}VirtualNetwork
+    SEQ=001
+    VNET_NAME=${PRE:?}VNet${SEQ:?}
     VNET_CIDR=192.168.0.0/16
+    
+    # 仮想ネットワークの作成
+    az network vnet create -l ${RG_LOCATION:?} -g ${RG_NAME:?} -n ${VNET_NAME:?} --address-prefix ${VNET_CIDR:?}
+    
+    
+## サブネット
+
+    # var
     SEQ=001
     SUBNET_NAME=${PRE:?}Subnet${SEQ:?}
     SUBNET_CIDR=192.168.$(seq ${SEQ:?}).0/24
-    
-    # 仮想ネットワークの作成
-    az network vnet create -g ${RG_NAME:?} -l ${RG_LOCATION:?} -n ${VNET_NAME:?} --address-prefix ${VNET_CIDR:?}
     
     # サブネットの作成
     az network vnet subnet create -g ${RG_NAME:?} --vnet-name ${VNET_NAME:?} -n ${SUBNET_NAME:?} --address-prefix ${SUBNET_CIDR:?}
     
     
+## パブリックIP
+
+    # var
+    SEQ=001
+    PIP_NAME=${PRE:?}PIP${SEQ:?}
     
+    az network public-ip create -g ${RG_NAME:?} -l ${RG_LOCATION:?} -n ${PIP_NAME:?} --allocation-method static
     
-    
+    #GLOBAL_HOSTNAME=devazvm001
+    #az network public-ip create -g ${RG_NAME:?} -l ${RG_LOCATION:?} -n ${PIP_NAME:?} --dns-name ${GLOBAL_HOSTNAME} --allocation-method static
     
     
     
