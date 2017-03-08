@@ -23,7 +23,7 @@
     v_vpc_cidr=10.0.0.0/16
     v_vpc_region=ap-northeast-1
     
-    # vpcのnameタグと同名のディレクトリを`$HOME`配下に作成 && 移動
+    # vpcのnameタグと同名のディレクトリを$HOME配下に作成 && 移動
     cd $HOME ; mkdir ${v_vpc_name} ; cd ${v_vpc_name} ; pwd
     
     # VPCを作成
