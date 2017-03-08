@@ -51,6 +51,17 @@
     # 
     RG_CREATE_JSON="$(az group create -n ${RG_NAME} -l ${RG_LOCATION} | tee /dev/stderr)"; echo "${RG_CREATE_JSON}"
     
+## Setup VirtualNetwork
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 ## Setup VirtualMachine ([_](https://docs.microsoft.com/ja-jp/azure/virtual-machines/virtual-machines-linux-create-cli-complete))
     
@@ -60,6 +71,7 @@
     VM_IMAGE=OpenLogic:CentOS:6.8:6.8.20170105
     VM_ADMIN_USER_NAME=azure-user
     VM_OS_TYPE=linux
+    
     # 
     VM_CREATE_JSON="$(az vm create -n ${VM_NAME} -g ${RG_NAME} --image ${VM_IMAGE} --admin-username ${VM_ADMIN_USER_NAME} )"; echo "${VM_CREATE_JSON}"
     
