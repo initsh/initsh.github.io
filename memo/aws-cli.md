@@ -34,7 +34,7 @@
     VPC_ID="$(echo "$VPC_CREATE_JSON" | sed -r -e /VpcId/\!d -e 's/.*"[^"]+": "([^"]+)".*/\1/g' | tee /dev/stderr)"
 
 
-#### VPCにNameタグを設定 / 設定をファイルに保存
+#### VPCにNameタグを設定 / 情報をファイルに保存
 
     aws ec2 create-tags --resources $VPC_ID --tags Key=Name,Value=$VPC_NAME
     aws ec2 describe-vpcs --vpc-id $VPC_ID | tee $VPC_NAME.json
@@ -72,7 +72,7 @@
     aws ec2 attach-internet-gateway --internet-gateway-id $IGW_ID --vpc-id $VPC_ID
 
 
-#### IGWにNameタグを設定 / 設定をファイルに保存
+#### IGWにNameタグを設定 / 情報をファイルに保存
 
     aws ec2 create-tags --resources $IGW_ID --tags Key=Name,Value=$IGW_NAME
     aws ec2 describe-internet-gateways --filters "Name=internet-gateway-id,Values=$IGW_ID" | tee $IGW_NAME.json
@@ -105,7 +105,7 @@
     aws ec2 modify-subnet-attribute --subnet-id $SUBNET_ID --map-public-ip-on-launch
 
 
-#### SUBNETにNameタグを設定 / 設定をファイルに保存
+#### SUBNETにNameタグを設定 / 情報をファイルに保存
 
     aws ec2 create-tags --resources $SUBNET_ID --tags Key=Name,Value=$SUBNET_NAME
     aws ec2 describe-subnets --subnet-ids $SUBNET_ID | tee $SUBNET_NAME.json
