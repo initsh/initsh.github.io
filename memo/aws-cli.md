@@ -16,27 +16,24 @@
 
 ## Setup VPC ([参考](http://www.simpline.co.jp/tech/?p=267))
 
-#### 変数を設定
-
+    # 変数を設定
     VPC_NAME=dev-vpc
     VPC_CIDR=10.0.0.0/16
     VPC_REGION=ap-northeast-1
-
-
-#### vpcのnameタグと同名のディレクトリを`$HOME`配下に作成 && 移動
-
+    
+    # vpcのnameタグと同名のディレクトリを`$HOME`配下に作成 && 移動
     cd $HOME ; mkdir $VPC_NAME ; cd $VPC_NAME ; pwd
-
-
-##### VPCを作成 / jsonからVPCのidを出力し、変数に格納 / 確認
-
+    
+    # VPCを作成
     VPC_CREATE_JSON="$(aws ec2 create-vpc --region $VPC_REGION --cidr-block $VPC_CIDR | tee /dev/stderr)"
+    
+    # VPCのid情報を、変数に格納
     VPC_ID="$(echo "$VPC_CREATE_JSON" | sed -r -e /VpcId/\!d -e 's/.*"[^"]+": "([^"]+)".*/\1/g' | tee /dev/stderr)"
-
-
-#### VPCにNameタグを設定 / 情報をファイルに保存
-
+    
+    # VPCにNameタグを設定
     aws ec2 create-tags --resources $VPC_ID --tags Key=Name,Value=$VPC_NAME
+    
+    # 情報をファイルに保存
     aws ec2 describe-vpcs --vpc-id $VPC_ID | tee $VPC_NAME.json
     
     # 【参考】VPC作成時の情報をファイルに保存
