@@ -16,9 +16,10 @@
     
 
 ## Setup Azure CLI ([参考](https://docs.microsoft.com/ja-jp/cli/azure/install-azure-cli))
+
     curl -L https://aka.ms/InstallAzureCli | bash
 
-
+    az login | az.login.json
 
 
 
