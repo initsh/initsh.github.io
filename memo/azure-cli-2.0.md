@@ -8,6 +8,9 @@
     # 依存関係をインストールする。
     yum install -y gcc libffi-devel python-devel openssl-devel
     
+    # 【参考】jqコマンドをインストール
+    curl -LR https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -o /tmp/jq ; chmod 755 /tmp/jq ; \mv -f /tmp/jq /usr/bin/jq ; ls -dl /usr/bin/jq*
+    
     # 【参考】Azure CLI 2.0 (az) azコマンド実行ユーザを作成する。
     USER_NAME=az
     GROUP_NAME=az
