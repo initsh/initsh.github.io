@@ -36,6 +36,7 @@
     # アカウント情報を表示
     az account show
     
+    
 ## Setup ResourceGroup
     
     # 
@@ -43,11 +44,17 @@
     RG_LOCATION=japaneast
     
     # 
-    az group create -n ${RG_NAME} -l ${RG_LOCATION} | tee ./az.rg.json.create
+    RG_CREATE_JSON="$(az group create -n ${RG_NAME} -l ${RG_LOCATION} | tee /dev/stderr)"
     
     
+## Setup VirtualMachine
     
+    # 
+    SEQ=001
+    VM_NAME=DevVM${SEQ}
     
+    # 
+    az vm create -n ${VM_NAME} -g ${RG_NAME} --image UbuntuLTS --generate-ssh-keys
     
     
     
