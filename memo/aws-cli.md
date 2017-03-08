@@ -5,7 +5,7 @@
     sudo su -
     
     # pipをインストール
-    python <(curl -LRs "https://bootstrap.pypa.io/get-pip.py")
+    curl -LRs "https://bootstrap.pypa.io/get-pip.py" | python
     
     # 【参考】jqをインストール
     curl -LR https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -o /tmp/jq ; chmod 755 /tmp/jq ; \mv -f /tmp/jq /usr/bin/jq ; ls -dl /usr/bin/jq*
