@@ -89,6 +89,26 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    https://docs.microsoft.com/ja-jp/azure/virtual-machines/virtual-machines-linux-create-cli-complete
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 ## 仮想マシン (VirtualMachine) ([参考](https://docs.microsoft.com/ja-jp/azure/virtual-machines/virtual-machines-linux-create-cli-complete))
 
     # var
@@ -100,6 +120,20 @@
     
     # create VM
     az vm create -n ${VM_NAME:?} -g ${RG_NAME:?} --image ${VM_IMAGE:?} --admin-username ${VM_ADMIN_USER_NAME:?}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
