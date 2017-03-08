@@ -2,13 +2,13 @@
 
 ## Prepare
 
-    # 特権ユーザに昇格
+    # 特権ユーザに昇格する。
     sudo su -
     
-    # 依存関係をインストール
+    # 依存関係をインストールする。
     yum install -y gcc libffi-devel python-devel openssl-devel
     
-    # 【参考】Azure CLI 2.0 (az) 実行ユーザの作成
+    # 【参考】Azure CLI 2.0 (az) azコマンド実行ユーザを作成する。
     USER_NAME=az
     GROUP_NAME=az
     GROUP_ID=12600
@@ -20,15 +20,16 @@
 
 ## Setup Azure CLI ([参考](https://docs.microsoft.com/ja-jp/cli/azure/install-azure-cli))
 
-    # Azure CLI 2.0 (az) をインストール
+    # Azure CLI 2.0 (az) をインストールする。
     curl -L https://aka.ms/InstallAzureCli | bash
     
-    # シェルを再実行し、環境変数などを反映させる
+    # シェルを再実行し、環境変数などを反映させる。
     exec -l ${SHELL}
     
-    # azureへログイン
+    # azureへログインする。 (出力をファイル"az.login.json"として保存する)
+    # 実行後に表示されるURLにアクセスし、コードを入力する。
     az login | tee ./az.login.json
-
+    
     
 
 
