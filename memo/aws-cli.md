@@ -1,11 +1,13 @@
 # AWS CLI
 
 ## Prepare
+    # 特権ユーザに昇格
     sudo su -
     
+    # pipをインストール
     python <(curl -LRs "https://bootstrap.pypa.io/get-pip.py")
     
-    # 【参考】jqコマンドをインストール
+    # 【参考】jqをインストール
     curl -LR https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -o /tmp/jq ; chmod 755 /tmp/jq ; \mv -f /tmp/jq /usr/bin/jq ; ls -dl /usr/bin/jq*
 
 
