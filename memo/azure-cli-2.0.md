@@ -49,7 +49,7 @@
     RG_LOCATION=japaneast
     
     # 
-    RG_CREATE_JSON="$(az group create -n ${RG_NAME} -l ${RG_LOCATION} | tee /dev/stderr)"
+    RG_CREATE_JSON="$(az group create -n ${RG_NAME} -l ${RG_LOCATION} | tee /dev/stderr)"; echo "${RG_CREATE_JSON}"
     
     
 ## Setup VirtualMachine
@@ -60,7 +60,7 @@
     VM_IMAGE='OpenLogic:CentOS:6.8:6.8.20170105'
     
     # 
-    VM_CREATE_JSON="$(az vm create -n ${VM_NAME} -g ${RG_NAME} --image ${VM_IMAGE} --generate-ssh-keys | tee /dev/stderr)"
+    VM_CREATE_JSON="$(az vm create -n ${VM_NAME} -g ${RG_NAME} --image ${VM_IMAGE} --generate-ssh-keys)"; echo "${VM_CREATE_JSON}"
     
     
     
