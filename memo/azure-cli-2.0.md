@@ -57,9 +57,10 @@
     # 
     SEQ=001
     VM_NAME=DevVM${SEQ}
+    VM_IMAGE='OpenLogic:CentOS:6.8:6.8.20170105'
     
     # 
-    az vm create -n ${VM_NAME} -g ${RG_NAME} --image UbuntuLTS --generate-ssh-keys
+    az vm create -n ${VM_NAME} -g ${RG_NAME} --image ${VM_IMAGE} --generate-ssh-keys
     
     
     
