@@ -49,12 +49,18 @@
     RG_LOCATION=japaneast
     
     # 
-    RG_CREATE_JSON="$(az group create -n ${RG_NAME} -l ${RG_LOCATION} | tee /dev/stderr)"; echo "${RG_CREATE_JSON}"
+    RG_CREATE_JSON="$(az group create --location ${RG_LOCATION} --name ${RG_NAME})"; echo "${RG_CREATE_JSON}"
     
 ## Setup VirtualNetwork
     
+    # 
+    VNET_NAME=DevVirtualNetwork
+    VNET_CIDR=192.168.0.0/16
+    SUBNET_NAME=DevSubnet
+    SUBNET_CIDR=192.168.1.0/24
     
-    
+    az network vnet create --resource-group ${RG_NAME} --location ${RG_LOCATION} --name ${VNET_NAME} --address-prefix ${VNET_CIDR} --subnet-name ${SUBNET_NAME} --subnet-prefix ${SUBNET_CIDR}
+
     
     
     
