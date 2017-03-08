@@ -56,11 +56,14 @@
     # 
     VNET_NAME=DevVirtualNetwork
     VNET_CIDR=192.168.0.0/16
-    SUBNET_NAME=DevSubnet
-    SUBNET_CIDR=192.168.1.0/24
+    SEQ=001
+    SUBNET_NAME=DevSubnet${SEQ}
+    SUBNET_CIDR=192.168.$(seq ${SEQ}).0/24
     
-    az network vnet create --resource-group ${RG_NAME:?} -l ${RG_LOCATION:?} -n ${VNET_NAME:?} \
-      --address-prefix ${VNET_CIDR:?} --subnet-name ${SUBNET_NAME:?} --subnet-prefix ${SUBNET_CIDR:?}
+    az network vnet create --resource-group ${RG_NAME:?} -l ${RG_LOCATION:?} -n ${VNET_NAME:?} --address-prefix ${VNET_CIDR:?}
+    
+    
+    az network vnet create --resource-group ${RG_NAME:?} -l ${RG_LOCATION:?} -n ${VNET_NAME:?} --subnet-name ${SUBNET_NAME:?} --subnet-prefix ${SUBNET_CIDR:?}
 
     
     
