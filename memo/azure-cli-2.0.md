@@ -43,7 +43,7 @@
     RG_LOCATION=japaneast
     
     # 
-    az group create -n ${RG_NAME} -l ${RG_LOCATION}
+    az group create -n ${RG_NAME} -l ${RG_LOCATION} | tee ./az.rg.json.create
     
     
     
