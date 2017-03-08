@@ -39,9 +39,9 @@
     az vm image list --all -o table >./az.vm.image.list.all.txt &
     
     
-## 全リソースのプレフィックスを設定
+## 全リソースのプレフィックスを設定 (プロジェクトコード・環境など)
 
-    v_pre=Dev
+    v_pre=OkDevCwr
     
     
 ## リソースグループ (ResourceGroup) 
@@ -81,31 +81,76 @@
     # var
     v_seq=001
     v_pip_name=${v_pre:?}PIP${v_seq:?}
+    v_global_hostname="$(echo ${v_pip_name:?} | tr "[:upper:]" "[:lower:]")"
     
-    az network public-ip create -g ${v_rg_name:?} -l ${v_rg_location:?} -n ${v_pip_name:?} --allocation-method static
-    
-    #v_global_hostname=devazvm001
-    #az network public-ip create -g ${v_rg_name:?} -l ${v_rg_location:?} -n ${v_pip_name:?} --dns-name ${v_global_hostname} --allocation-method static
-    
+    #az network public-ip create -g ${v_rg_name:?} -l ${v_rg_location:?} -n ${v_pip_name:?} --allocation-method static
+    az network public-ip create -g ${v_rg_name:?} -l ${v_rg_location:?} -n ${v_pip_name:?} --allocation-method static --dns-name ${v_global_hostname}
     
     
+## ロードバランサ ([参考](https://docs.microsoft.com/ja-jp/azure/virtual-machines/virtual-machines-linux-create-cli-complete))
+
+    # var
+    v_seq=001
+    v_lb_name=${v_pre:?}LB${v_seq:?}
+    v_lb_frontend_ip_name=${v_pre:?}LBFront${v_seq:?}
+    v_lb_backend_pool_name=${v_pre:?}LBBack${v_seq:?}
     
+    # ロードバランサ作成＆フロントエンドPIP付与
+    az network lb create -g ${v_rg_name:?} -l ${v_rg_location:?} -n ${v_lb_name:?} --public-ip-address ${v_pip_name:?} --frontend-ip-name ${v_lb_frontend_ip_name:?}
     
+    # ロードバランサバックエンドLocalIPプール作成
+    az network lb address-pool create -g ${v_rg_name:?} --lb-name ${v_lb_name:?} -n ${v_lb_backend_pool_name:?}
     
+## ロードバランサのNATルール？？？？？
+
+    #
+    ## var
+    #v_seq=001
+    #v_lb_nat=${v_pre:?}LBInNat${v_seq:?}
+    #v_lb_protocol=tcp
+    #v_lb_front_port=80
+    #v_lb_back_port=80
+    #
+    ## nat rule
+    #az network lb inbound-nat-rule create -g ${v_rg_name:?} --lb-name ${v_lb_name:?} -n ${v_lb_nat:?} --protocol ${v_lb_protocol:?} --frontend-port ${v_lb_front_port:?} --backend-port ${v_lb_back_port:?} --frontend-ip-name ${v_lb_frontend_ip_name:?}
+    #
+    ## var
+    #v_seq=002
+    #v_lb_nat=${v_pre:?}LBNat${v_seq:?}
+    #v_lb_protocol=tcp
+    #v_lb_front_port=443
+    #v_lb_back_port=443
+    #
+    ## nat rule
+    #az network lb inbound-nat-rule create -g ${v_rg_name:?} --lb-name ${v_lb_name:?} -n ${v_lb_nat:?} --protocol ${v_lb_protocol:?} --frontend-port ${v_lb_front_port:?} --backend-port ${v_lb_back_port:?} --frontend-ip-name ${v_lb_frontend_ip_name:?}
+    #
+
     
+## LB正常性プローブ (ヘルスチェックルール)
+
+    # var
+    v_seq=001
+    v_lb_protocol=tcp
+    v_lb_front_port=80
+    v_lb_back_port=80
+    v_lb_probe_name=${v_pre:?}LBProbe${v_seq:?}
+    v_lb_probe_interval=5 #sec
+    v_lb_probe_threshold=2
+
+    az network lb probe create -g ${v_rg_name:?} --lb-name ${v_lb_name:?} -n ${v_lb_probe_name:?} --protocol ${v_lb_rule_protocol:?} --port ${v_lb_rule_front_port:?} --interval ${v_lb_probe_interval:?} --threshold ${v_lb_probe_threshold:?}
     
+
+## ロードバランシングルール
     
-    https://docs.microsoft.com/ja-jp/azure/virtual-machines/virtual-machines-linux-create-cli-complete
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    # var
+    v_seq=001
+    v_lb_rule_name=${v_pre:?}LBRule${v_seq:?}
+
+    az network lb rule create -g ${v_rg_name:?} --lb-name ${v_lb_name:?} -n ${v_lb_rule_name:?} --protocol ${v_lb_protocol:?} --frontend-port ${v_lb_front_port:?} --backend-port ${v_lb_back_port:?} --frontend-ip-name ${v_lb_frontend_ip_name:?} --backend-pool-name ${v_lb_backend_pool_name:?} --probe-name ${v_lb_probe_name:?}
+
+    # 確認
+    az network lb show -g ${v_rg_name:?} -n ${v_lb_name:?}
+
     
     
     
