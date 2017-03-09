@@ -41,7 +41,7 @@
     
 ## 全リソースのプレフィックスを設定 (プロジェクトコード・環境など)
 
-    v_pre=OkDevCwr
+    v_pre=OkWDev
     
     
 ## リソースグループ (ResourceGroup) 
