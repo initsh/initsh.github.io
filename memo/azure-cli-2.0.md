@@ -177,6 +177,7 @@
     v_nsg_rule_source_address=*
     v_nsg_rule_source_port=*
     v_nsg_rule_destination_address=*
+    v_nsg_rule_destination_port=22
     v_nsg_rule_allow_or_deny=allow
     
     # ルール作成
