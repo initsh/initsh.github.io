@@ -107,7 +107,7 @@
     # ロードバランサバックエンドLocalIPプール作成
     az network lb address-pool create -g ${v_rg_name:?} --lb-name ${v_lb_name:?} -n ${v_lb_backend_pool_name:?}
     
-## ロードバランサのNATルール？？？？？
+## ロードバランサのNATルール (今回は不要か？)
 
     #
     ## var
@@ -132,7 +132,7 @@
     #
 
     
-## LB正常性プローブ (ヘルスチェックルール)
+## LB正常性プローブ (ヘルスチェック)
 
     # var
     v_seq=001
