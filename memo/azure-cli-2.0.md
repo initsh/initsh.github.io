@@ -76,7 +76,7 @@
     # var
     v_seq=001
     v_subnet_name=${v_pre:?}Subnet${v_seq:?}
-    v_subnet_cidr=192.168.$(seq ${v_seq:?}).0/24
+    v_subnet_cidr=10.1.$(seq ${v_seq:?}).0/24
     
     # サブネットの作成
     az network vnet subnet create -g ${v_rg_name:?} --vnet-name ${v_vnet_name:?} -n ${v_subnet_name:?} --address-prefix ${v_subnet_cidr:?}
