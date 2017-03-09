@@ -137,13 +137,12 @@
     # var
     v_seq=001
     v_lb_protocol=tcp
-    v_lb_front_port=80
     v_lb_back_port=80
     v_lb_probe_name=${v_pre:?}LBProbe${v_seq:?}
     v_lb_probe_interval=5 #sec
     v_lb_probe_threshold=2
 
-    az network lb probe create -g ${v_rg_name:?} --lb-name ${v_lb_name:?} -n ${v_lb_probe_name:?} --protocol ${v_lb_protocol:?} --port ${v_lb_rule_front_port:?} --interval ${v_lb_probe_interval:?} --threshold ${v_lb_probe_threshold:?}
+    az network lb probe create -g ${v_rg_name:?} --lb-name ${v_lb_name:?} -n ${v_lb_probe_name:?} --protocol ${v_lb_protocol:?} --port ${v_lb_back_port:?} --interval ${v_lb_probe_interval:?} --threshold ${v_lb_probe_threshold:?}
     
 
 ## ロードバランシングルール
@@ -151,6 +150,7 @@
     # var
     v_seq=001
     v_lb_rule_name=${v_pre:?}LBRule${v_seq:?}
+    v_lb_front_port=80
 
     az network lb rule create -g ${v_rg_name:?} --lb-name ${v_lb_name:?} -n ${v_lb_rule_name:?} --protocol ${v_lb_protocol:?} --frontend-port ${v_lb_front_port:?} --backend-port ${v_lb_back_port:?} --frontend-ip-name ${v_lb_frontend_ip_name:?} --backend-pool-name ${v_lb_backend_pool_name:?} --probe-name ${v_lb_probe_name:?}
 
@@ -193,7 +193,7 @@
     
     
     
-    
+    
 ## Regions
 | Azure CLI 2.0 Regions | 和名 |
 |:----------------------|:-----|
