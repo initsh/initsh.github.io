@@ -1,5 +1,11 @@
 # Azure CLI
 
+## 前提
+
+以下を参考に、サブスクリプションやリソースの制限について確認すること。
+[Azure サブスクリプションとサービスの制限、クォータ、制約](https://docs.microsoft.com/ja-jp/azure/azure-subscription-service-limits)
+
+    
 ## 準備
 
     # 特権ユーザに昇格
