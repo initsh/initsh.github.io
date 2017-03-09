@@ -65,7 +65,7 @@
     # var
     v_seq=001
     v_vnet_name=${v_pre:?}VNet${v_seq:?}
-    v_vnet_cidr=192.168.0.0/16
+    v_vnet_cidr=10.1.0.0/16
     
     # 仮想ネットワークの作成
     az network vnet create -l ${v_rg_location:?} -g ${v_rg_name:?} -n ${v_vnet_name:?} --address-prefix ${v_vnet_cidr:?}
