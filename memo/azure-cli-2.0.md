@@ -143,7 +143,7 @@
     v_lb_probe_interval=5 #sec
     v_lb_probe_threshold=2
 
-    az network lb probe create -g ${v_rg_name:?} --lb-name ${v_lb_name:?} -n ${v_lb_probe_name:?} --protocol ${v_lb_rule_protocol:?} --port ${v_lb_rule_front_port:?} --interval ${v_lb_probe_interval:?} --threshold ${v_lb_probe_threshold:?}
+    az network lb probe create -g ${v_rg_name:?} --lb-name ${v_lb_name:?} -n ${v_lb_probe_name:?} --protocol ${v_lb_protocol:?} --port ${v_lb_rule_front_port:?} --interval ${v_lb_probe_interval:?} --threshold ${v_lb_probe_threshold:?}
     
 
 ## ロードバランシングルール
