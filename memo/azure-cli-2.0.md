@@ -39,7 +39,7 @@
     az login
     
     # アカウント情報を表示
-    az account show
+    az account show -o table
     
     # 【参考】imageリストをファイルに保存
     az vm image list --all -o table >./az.vm.image.list.all.txt &
@@ -58,7 +58,9 @@
     
     # リソースグループの作成
     az group create -l ${v_rg_location:?} -n ${v_rg_name:?}
-    
+
+    # リソースグループの確認
+    az group show -o table -l ${v_rg_location:?} -n ${v_rg_name:?}
     
 ## 仮想ネットワーク (VirtualNetwork)
 
@@ -69,7 +71,9 @@
     
     # 仮想ネットワークの作成
     az network vnet create -l ${v_rg_location:?} -g ${v_rg_name:?} -n ${v_vnet_name:?} --address-prefix ${v_vnet_cidr:?}
-    
+
+    # 仮想ネットワークの確認
+    az network vnet show -o table -l ${v_rg_location:?} -g ${v_rg_name:?} -n ${v_vnet_name:?}
     
 ## サブネット
 
@@ -80,6 +84,9 @@
     
     # サブネットの作成
     az network vnet subnet create -g ${v_rg_name:?} --vnet-name ${v_vnet_name:?} -n ${v_subnet_name:?} --address-prefix ${v_subnet_cidr:?}
+
+    # サブネットの確認
+    az network vnet subnet show -o table -g ${v_rg_name:?} --vnet-name ${v_vnet_name:?} -n ${v_subnet_name:?}
     
     
 ## パブリックIP
@@ -88,9 +95,13 @@
     v_seq=001
     v_pip_name=${v_pre:?}PIP${v_seq:?}
     v_global_hostname="$(echo ${v_pip_name:?} | tr "[:upper:]" "[:lower:]")"
+    v_pip_dynamic_or_static=static
     
     #az network public-ip create -g ${v_rg_name:?} -l ${v_rg_location:?} -n ${v_pip_name:?} --allocation-method static
-    az network public-ip create -g ${v_rg_name:?} -l ${v_rg_location:?} -n ${v_pip_name:?} --allocation-method static --dns-name ${v_global_hostname}
+    az network public-ip create -g ${v_rg_name:?} -l ${v_rg_location:?} -n ${v_pip_name:?} --allocation-method ${v_pip_dynamic_or_static:?} --dns-name ${v_global_hostname}
+
+    # PIPを確認
+    az network public-ip show -o table -g ${v_rg_name:?} -l ${v_rg_location:?} -n ${v_pip_name:?}
     
     
 ## ロードバランサ ([参考](https://docs.microsoft.com/ja-jp/azure/virtual-machines/virtual-machines-linux-create-cli-complete))
@@ -104,8 +115,15 @@
     # ロードバランサ作成＆フロントエンドPIP付与
     az network lb create -g ${v_rg_name:?} -l ${v_rg_location:?} -n ${v_lb_name:?} --public-ip-address ${v_pip_name:?} --frontend-ip-name ${v_lb_frontend_ip_name:?}
     
-    # ロードバランサバックエンドLocalIPプール作成
+    # LBを確認
+    az network lb show -o table -g ${v_rg_name:?} -l ${v_rg_location:?} -n ${v_lb_name:?}
+
+    # ロードバランサバックエンドIPプール作成
     az network lb address-pool create -g ${v_rg_name:?} --lb-name ${v_lb_name:?} -n ${v_lb_backend_pool_name:?}
+
+    # LBバックエンドIPプールを確認
+    az network lb address-pool show -o table -g ${v_rg_name:?} --lb-name ${v_lb_name:?} -n ${v_lb_backend_pool_name:?}
+
     
 ## ロードバランサのNATルール (今回は不要か？)
 
@@ -142,8 +160,11 @@
     v_lb_probe_interval=5 #sec
     v_lb_probe_threshold=2
 
+    # 作成
     az network lb probe create -g ${v_rg_name:?} --lb-name ${v_lb_name:?} -n ${v_lb_probe_name:?} --protocol ${v_lb_protocol:?} --port ${v_lb_back_port:?} --interval ${v_lb_probe_interval:?} --threshold ${v_lb_probe_threshold:?}
     
+    # 確認
+    az network lb probe show -o table -g ${v_rg_name:?} --lb-name ${v_lb_name:?} -n ${v_lb_probe_name:?}
 
 ## ロードバランシングルール
     
@@ -155,7 +176,7 @@
     az network lb rule create -g ${v_rg_name:?} --lb-name ${v_lb_name:?} -n ${v_lb_rule_name:?} --protocol ${v_lb_protocol:?} --frontend-port ${v_lb_front_port:?} --backend-port ${v_lb_back_port:?} --frontend-ip-name ${v_lb_frontend_ip_name:?} --backend-pool-name ${v_lb_backend_pool_name:?} --probe-name ${v_lb_probe_name:?}
 
     # 確認
-    az network lb show -g ${v_rg_name:?} -n ${v_lb_name:?}
+    az network lb rule show -o table -g ${v_rg_name:?} --lb-name ${v_lb_name:?} -n ${v_lb_rule_name:?}
 
     
 ## ネットワークセキュリティグループ (Network Security Group)
@@ -166,6 +187,9 @@
     
     # ネットワークセキュリティグループ作成
     az network nsg create -g ${v_rg_name:?} -l ${v_rg_location:?} -n ${v_nsg_name:?}
+
+    # 確認
+    az network nsg show -o table -g ${v_rg_name:?} -l ${v_rg_location:?} -n ${v_nsg_name:?}
 
 ##  NSGルール
 
@@ -184,10 +208,10 @@
     # ルール作成
     az network nsg rule create -g ${v_rg_name:?} --nsg-name ${v_nsg_name:?} -n ${v_nsg_rule_name:?} --protocol ${v_nsg_rule_protocol:?} --direction ${v_nsg_rule_direction:?} --priority ${v_nsg_rule_priority:?} --source-address-prefix "${v_nsg_rule_source:?}" --source-port-range "${v_nsg_rule_source_port:?}" --destination-address-prefix "${v_nsg_rule_destination_address:?}" --destination-port-range "${v_nsg_rule_destination_port:?}" --access ${v_nsg_rule_allow_or_deny:?}
 
+    # 確認
+    az network nsg rule show -o table -g ${v_rg_name:?} --nsg-name ${v_nsg_name:?} -n ${v_nsg_rule_name:?} -o table
 
 
-    
-    
 ## 仮想マシン (VirtualMachine) ([参考](https://docs.microsoft.com/ja-jp/azure/virtual-machines/virtual-machines-linux-create-cli-complete))
 
     # var
