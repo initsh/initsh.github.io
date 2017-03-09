@@ -172,6 +172,7 @@
     # var
     v_seq=001
     v_nsg_rule_name=${v_nsg_name:?}Rule${seq:?}
+    v_nsg_rule_protocol=tcp
     v_nsg_rule_direction=inbound
     v_nsg_rule_priority=1000
     v_nsg_rule_source_address=*
@@ -181,7 +182,7 @@
     v_nsg_rule_allow_or_deny=allow
     
     # ルール作成
-    az network nsg rule create -g ${v_rg_name:?} --nsg-name ${v_nsg_name:?} -n ${v_nsg_rule_name:?} --protocol tcp --direction ${v_nsg_rule_direction:?} --priority ${v_nsg_rule_priority:?} --source-address-prefix "${v_nsg_rule_source:?}" --source-port-range "${v_nsg_rule_source_port:?}" --destination-address-prefix "${v_nsg_rule_destination_address:?}" --destination-port-range "${v_nsg_rule_destination_port:?}" --access ${v_nsg_rule_allow_or_deny:?}
+    az network nsg rule create -g ${v_rg_name:?} --nsg-name ${v_nsg_name:?} -n ${v_nsg_rule_name:?} --protocol ${v_nsg_rule_protocol:?} --direction ${v_nsg_rule_direction:?} --priority ${v_nsg_rule_priority:?} --source-address-prefix "${v_nsg_rule_source:?}" --source-port-range "${v_nsg_rule_source_port:?}" --destination-address-prefix "${v_nsg_rule_destination_address:?}" --destination-port-range "${v_nsg_rule_destination_port:?}" --access ${v_nsg_rule_allow_or_deny:?}
 
 
 
