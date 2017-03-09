@@ -166,7 +166,7 @@
     v_seq=001
     v_vm_name=${v_pre:?}VM${v_seq:?}
     v_vm_image="OpenLogic:CentOS:6.8:6.8.20170105"
-    v_vm_user_name=azure-user
+    v_vm_user_name=az-user
     v_vm_os_type=linux
     
     # create VM
