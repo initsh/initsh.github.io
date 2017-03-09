@@ -171,7 +171,7 @@
 
     # var
     v_seq=001
-    v_nsg_rule_name=${v_nsg_name:?}Rule${seq:?}
+    v_nsg_rule_name=${v_nsg_name:?}Rule${v_seq:?}
     v_nsg_rule_protocol=tcp
     v_nsg_rule_direction=inbound
     v_nsg_rule_priority=1000
