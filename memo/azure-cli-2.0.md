@@ -60,7 +60,7 @@
     az group create -l ${v_rg_location:?} -n ${v_rg_name:?}
 
     # リソースグループの確認
-    az group show -o table -l ${v_rg_location:?} -n ${v_rg_name:?}
+    az group show -o table -n ${v_rg_name:?}
     
 ## 仮想ネットワーク (VirtualNetwork)
 
