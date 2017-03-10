@@ -73,7 +73,7 @@
     az network vnet create -l ${v_rg_location:?} -g ${v_rg_name:?} -n ${v_vnet_name:?} --address-prefix ${v_vnet_cidr:?}
 
     # 仮想ネットワークの確認
-    az network vnet show -o table -l ${v_rg_location:?} -g ${v_rg_name:?} -n ${v_vnet_name:?}
+    az network vnet show -o table -g ${v_rg_name:?} -n ${v_vnet_name:?}
     
 ## サブネット
 
