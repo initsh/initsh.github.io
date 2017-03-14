@@ -16,87 +16,87 @@ v_script_name="centos6/utils.sh"
 	
 	if ! rpm --quiet -q yum-utils
 	then
-		yum -y install yum-utils
+		yum -y install yum-utils 2>/dev/stdout
 	fi
 	
 	if ! rpm --quiet -q expect
 	then
-		yum -y install expect
+		yum -y install expect 2>/dev/stdout
 	fi
 	
 	if ! rpm --quiet -q net-tools
 	then
-		yum -y install net-tools
+		yum -y install net-tools 2>/dev/stdout
 	fi
 	
 	if ! rpm --quiet -q bind-utils
 	then
-		yum -y install bind-utils
+		yum -y install bind-utils 2>/dev/stdout
 	fi
 	
 	if ! rpm --quiet -q traceroute
 	then
-		yum -y install traceroute
+		yum -y install traceroute 2>/dev/stdout
 	fi
 	
 	if ! rpm --quiet -q nmap
 	then
-		yum -y install nmap
+		yum -y install nmap 2>/dev/stdout
 	fi
 	
 	if ! rpm --quiet -q nmap-ncat
 	then
-		yum -y install nmap-ncat
+		yum -y install nmap-ncat 2>/dev/stdout
 	fi
 	
 	if ! rpm --quiet -q tcpdump
 	then
-		yum -y install tcpdump
+		yum -y install tcpdump 2>/dev/stdout
 	fi
 	
 	if ! rpm --quiet -q mailx
 	then
-		yum -y install mailx
+		yum -y install mailx 2>/dev/stdout
 	fi
 	
 	if ! rpm --quiet -q lsof
 	then
-		yum -y install lsof
+		yum -y install lsof 2>/dev/stdout
 	fi
 	
 	if ! rpm --quiet -q parted
 	then
-		yum -y install parted
+		yum -y install parted 2>/dev/stdout
 	fi
 	
 	if ! rpm --quiet -q openssh-clients
 	then
-		yum -y install openssh-clients
+		yum -y install openssh-clients 2>/dev/stdout
 	fi
 	
 	if ! rpm --quiet -q telnet
 	then
-		yum -y install telnet
+		yum -y install telnet 2>/dev/stdout
 	fi
 	
 	if ! rpm --quiet -q wget
 	then
-		yum -y install wget
+		yum -y install wget 2>/dev/stdout
 	fi
 	
 	if ! rpm --quiet -q zip
 	then
-		yum -y install zip
+		yum -y install zip 2>/dev/stdout
 	fi
 	
 	if ! rpm --quiet -q unzip
 	then
-		yum -y install unzip
+		yum -y install unzip 2>/dev/stdout
 	fi
 	
 	if ! rpm --quiet -q vim-enhanced
 	then
-		yum -y install vim-enhanced
+		yum -y install vim-enhanced 2>/dev/stdout
 	fi
 	
 	# if not installed (return 127), download jq
