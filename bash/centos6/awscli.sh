@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Edit 20170306
-v_github_dir="initsh.github.io/bash"
+v_github_dir="https://raw.githubusercontent.com/initsh/initsh.github.io/master/bash"
 v_script_name="centos6/awscli.sh"
 
 # functions
