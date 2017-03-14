@@ -1,17 +1,18 @@
 #!/bin/bash
 
 # Edit 20170306
-v_script_name="centos7.epel.sh"
+v_github_dir="raw.githubusercontent.com/initsh/initsh.github.io/master/bash"
+v_script_name="centos7/epel.sh"
 
 # functions
-. <(curl -LRs initsh.github.io/functions.sh) || echo "$(date -Is) [ERROR]: Failed to load https://initsh.github.io/functions.sh"
+. <(curl -LRs initsh.github.io/functions.sh) || echo "$(date -Is) [ERROR]: Failed to load https://${v_github_dir}/functions.sh"
 
 {
 	LogInfo "Start \"${v_script_name}\"."
 	
 	# checks
-	. <(curl -LRs initsh.github.io/check.centos7.sh)
-	. <(curl -LRs initsh.github.io/check.root.sh)
+	. <(curl -LRs "${v_github_dir}/check/centos7.sh")
+	. <(curl -LRs "${v_github_dir}/check/root.sh")
 	
 	# variable
 	v_epel_url="https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm"
