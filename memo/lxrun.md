@@ -1,9 +1,13 @@
 
 
 
-```cmd.exe
-C:\> OptionalFeatures
-```
+### [Windows] + [R] => [OptionalFeatures]
+
+### [Windows] + [U] => [developer]
+
+
+
+
 
 ```
 Performs administrative operations on the LX subsystem
@@ -28,11 +32,6 @@ C:\> lxrun /install /y
 ```
 C:\> lxrun /uninstall /y
 ```
-
-### [Windows] + [U]
-
-### insert [developer]
-
 
 
 ###### EOF
