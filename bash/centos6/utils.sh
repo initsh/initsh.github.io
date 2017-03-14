@@ -109,7 +109,7 @@ v_script_name="centos6/utils.sh"
 		ls -dl /usr/bin/jq*
 		if [ "$(jq --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 		then
-			echo "$(date -Is) [ERROR]: Failed to install /usr/bin/jq" | tee /dev/stderr
+			LogError "Failed to install /usr/bin/jq"
 			exit 1
 		fi
 	fi
