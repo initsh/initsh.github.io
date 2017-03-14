@@ -1,7 +1,7 @@
 
 
 
-### [Windows] + [R] => [OptionalFeatures]
+### [Windows] + [R] => [OptionalFeatures.exe]
 
 ### [Windows] + [U] => [developer]
 
