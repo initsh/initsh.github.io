@@ -5,7 +5,7 @@ v_github_dir="raw.githubusercontent.com/initsh/initsh.github.io/master/bash"
 v_script_name="centos7/epel.sh"
 
 # functions
-. <(curl -LRs initsh.github.io/functions.sh) || echo "$(date -Is) [ERROR]: Failed to load https://${v_github_dir}/functions.sh"
+. <(curl -LRs "${v_github_dir}/functions.sh") || echo "$(date -Is) [ERROR]: Failed to load https://${v_github_dir}/functions.sh"
 
 {
 	LogInfo "Start \"${v_script_name}\"."
