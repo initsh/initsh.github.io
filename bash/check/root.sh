@@ -4,7 +4,7 @@
 
 if [ "$(whoami)" != "root" ]
 then
-	echo "$(date -Is) [ERROR]: This program needs to be executed by root user." | tee /dev/stderr
+	echo "$(date -Is) [ERROR]: You need to be root to perform this program." | tee /dev/stderr
 	exit 1
 fi
 
