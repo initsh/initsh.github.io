@@ -16,7 +16,7 @@ v_script_name="centos6/awscli.sh"
 	if [ "$(pip --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 	then
 		LogInfo "Run \"get-pip.py\"."
-		python <(curl -LRs "${v_url_getpip}")
+		python <(curl -LRs "${v_url_getpip}") 2>/dev/stdout
 		if [ "$(pip --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 		then
 			LogError "Failed to install \"pip\"."
@@ -28,7 +28,7 @@ v_script_name="centos6/awscli.sh"
 	if [ "$(aws --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 	then
 		LogInfo "bash# pip install awscli"
-		pip install awscli
+		pip install awscli 2>/dev/stdout
 		if [ "$(aws --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 		then
 			LogError "Failed to install \"awscli\"."
