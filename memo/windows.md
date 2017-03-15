@@ -1,3 +1,10 @@
+## System Files
+#### `hosts`
+```
+%SYSTEMROOT%\system32\drivers\etc
+```
+
+
 ## Commands
 #### `mstsc`
 ```
