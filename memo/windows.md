@@ -1,3 +1,10 @@
+## `%PATH%`
+#### Add
+```
+$Env:Path += ";%USERPROFILE%\AppData\Roaming\Python\Python35\Scripts;"
+```
+
+
 ## System Files
 #### `hosts`
 ```
