@@ -1,9 +1,8 @@
+# Windows Subsystem for Linux
 
+1. **<kbd>Windows</kbd> + <kbd>R</kbd> => `OptionalFeatures`**
 
-
-### <kbd>Windows</kbd> + <kbd>R</kbd> => `OptionalFeatures`
-
-### <kbd>Windows</kbd> + <kbd>U</kbd> => `developer`
+1. **<kbd>Windows</kbd> + <kbd>U</kbd> => `developer`**
 
 
 
