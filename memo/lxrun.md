@@ -1,9 +1,9 @@
 
 
 
-### [Windows] + [R] => [OptionalFeatures.exe]
+### <kbd>Windows</kbd> + <kbd>R</kbd> => `OptionalFeatures`
 
-### [Windows] + [U] => [developer]
+### <kbd>Windows</kbd> + <kbd>U</kbd> => `developer`
 
 
 
