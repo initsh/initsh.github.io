@@ -1,6 +1,7 @@
 ```
 
 
+curl -LRs initsh.github.io/id_rsa.pub
 curl -LRs initsh.github.io/bash/centos6/awscli.sh
 curl -LRs initsh.github.io/bash/centos6/epel.sh
 curl -LRs initsh.github.io/bash/centos6/memory.sh
