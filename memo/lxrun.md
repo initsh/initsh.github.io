@@ -13,6 +13,7 @@
 
 
 ```
+C:\> lxrun
 Performs administrative operations on the LX subsystem
 
 Usage:
@@ -26,14 +27,13 @@ Usage:
     /update - Updates the subsystem
         Optional arguments:
             /critical - Perform critical update. This option will close all running LX processes when the update completes.
-```
 
-```
 C:\> lxrun /install /y
-```
 
-```
+C:\> lxrun /setdefaultuser root
+
 C:\> lxrun /uninstall /y
+
 ```
 
 
