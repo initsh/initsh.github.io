@@ -5,8 +5,7 @@
 
 1. **Check `Windows Subsystem for Linux`**
 
-1. **<kbd>Windows</kbd> + <kbd>U</kbd> => `developer`**
-<br><br>(OR **<kbd>Windows</kbd> + <kbd>R</kbd> => `powershell -Command "Start-Process -Verb runas powershell Show-WindowsDeveloperLicenseRegistration"`**)
+1. **<kbd>Windows</kbd> + <kbd>U</kbd> => `developer`** (OR **<kbd>Windows</kbd> + <kbd>R</kbd> => `powershell -Command "Start-Process -Verb runas powershell Show-WindowsDeveloperLicenseRegistration"`**)
 
 1. **Check `Developer mode`**
 
