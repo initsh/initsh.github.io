@@ -103,9 +103,7 @@ v_script_name="centos6/utils.sh"
 	if [ "$(jq --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 	then
 		echo '# curl $url -o /usr/bin/jq'
-		curl -LRs https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -o /tmp/jq
-		chmod 755 /tmp/jq
-		\mv -f /tmp/jq /usr/bin/jq
+		sudo curl -LRs https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -o /usr/bin/jq && sudo chmod 755 /usr/bin/jq 
 		ls -dl /usr/bin/jq*
 		if [ "$(jq --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 		then
