@@ -1,4 +1,4 @@
 #!/bin/bash
-timedatectl set-timezone Asia/Tokyo
+sudo timedatectl set-timezone Asia/Tokyo
 
 # EOF
