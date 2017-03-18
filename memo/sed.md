@@ -2,9 +2,9 @@
 # sed
 
 ### IBM
-[共通テーマ: 実例でわかる sed 第 1 回](https://www.ibm.com/developerworks/jp/linux/library/l-sed1/)<br>
-[共通テーマ: 実例でわかる sed 第 2 回](https://www.ibm.com/developerworks/jp/linux/library/l-sed2/)<br>
-[共通テーマ: 実例でわかる sed 第 3 回](https://www.ibm.com/developerworks/jp/linux/library/l-sed3/)<br>
+[実例でわかる sed 第 1 回 - 2000年09月01日 - 強力な UNIX テキスト・エディターを使ってみる](https://www.ibm.com/developerworks/jp/linux/library/l-sed1/)<br>
+[実例でわかる sed 第 2 回 - 2000年10月01日 - UNIX テキスト・エディターのより有効な利用法](https://www.ibm.com/developerworks/jp/linux/library/l-sed2/)<br>
+[実例でわかる sed 第 3 回 - 2000年11月01日 - 次のレベルへ sed 流のデータ加工](https://www.ibm.com/developerworks/jp/linux/library/l-sed3/)<br>
 
 ### memo
 ```
