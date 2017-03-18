@@ -6,7 +6,7 @@
 
 1. **<kbd>Windows</kbd> + <kbd>U</kbd> => `developer`**
 
-
+1. **Check `Developer mode`**
 
 
 
