@@ -1,6 +1,12 @@
 
 # sed
 
+### IBM
+[共通テーマ: 実例でわかる sed 第 1 回](https://www.ibm.com/developerworks/jp/linux/library/l-sed1/)<br>
+[共通テーマ: 実例でわかる sed 第 2 回](https://www.ibm.com/developerworks/jp/linux/library/l-sed2/)<br>
+[共通テーマ: 実例でわかる sed 第 3 回](https://www.ibm.com/developerworks/jp/linux/library/l-sed3/)<br>
+
+### memo
 ```
 sed -r -e 's/[ \t]*(%wheel[ \t]+ALL=\(ALL\)[ \t]+ALL)/# \1/g' -e 's/[ \t]*#[ \t]*(%wheel[ \t]+ALL=\(ALL\)[ \t]+NOPASSWD:[ \t]*ALL)/\1/g' /etc/sudoers
 ```
