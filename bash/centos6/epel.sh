@@ -21,16 +21,16 @@ v_script_name="centos6/epel.sh"
 	if ! rpm --quiet -q yum-utils
 	then
 		LogInfo "bash# yum -y install yum-utils"
-		yum -y install yum-utils 2>/dev/stdout
+		sudo yum -y install yum-utils 2>/dev/stdout
 	fi
 	
 	# install epel-release
 	if ! rpm --quiet -q epel-release
 	then
 		LogInfo "bash# yum -y install ${v_epel_url}"
-		yum -y install "${v_epel_url}" 2>/dev/stdout
+		sudo yum -y install "${v_epel_url}" 2>/dev/stdout
 		LogInfo "bash# yum-config-manager --disable epel*"
-		yum-config-manager --disable epel* 2>/dev/stdout
+		sudo yum-config-manager --disable epel* 2>/dev/stdout
 	fi
 	
 	LogInfo "End \"${v_script_name}\"."
