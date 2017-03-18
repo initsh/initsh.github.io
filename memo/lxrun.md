@@ -1,14 +1,12 @@
 # Windows Subsystem for Linux
 
-1. **<kbd>Windows</kbd> + <kbd>R</kbd> => `powershell -Command "Start-Process -Verb runas powershell Show-WindowsDeveloperLicenseRegistration"`**
-
-### Old
 
 1. **<kbd>Windows</kbd> + <kbd>R</kbd> => `OptionalFeatures`**
 
 1. **Check `Windows Subsystem for Linux`**
 
-1. **<kbd>Windows</kbd> + <kbd>U</kbd> => `developer`**
+1. **<kbd>Windows</kbd> + <kbd>R</kbd> => `powershell -Command "Start-Process -Verb runas powershell Show-WindowsDeveloperLicenseRegistration"`**
+<br>OR **<kbd>Windows</kbd> + <kbd>U</kbd> => `developer`**
 
 1. **Check `Developer mode`**
 
