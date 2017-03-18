@@ -22,13 +22,13 @@ v_script_name="centos6/munin.sh"
 	v_munin_password=munin
 	
 	# install munin
-	yum -y --enablerepo=epel munin
+	sudo yum -y --enablerepo=epel munin
 	
 	# gen passwd
 	echo -e "${v_munin_password}" | htpasswd -i /etc/munin/munin-htpasswd ${v_munin_user}
 	
 	# load /etc/httpd/conf.d/munin.conf
-	service httpd restart
+	sudo service httpd restart
 	
 	LogInfo "End \"${v_script_name}\"."
 } >>"${v_log_file}"
