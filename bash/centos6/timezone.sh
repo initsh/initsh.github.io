@@ -1,4 +1,4 @@
 #!/bin/bash
-\cp -p /usr/share/zoneinfo/Japan /etc/localtime
+sudo \cp -p /usr/share/zoneinfo/Japan /etc/localtime
 
 # EOF
