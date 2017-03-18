@@ -11,7 +11,7 @@ v_script_name="centos7/utils.sh"
 	LogInfo "Start \"${v_script_name}\"."
 	
 	LogInfo "Redirect."
-	curl -LRs "${v_github_dir}/centos6/utils.sh" | bash
+	sudo curl -LRs "${v_github_dir}/centos6/utils.sh" | bash
 	
 	LogInfo "End \"${v_script_name}\"."
 } >>"${v_log_file}"
