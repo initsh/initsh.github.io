@@ -5,7 +5,7 @@
 
 # 変数 (variable)
 v_logfile="$1"
-v_output_logfile="$1".formatted.log
+v_output_logfile="$1".formatted
 
 # アウトプットログファイルを初期化する。
 cat /dev/null > "${v_output_logfile}"
@@ -18,8 +18,8 @@ then
 fi
 
 # ログ整形を実施する。
-#perl -p -e 's/\n/\t/g; s/^(-+)\t$/\1\n/g' "${v_logfile}" > "${v_output_logfile}"
-perl -p -e 's/\n/\t/g; s/^-+\t$/\n/g' "${v_logfile}" > "${v_output_logfile}"
+#perl -p -e 's/\t/ /g; s/\n/\t/g; s/^(-+)\t$/\1\n/g' "${v_logfile}" > "${v_output_logfile}"
+perl -p -e 's/\t/ /g; s/\n/\t/g; s/^-+\t$/\n/g' "${v_logfile}" > "${v_output_logfile}"
 
 # 正常終了する。
 exit 0
