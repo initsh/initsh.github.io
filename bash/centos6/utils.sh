@@ -102,7 +102,7 @@ v_script_name="centos6/utils.sh"
 	# if not installed (return 127), download jq
 	if [ "$(jq --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 	then
-		echo '# curl $url -o /usr/bin/jq'
+		echo 'bash# curl $url -o /usr/bin/jq'
 		curl -LRs https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -o /usr/bin/jq && chmod 755 /usr/bin/jq 
 		ls -dl /usr/bin/jq*
 		if [ "$(jq --help >/dev/null 2>&1; echo $?)" -eq 127 ]
