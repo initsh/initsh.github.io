@@ -35,9 +35,9 @@ v_script_name="centos7/certbot.sh"
 	if ! rpm --quiet -q certbot
 	then
 		LogInfo "bash# yum --enablerepo=* -y install certbot"
-		sudo yum --enablerepo=* -y install certbot
+		yum --enablerepo=* -y install certbot
 		LogInfo "bash# yum --enablerepo=extra,optional,epel -y install certbot"
-		sudo yum --enablerepo=extra,optional,epel -y install certbot
+		yum --enablerepo=extra,optional,epel -y install certbot
 		if ! rpm -q certbot
 		then
 			LogError "Failed to install certbot."
@@ -50,21 +50,21 @@ v_script_name="centos7/certbot.sh"
 	v_fqdn="$2"
 	
 	# install cert
-	if [ -z "$(sudo ss -lntp | awk '$0=$4' | egrep '443$')" ]
+	if [ -z "$(ss -lntp | awk '$0=$4' | egrep '443$')" ]
 	then
 		LogInfo "Generate SSL Keys."
 		LogInfo "$(echo '{"v_email_addr": "'"${v_email_addr}"'", "v_fqdn": "'"${v_fqdn}"'"}' | jq .)"
 		
 		v_expect_num="$(expect -c "
 set timeout 10
-spawn sudo certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01
+spawn certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01
 expect \"(press 'c' to cancel): \"
 send \"c\n\"
 " | awk -F: '/standalone/{print $1}')"
 		
 		expect -c "
 set timeout 10
-spawn sudo certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01
+spawn certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01
 expect \"(press 'c' to cancel): \"
 send \"${v_expect_num}\n\"
 expect \"(press 'c' to cancel): \"
@@ -75,7 +75,7 @@ interact
 	else
 		if [ -z "$(echo "$3" | egrep '^/[^/]*')" ]
 		then
-			v_web_server="$(sudo ss -lntp | awk '{print $6,$4}' | egrep '443$' | sed -r -e 's/users:\(\("([^"]*)".*/\1/g')"
+			v_web_server="$(ss -lntp | awk '{print $6,$4}' | egrep '443$' | sed -r -e 's/users:\(\("([^"]*)".*/\1/g')"
 			LogError "\$2 needs web server's document root..."
 			LogError "OR run the following command."
 			LogError "bash# certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01 --pre-hook \"systemctl stop ${v_web_server}\" --post-hook \"systemctl start ${v_web_server}\""
@@ -90,7 +90,7 @@ interact
 		
 		expect -c "
 set timeout 10
-spawn sudo certbot certonly --agree-tos --email ${v_email_addr} --webroot -w ${v_fqdn_docroot} -d ${v_fqdn}
+spawn certbot certonly --agree-tos --email ${v_email_addr} --webroot -w ${v_fqdn_docroot} -d ${v_fqdn}
 expect \"(press 'c' to cancel): \"
 send \"c\n\"
 interact
@@ -100,7 +100,7 @@ interact
 	
 	# notice
 	LogNotice "SSL Keys..."
-	LogNotice "$(sudo ls -dl "/etc/letsencrypt/live/${v_fqdn}/"*)"
+	LogNotice "$(ls -dl "/etc/letsencrypt/live/${v_fqdn}/"*)"
 	LogNotice "Please edit web server's conf for SSL Keys."
 	
 	LogInfo "End \"${v_script_name}\"."
