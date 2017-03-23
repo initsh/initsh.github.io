@@ -19,7 +19,7 @@ v_script_name="centos7/httpd.vhost.sh"
 	if ! rpm --quiet -q openssl
 	then
 		LogInfo "bash# yum -y install openssl"
-		yum -y install openssl
+		yum -y install openssl 2>/dev/stdout
 		if ! rpm -q openssl
 		then
 			LogError "Failed to install openssl."
@@ -29,7 +29,7 @@ v_script_name="centos7/httpd.vhost.sh"
 	if ! rpm --quiet -q httpd
 	then
 		LogInfo "bash# yum -y install httpd"
-		yum -y install httpd
+		yum -y install httpd 2>/dev/stdout
 		if ! rpm -q httpd
 		then
 			LogError "Failed to install httpd."
@@ -39,7 +39,7 @@ v_script_name="centos7/httpd.vhost.sh"
 	if ! rpm --quiet -q mod_ssl
 	then
 		LogInfo "bash# yum -y install mod_ssl"
-		yum -y install mod_ssl
+		yum -y install mod_ssl 2>/dev/stdout
 		if ! rpm -q mod_ssl
 		then
 			LogError "Failed to install mod_ssl."
