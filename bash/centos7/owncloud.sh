@@ -26,22 +26,52 @@ v_script_name="centos7/owncloud.sh"
         v_my_small_cnf="/usr/share/mysql/my-small.cnf"
         \cp -p "${v_my_server_cnf}" "${v_my_server_cnf}${v_backup_suffix}"
         \cp -p "${v_my_small_cnf}" "${v_my_server_cnf}"
+        
+        systemctl enable mariadb
+        systemctl start mariadb
+        
+        v_mariadb_root_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z_/" | head -c 64)"
+        logger -t "${v_script_name}" "MariaDB initial root password: ${v_mariadb_root_passwd}"
+        
+        expect -c "
+set timeout 10
+spawn mysql_secure_installation
+expect \"Enter current password for root (enter for none):\"
+send \"\n\"
+expect \"Set root password? [Y/n]\"
+send \"\n\"
+expect \"New password:\"
+send \"${v_mariadb_root_passwd}\n\"
+expect \"Re-enter new password:\"
+send \"${v_mariadb_root_passwd}\n\"
+expect \"Remove anonymous users? [Y/n]\"
+send \"\n\"
+expect \"Disallow root login remotely? [Y/n]\"
+send \"\n\"
+expect \"Remove test database and access to it? [Y/n]\"
+send \"\n\"
+expect \"Reload privilege tables now? [Y/n]\"
+send \"\n\"
+interact
+"
+        
+        v_mariadb_oc_user="$(cat /dev/urandom | tr -dc "0-9a-zA-Z_/" | head -c 32)"
+        v_mariadb_oc_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z_/" | head -c 64)"
+        logger -t "${v_script_name}" "MariaDB initial OwnCloud User,Password: ${v_mariadb_oc_user},${v_mariadb_oc_passwd}"
+        
+        mysql -u"root" -p"${v_mariadb_root_passwd}" <<__EOD__
+mysql -u"root" -p"${v_mariadb_root_passwd}"
+CREATE USER '${v_mariadb_oc_user}'@'localhost' IDENTIFIED BY '${v_mariadb_oc_passwd}';
+CREATE DATABASE IF NOT EXISTS owncloud;
+GRANT ALL PRIVILEGES ON owncloud.* TO '${v_mariadb_oc_user}'@'localhost' IDENTIFIED BY '${v_mariadb_oc_passwd}';
+__EOD__
+        
     fi
     
     if ! rpm --quiet -q owncloud
     then
         LogInfo "bash# yum -y install owncloud --enablerepo=epel"
         yum -y install owncloud --enablerepo=epel
-        if ! rpm --quiet -q mariadb-server
-        then
-            LogInfo "mariadb> yum -y install owncloud --enablerepo=epel"
-            mysql -u"root" -D$schema <<__EOD__
-begin;
-select table_name, column_name from information_schema.columns where table_schema = "$schema";
-insert into hoge values(1, $name3);
-commit;
-__EOD__
-        fi
     fi
     
     if [ ! -f /etc/httpd/conf.d/z-owncloud-access.conf ]; 
