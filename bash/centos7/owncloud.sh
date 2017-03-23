@@ -74,7 +74,8 @@ __EOD__
         yum -y install owncloud --enablerepo=epel
     fi
     
-    if [ ! -f /etc/httpd/conf.d/z-owncloud-access.conf ]; 
+    if [ ! -f /etc/httpd/conf.d/z-owncloud-access.conf ]
+    then
         LogInfo "bash# ln -s /etc/httpd/conf.d/owncloud-access.conf.avail /etc/httpd/conf.d/z-owncloud-access.conf"
         ln -s /etc/httpd/conf.d/owncloud-access.conf.avail /etc/httpd/conf.d/z-owncloud-access.conf
     fi
