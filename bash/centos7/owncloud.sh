@@ -24,6 +24,9 @@ v_script_name="centos7/owncloud.sh"
     LogInfo "bash# ln -s /etc/httpd/conf.d/owncloud-access.conf.avail /etc/httpd/conf.d/z-owncloud-access.conf"
     ln -s /etc/httpd/conf.d/owncloud-access.conf.avail /etc/httpd/conf.d/z-owncloud-access.conf
     
+    LogInfo "bash# yum -y install mariadb-server"
+    yum -y install mariadb-server
+    
     LogInfo "End \"${v_script_name}\"."
 } >>"${v_log_file}"
 
