@@ -1,8 +1,8 @@
-## Zabbix
+# Zabbix
 
 - [Reference](http://knowledge.sakura.ad.jp/tech/2917/)
 
-### Zabbix Server
+## Zabbix Server
 - ListenPort 10051
 ```
 yum -y install httpd
@@ -30,7 +30,7 @@ chkconfig httpd on
 service httpd start
 ```
 
-### Zabbix Agent
+## Zabbix Agent
 - ListenPort 10050
 ```
 yum -y install http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
