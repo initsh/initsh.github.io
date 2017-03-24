@@ -33,7 +33,7 @@ set timeout 10
 spawn mysql_secure_installation
 expect \"Enter current password for root (enter for none):\"
 send \"\n\"
-expect \"Set root password? \[Y/n\]\"
+expect \"Set root password? [Y/n\]"
 send \"\n\"
 expect \"New password:\"
 send \"${v_mariadb_root_passwd}\n\"
