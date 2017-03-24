@@ -14,7 +14,7 @@ chkconfig mysqld on
 service mysqld start
 mysql_secure_installation
   BuNaiKyoutsu
-mysql -uroot -p
+mysql -u root -p
   CREATE USER zabbix;
   CREATE DATABASE zabbix CHARACTER SET utf8;
   GRANT ALL PRIVILEGES on zabbix.* TO zabbix@localhost IDENTIFIED BY 'BuNaiKyoutsu';
