@@ -1,5 +1,7 @@
 ## Zabbix
 
+- [Reference](http://knowledge.sakura.ad.jp/tech/2917/)
+
 ### Zabbix Server
 - ListenPort 10051
 ```
