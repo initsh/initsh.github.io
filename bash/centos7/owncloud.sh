@@ -55,7 +55,6 @@ interact
         logger -t "${v_script_name}" "MariaDB initial OwnCloud User,Password: ${v_mariadb_oc_user},${v_mariadb_oc_passwd}"
         
         mysql -u"root" -p"${v_mariadb_root_passwd}" <<__EOD__
-mysql -u"root" -p"${v_mariadb_root_passwd}"
 CREATE USER '${v_mariadb_oc_user}'@'localhost' IDENTIFIED BY '${v_mariadb_oc_passwd}';
 CREATE DATABASE IF NOT EXISTS owncloud;
 GRANT ALL PRIVILEGES ON owncloud.* TO '${v_mariadb_oc_user}'@'localhost' IDENTIFIED BY '${v_mariadb_oc_passwd}';
