@@ -17,9 +17,9 @@ mysql -uroot -p
   CREATE DATABASE zabbix CHARACTER SET utf8;
   GRANT ALL PRIVILEGES on zabbix.* TO zabbix@localhost IDENTIFIED BY 'BuNaiKyoutsu';
   FLUSH PRIVILEGES;
-mysql -u zabbix -p zabbix < /usr/share/doc/zabbix-server-mysql-2.4.8/create/data.sql
-mysql -u zabbix -p zabbix < /usr/share/doc/zabbix-server-mysql-2.4.8/create/images.sql
 mysql -u zabbix -p zabbix < /usr/share/doc/zabbix-server-mysql-2.4.8/create/schema.sql
+mysql -u zabbix -p zabbix < /usr/share/doc/zabbix-server-mysql-2.4.8/create/images.sql
+mysql -u zabbix -p zabbix < /usr/share/doc/zabbix-server-mysql-2.4.8/create/data.sql
 sed -r -e 's/^(# DBPassword=)$/# '"$(date +%Y%m%d)"' #\1\nDBPassword=BuNaiKyoutsu/g' /etc/zabbix/zabbix_server.conf
 sed -r -e 's@^([ \t]*)(#[ \t]*)(php_value date.timezone )(Europe/Riga)@# '"$(date +%Y%m%d)"' #\1\2\3\4\n\1\3Asia/Tokyo@g' /etc/httpd/conf.d/zabbix.conf
 chkconfig zabbix-server on
