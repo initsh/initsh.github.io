@@ -25,7 +25,7 @@ v_script_name="centos7/owncloud.sh"
         systemctl enable mariadb
         systemctl start mariadb
         
-        v_mariadb_root_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z_/" | head -c 32)"
+        v_mariadb_root_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z_/" | head -c 16)"
         logger -t "${v_script_name}" "MariaDB initial root password: ${v_mariadb_root_passwd}"
         
         expect -c "
@@ -50,14 +50,14 @@ send \"y\n\"
 interact
 "
         
-        v_mariadb_oc_user="$(cat /dev/urandom | tr -dc "0-9a-zA-Z_/" | head -c 16)"
-        v_mariadb_oc_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z_/" | head -c 32)"
-        logger -t "${v_script_name}" "MariaDB initial OwnCloud User,Password: ${v_mariadb_oc_user},${v_mariadb_oc_passwd}"
+        v_mariadb_oc_admin="ocadmin"
+        v_mariadb_oc_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z_/" | head -c 16)"
+        logger -t "${v_script_name}" "MariaDB initial OwnCloud User,Password: ${v_mariadb_oc_admin},${v_mariadb_oc_passwd}"
         
         mysql -u"root" -p"${v_mariadb_root_passwd}" <<__EOD__
-CREATE USER '${v_mariadb_oc_user}'@'localhost' IDENTIFIED BY '${v_mariadb_oc_passwd}';
+CREATE USER '${v_mariadb_oc_admin}'@'localhost' IDENTIFIED BY '${v_mariadb_oc_passwd}';
 CREATE DATABASE IF NOT EXISTS owncloud;
-GRANT ALL PRIVILEGES ON owncloud.* TO '${v_mariadb_oc_user}'@'localhost' IDENTIFIED BY '${v_mariadb_oc_passwd}';
+GRANT ALL PRIVILEGES ON owncloud.* TO '${v_mariadb_oc_admin}'@'localhost' IDENTIFIED BY '${v_mariadb_oc_passwd}';
 __EOD__
         
     fi
