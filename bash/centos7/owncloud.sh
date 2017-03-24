@@ -10,11 +10,6 @@ v_script_name="centos7/owncloud.sh"
 {
     LogInfo "Start \"${v_script_name}\"."
     
-    
-    . <(curl -LRs "${v_github_dir}/centos7/selinux.sh")
-    . <(curl -LRs "${v_github_dir}/centos7/timezone.sh")
-    . <(curl -LRs "${v_github_dir}/centos7/utils.sh")
-    
     . <(curl -LRs "${v_github_dir}/centos7/epel.sh")
     
     if ! rpm --quiet -q mariadb-server
