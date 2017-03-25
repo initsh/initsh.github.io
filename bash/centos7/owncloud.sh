@@ -86,8 +86,7 @@ interact
 __EOD__
         
         # Write MariaDB root password to syslog
-        LogInfo "Write MariaDB root password to syslog."
-        logger -t "${v_script_name}" "MariaDB root password: ${v_mariadb_root_passwd}"
+        LogNotice "Write MariaDB root password: ${v_mariadb_root_passwd}"
         
         # variables for MariaDB USER & PASSWORD & TABLE for owncloud
         v_mariadb_oc_admin="ocadmin"
@@ -102,8 +101,7 @@ GRANT ALL PRIVILEGES ON owncloud.* TO '${v_mariadb_oc_admin}'@'localhost' IDENTI
 __EOD__
         
         # write owncloud MariaDB USER & PASSWORD
-        LogInfo "Write ownCloud admin & password to syslog."
-        logger -t "${v_script_name}" "ownCloud admin,password: ${v_mariadb_oc_admin},${v_mariadb_oc_passwd}"
+        LogNotice "Write ownCloud admin,password: ${v_mariadb_oc_admin},${v_mariadb_oc_passwd}"
     fi
     
     ## ownCloud
@@ -118,7 +116,22 @@ __EOD__
             ln -s /etc/httpd/conf.d/owncloud-access.conf.avail /etc/httpd/conf.d/z-owncloud-access.conf
         fi
     fi
-        
+    
+    # install mod_ssl
+    if ! rpm --quiet -q mod_ssl
+    then
+        LogInfo "bash# yum -y install mod_ssl"
+        yum -y install mod_ssl 2>/dev/stdout
+        if ! rpm -q mod_ssl
+        then
+            LogError "Failed to install mod_ssl."
+            exit 1
+        fi	
+    fi
+    
+    var_gip=$(curl -s ipinfo.io | sed -r -e /"ip"/\!d -e 's/.+"ip": "([0-9\.]+)",/\1/g')
+    [ -z "${var_gip}" ] && LogNotice "If you have Global IPAddress for https server, access https://${var_gip}/owncloud"
+    
     LogInfo "End \"${v_script_name}\"."
 } >>"${v_log_file}"
 
