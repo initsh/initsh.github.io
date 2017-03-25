@@ -55,22 +55,23 @@ v_script_name="centos7/certbot.sh"
 		LogInfo "Generate SSL Keys."
 		LogInfo "$(echo '{"v_email_addr": "'"${v_email_addr}"'", "v_fqdn": "'"${v_fqdn}"'"}' | jq .)"
 		
-		v_expect_num="$(expect -c "
+		v_expect_num="$(expect <<__EOD__ | awk -F: '/standalone/{print $1}'
 set timeout 10
 spawn certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01
-expect \"(press 'c' to cancel): \"
-send \"c\n\"
-" | awk -F: '/standalone/{print $1}')"
+expect "(press 'c' to cancel): "
+send "c\n"
+__EOD__
+)"
 		
-		expect -c "
+		expect <<__EOD__
 set timeout 10
 spawn certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01
-expect \"(press 'c' to cancel): \"
-send \"${v_expect_num}\n\"
-expect \"(press 'c' to cancel): \"
-send \"c\n\"
+expect "(press 'c' to cancel): "
+send "${v_expect_num}\n"
+expect "(press 'c' to cancel): "
+send "c\n"
 interact
-"
+__EOD__
 		
 	else
 		if [ -z "$(echo "$3" | egrep '^/[^/]*')" ]
@@ -88,13 +89,13 @@ interact
 		LogInfo "Generate SSL Keys."
 		LogInfo "$(echo '{"v_email_addr": "'"${v_email_addr}"'", "v_fqdn": "'"${v_fqdn}"'", "v_fqdn_docroot": "'"${v_fqdn_docroot}"'"}' | jq .)"
 		
-		expect -c "
+		expect <<__EOD__
 set timeout 10
 spawn certbot certonly --agree-tos --email ${v_email_addr} --webroot -w ${v_fqdn_docroot} -d ${v_fqdn}
-expect \"(press 'c' to cancel): \"
-send \"c\n\"
+expect "(press 'c' to cancel): "
+send "c\n"
 interact
-"
+__EOD__
 	
 	fi
 	
