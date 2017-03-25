@@ -43,7 +43,7 @@ v_script_name="centos7/owncloud.sh"
         systemctl start mariadb 2>/dev/stdout
         
         # variables for mysql_secure_installation
-        v_mariadb_root_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z_/" | head -c 32)"
+        v_mariadb_root_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z" | head -c 32)"
         
         # mysql_secure_installation
         LogInfo "bash# mysql_secure_installation"
@@ -84,7 +84,7 @@ __EOD__
         
         # variables for MariaDB USER & PASSWORD & TABLE for owncloud
         v_mariadb_oc_admin="ocadmin"
-        v_mariadb_oc_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z_/" | head -c 32)"
+        v_mariadb_oc_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z" | head -c 32)"
         
         # CREATE ownCloud environment on MariaDB
         LogInfo "CREATE ownCloud environment on MariaDB"
