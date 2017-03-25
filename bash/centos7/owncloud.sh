@@ -129,8 +129,9 @@ __EOD__
         fi	
     fi
     
+    # Notice URL
     var_gip=$(curl -s ipinfo.io | sed -r -e /"ip"/\!d -e 's/.+"ip": "([0-9\.]+)",/\1/g')
-    [ -z "${var_gip}" ] && LogNotice "If you have Global IPAddress for https server, access https://${var_gip}/owncloud"
+    [ -n "${var_gip}" ] && LogNotice "If you have Global IPAddress for https server, access https://${var_gip}/owncloud"
     
     LogInfo "End \"${v_script_name}\"."
 } >>"${v_log_file}"
