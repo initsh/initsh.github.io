@@ -15,7 +15,7 @@ v_script_name="centos7/owncloud.sh"
     . <(curl -LRs "${v_github_dir}/check/root.sh")
     
     # install epel-release
-    . <(curl -LRs "${v_github_dir}/centos7/epel.sh")
+    bash <(curl -LRs "${v_github_dir}/centos7/epel.sh")
     
     ## MariaDB
     if ! rpm --quiet -q mariadb-server
