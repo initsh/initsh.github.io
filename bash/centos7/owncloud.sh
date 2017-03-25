@@ -46,7 +46,6 @@ v_script_name="centos7/owncloud.sh"
         v_mariadb_root_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z" | head -c 32)"
         
         # install expect
-        LogInfo "bash# yum -y install expect"
         if ! rpm --quiet -q expect
         then
             LogInfo "bash# yum -y install expect"
