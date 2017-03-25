@@ -19,13 +19,16 @@ v_script_name="centos7/owncloud.sh"
         
         v_my_server_cnf="/etc/my.cnf.d/server.cnf"
         v_my_small_cnf="/usr/share/mysql/my-small.cnf"
+        LogInfo "Edit ${v_my_server_cnf} File"
         \cp -p "${v_my_server_cnf}" "${v_my_server_cnf}${v_backup_suffix}"
         \cp -p "${v_my_small_cnf}" "${v_my_server_cnf}"
+        sed -r -e 's@(\[client\])@\1\n# '"$(date +%Y%m%d)"' #\ndefault-character-set = utf8\n# '"$(date +%Y%m%d)"' #@g' "${v_my_server_cnf}" -i
+        sed -r -e 's@(\[mysqld\])@\1\n# '"$(date +%Y%m%d)"' #\ncharacter-set-server = utf8\n# '"$(date +%Y%m%d)"' #@g' "${v_my_server_cnf}" -i
         
         systemctl enable mariadb
         systemctl start mariadb
         
-        v_mariadb_root_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z_/" | head -c 16)"
+        v_mariadb_root_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z_/" | head -c 32)"
         logger -t "${v_script_name}" "MariaDB initial root password: ${v_mariadb_root_passwd}"
         
         expect -c "
@@ -51,7 +54,7 @@ interact
 "
         
         v_mariadb_oc_admin="ocadmin"
-        v_mariadb_oc_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z_/" | head -c 16)"
+        v_mariadb_oc_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z_/" | head -c 32)"
         logger -t "${v_script_name}" "MariaDB initial OwnCloud User,Password: ${v_mariadb_oc_admin},${v_mariadb_oc_passwd}"
         
         mysql -u"root" -p"${v_mariadb_root_passwd}" <<__EOD__
