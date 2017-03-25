@@ -45,6 +45,14 @@ v_script_name="centos7/owncloud.sh"
         # variables for mysql_secure_installation
         v_mariadb_root_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z" | head -c 32)"
         
+        # install expect
+        LogInfo "bash# yum -y install expect"
+        if ! rpm --quiet -q expect
+        then
+            LogInfo "bash# yum -y install expect"
+            yum -y install expect 2>/dev/stdout
+        fi
+        
         # mysql_secure_installation
         LogInfo "bash# mysql_secure_installation"
         expect <<__EOD__ 2>/dev/stdout
