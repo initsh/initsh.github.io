@@ -14,7 +14,9 @@ v_script_name="centos7/owncloud.sh"
     . <(curl -LRs "${v_github_dir}/check/centos7.sh")
     . <(curl -LRs "${v_github_dir}/check/root.sh")
     
-    # install utils epel-release
+    # setup
+    bash <(curl -LRs "${v_github_dir}/centos7/selinux.sh")
+    bash <(curl -LRs "${v_github_dir}/centos7/tz.tokyo.sh")
     bash <(curl -LRs "${v_github_dir}/centos7/utils.sh")
     bash <(curl -LRs "${v_github_dir}/centos7/epel.sh")
     
