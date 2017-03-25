@@ -11,8 +11,8 @@ v_script_name="centos7/owncloud.sh"
     LogInfo "Start \"${v_script_name}\"."
     
     # check
-	. <(curl -LRs "${v_github_dir}/check/centos7.sh")
-	. <(curl -LRs "${v_github_dir}/check/root.sh")
+    . <(curl -LRs "${v_github_dir}/check/centos7.sh")
+    . <(curl -LRs "${v_github_dir}/check/root.sh")
     
     # install epel-release
     . <(curl -LRs "${v_github_dir}/centos7/epel.sh")
