@@ -93,17 +93,18 @@ __EOD__
         # variables for MariaDB USER & PASSWORD & TABLE for owncloud
         v_mariadb_oc_admin="ocadmin"
         v_mariadb_oc_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z" | head -c 32)"
+        v_mariadb_oc_dbname="owncloud"
         
         # CREATE ownCloud environment on MariaDB
         LogInfo "CREATE ownCloud environment on MariaDB"
         mysql -u root -p"${v_mariadb_root_passwd}" <<__EOD__ 2>&1
 CREATE USER '${v_mariadb_oc_admin}'@'localhost' IDENTIFIED BY '${v_mariadb_oc_passwd}';
-CREATE DATABASE IF NOT EXISTS owncloud;
-GRANT ALL PRIVILEGES ON owncloud.* TO '${v_mariadb_oc_admin}'@'localhost' IDENTIFIED BY '${v_mariadb_oc_passwd}';
+CREATE DATABASE IF NOT EXISTS ${v_mariadb_oc_dbname};
+GRANT ALL PRIVILEGES ON ${v_mariadb_oc_dbname}.* TO '${v_mariadb_oc_admin}'@'localhost' IDENTIFIED BY '${v_mariadb_oc_passwd}';
 __EOD__
         
         # write owncloud MariaDB USER & PASSWORD
-        LogNotice "ownCloud on MariaDB admin,password: ${v_mariadb_oc_admin},${v_mariadb_oc_passwd}"
+        LogNotice "ownCloud on MariaDB admin,password,database: ${v_mariadb_oc_admin},${v_mariadb_oc_passwd},${v_mariadb_oc_dbname}"
     fi
     
     ## ownCloud
