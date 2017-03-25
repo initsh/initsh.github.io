@@ -23,7 +23,7 @@ v_script_name="centos7/owncloud.sh"
     then
         # install MariaDB
         LogInfo "bash# yum -y install mariadb-server"
-        yum -y install mariadb-server 2>/dev/stdout
+        yum -y install mariadb-server 2>&1
         
         # variables for MariaDB
         v_my_server_cnf="/etc/my.cnf.d/server.cnf"
@@ -38,9 +38,9 @@ v_script_name="centos7/owncloud.sh"
         
         # enable and start MariaDB
         LogInfo "bash# systemctl enable mariadb"
-        systemctl enable mariadb 2>/dev/stdout
+        systemctl enable mariadb 2>&1
         LogInfo "bash# systemctl start mariadb"
-        systemctl start mariadb 2>/dev/stdout
+        systemctl start mariadb 2>&1
         
         # variables for mysql_secure_installation
         v_mariadb_root_passwd="$(cat /dev/urandom | tr -dc "0-9a-zA-Z" | head -c 32)"
@@ -49,12 +49,12 @@ v_script_name="centos7/owncloud.sh"
         if ! rpm --quiet -q expect
         then
             LogInfo "bash# yum -y install expect"
-            yum -y install expect 2>/dev/stdout
+            yum -y install expect 2>&1
         fi
         
         # mysql_secure_installation
         LogInfo "bash# mysql_secure_installation"
-        expect <<__EOD__ 2>/dev/stdout
+        expect <<__EOD__ 2>&1
 set timeout 10
 spawn mysql_secure_installation
 
@@ -94,7 +94,7 @@ __EOD__
         
         # CREATE ownCloud environment on MariaDB
         LogInfo "CREATE ownCloud environment on MariaDB"
-        mysql -u root -p"${v_mariadb_root_passwd}" <<__EOD__ 2>/dev/stdout
+        mysql -u root -p"${v_mariadb_root_passwd}" <<__EOD__ 2>&1
 CREATE USER '${v_mariadb_oc_admin}'@'localhost' IDENTIFIED BY '${v_mariadb_oc_passwd}';
 CREATE DATABASE IF NOT EXISTS owncloud;
 GRANT ALL PRIVILEGES ON owncloud.* TO '${v_mariadb_oc_admin}'@'localhost' IDENTIFIED BY '${v_mariadb_oc_passwd}';
@@ -108,7 +108,7 @@ __EOD__
     if ! rpm --quiet -q owncloud
     then
         LogInfo "bash# yum -y --enablerepo=epel install owncloud"
-        yum -y --enablerepo=epel install owncloud 2>/dev/stdout
+        yum -y --enablerepo=epel install owncloud 2>&1
         # ln conf
         if [ ! -f /etc/httpd/conf.d/z-owncloud-access.conf ]
         then
@@ -121,7 +121,7 @@ __EOD__
     if ! rpm --quiet -q mod_ssl
     then
         LogInfo "bash# yum -y install mod_ssl"
-        yum -y install mod_ssl 2>/dev/stdout
+        yum -y install mod_ssl 2>&1
         if ! rpm -q mod_ssl
         then
             LogError "Failed to install mod_ssl."
