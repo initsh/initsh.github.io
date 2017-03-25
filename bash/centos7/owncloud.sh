@@ -109,8 +109,8 @@ __EOD__
     ## ownCloud
     if ! rpm --quiet -q owncloud
     then
-        LogInfo "bash# yum -y install owncloud --enablerepo=epel"
-        yum -y install owncloud --enablerepo=epel 2>/dev/stdout
+        LogInfo "bash# yum -y --enablerepo=epel install owncloud"
+        yum -y --enablerepo=epel install owncloud 2>/dev/stdout
         # ln conf
         if [ ! -f /etc/httpd/conf.d/z-owncloud-access.conf ]
         then
