@@ -11,7 +11,7 @@ v_script_name="centos7/awscli.sh"
 	LogInfo "Start \"${v_script_name}\"."
 	
 	LogInfo "Redirect."
-	curl -LRs "${v_github_dir}/centos6/awscli.sh" | bash
+	bash <(curl -LRs "${v_github_dir}/centos6/awscli.sh")
 	
 	LogInfo "End \"${v_script_name}\"."
 } >>"${v_log_file}"
