@@ -88,7 +88,7 @@ interact
 __EOD__
         
         # Write MariaDB root password to syslog
-        LogNotice "Write MariaDB root password: ${v_mariadb_root_passwd}"
+        LogNotice "MariaDB root password: ${v_mariadb_root_passwd}"
         
         # variables for MariaDB USER & PASSWORD & TABLE for owncloud
         v_mariadb_oc_admin="ocadmin"
@@ -103,7 +103,7 @@ GRANT ALL PRIVILEGES ON owncloud.* TO '${v_mariadb_oc_admin}'@'localhost' IDENTI
 __EOD__
         
         # write owncloud MariaDB USER & PASSWORD
-        LogNotice "Write ownCloud admin,password: ${v_mariadb_oc_admin},${v_mariadb_oc_passwd}"
+        LogNotice "ownCloud on MariaDB admin,password: ${v_mariadb_oc_admin},${v_mariadb_oc_passwd}"
     fi
     
     ## ownCloud
