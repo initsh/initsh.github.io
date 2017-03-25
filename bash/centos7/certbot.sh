@@ -28,8 +28,8 @@ v_script_name="centos7/certbot.sh"
 	fi
 	
 	# install utils epel-release
-	. <(curl -LRs "${v_github_dir}/centos7/utils.sh")
-	. <(curl -LRs "${v_github_dir}/centos7/epel.sh")
+	bash <(curl -LRs "${v_github_dir}/centos7/utils.sh")
+	bash <(curl -LRs "${v_github_dir}/centos7/epel.sh")
 	
 	# install certbot
 	if ! rpm --quiet -q certbot
