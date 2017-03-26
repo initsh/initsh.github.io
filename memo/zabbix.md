@@ -38,6 +38,8 @@ lokkit -p 10051:tcp
 yum -y install http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
 yum-config-manager --disablerepo=zabbiz*
 yum -y --enablerepo=zabbix install zabbix-agent
+sed -r -e 's/^(# )(HostnameItem=system.hostname)$/\1\2\n# '"$(date +%Y%m%d)"' #\n\2\n# '"$(date +%Y%m%d)"' #/g' /etc/zabbix/zabbix_server.conf
+
 chkconfig zabbix-agent on
 service zabbix-agent start
 
