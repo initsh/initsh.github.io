@@ -40,8 +40,8 @@ yum-config-manager --disablerepo=zabbiz*
 yum -y --enablerepo=zabbix install zabbix-agent
 sed -r -e 's/^(# )(HostnameItem=system.hostname)$/\1\2\n# '"$(date +%Y%m%d)"' #\n\2\n# '"$(date +%Y%m%d)"' #/g' /etc/zabbix/zabbix_server.conf
 SERVER_IPADDRESS=""
+sed -r -e 's/^(Server=)(127.0.0.1)$/# '"$(date +%Y%m%d)"' #\1\2\n\1'"${SERVER_IPADDRESS}"'\n/g' /etc/zabbix/zabbix_server.conf
 sed -r -e 's/^(ServerActive=)(127.0.0.1)$/# '"$(date +%Y%m%d)"' #\1\2\n\1'"${SERVER_IPADDRESS}"'\n/g' /etc/zabbix/zabbix_server.conf
-
 chkconfig zabbix-agent on
 service zabbix-agent start
 
