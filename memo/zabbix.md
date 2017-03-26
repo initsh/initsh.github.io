@@ -3,7 +3,7 @@
 - [Reference](http://knowledge.sakura.ad.jp/tech/2917/)
 
 ## Zabbix Server
-- ListenPort 10051
+- ListenPort 10050
 ```
 yum -y install httpd
 yum -y install mysql-server
@@ -28,14 +28,18 @@ chkconfig zabbix-server on
 service zabbix-server start
 chkconfig httpd on
 service httpd start
+
+lokkit -p 10050:tcp
 ```
 
 ## Zabbix Agent
-- ListenPort 10050
+- ListenPort 10051
 ```
 yum -y install http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
 yum-config-manager --disablerepo=zabbiz*
 yum -y --enablerepo=zabbix install zabbix-agent
 chkconfig zabbix-agent on
-server zabbix-agent start
+service zabbix-agent start
+
+lokkit -p 10051:tcp
 ```
