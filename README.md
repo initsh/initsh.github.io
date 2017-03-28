@@ -25,7 +25,8 @@ curl -LRs initsh.github.io/bash/check/centos7.sh
 curl -LRs initsh.github.io/bash/check/root.sh
 curl -LRs initsh.github.io/bash/check/x86_64.sh
 curl -LRs initsh.github.io/bash/functions.sh
-curl -LRs initsh.github.io/bash/vimrc
-curl -LRs initsh.github.io/bash/z-profile.sh
+
+curl -LRs initsh.github.io/bash/vimrc -o $HOME/.vimrc
+curl -LRs initsh.github.io/bash/z-profile.sh -o /etc/profile.d/z-profile.sh
 
 ```
