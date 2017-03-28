@@ -5,8 +5,8 @@
 
 ## useradd sudoers
 ```
-USERNAME=""
-USERID=""
+USERNAME=
+USERID=
 groupadd -g "$USERID" "$USERNAME"
 useradd -u "$USERID" -g "$USERID" "$USERNAME"
 usermod -G wheel "$USERNAME"
