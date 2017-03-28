@@ -10,15 +10,11 @@ v_script_name="centos6/awscli.sh"
 {
 	LogInfo "Start \"${v_script_name}\"."
 	
-	v_url_getpip="https://bootstrap.pypa.io/get-pip.py"
-	v_tmp_getpip="/tmp/get-pip.py"
-	
 	# pip
 	if [ "$(pip --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 	then
 		LogInfo "Run \"get-pip.py\"."
-		curl -LRs "${v_url_getpip}" -o "${v_tmp_getpip}"
-		python "${v_tmp_getpip}" 2>/dev/stdout
+		curl -LRs https://bootstrap.pypa.io/get-pip.py 2>/dev/null | python 2>&1
 		if [ "$(pip --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 		then
 			LogError "Failed to install \"pip\"."
