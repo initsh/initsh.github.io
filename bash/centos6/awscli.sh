@@ -26,7 +26,7 @@ v_script_name="centos6/awscli.sh"
 	if [ "$(aws --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 	then
 		LogInfo "bash# pip install awscli"
-		pip install awscli 2>/dev/stdout
+		pip install -U awscli 2>&1
 		if [ "$(aws --help >/dev/null 2>&1; echo $?)" -eq 127 ]
 		then
 			LogError "Failed to install \"awscli\"."
