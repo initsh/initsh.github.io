@@ -10,7 +10,7 @@ cat <<__EOD__
 
         date | $(date -Is)
     hostname | $(uname -n)
-      whoami | $(id)
+          id | $(id)
 
 __EOD__
 
