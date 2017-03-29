@@ -19,7 +19,7 @@ v_script_name="centos7/httpd.vhost.sh"
     if ! rpm --quiet -q openssl
     then
         LogInfo "bash# yum -y install openssl"
-        yum -y install openssl 2>/dev/stdout
+        yum -y install openssl 2>&1
         if ! rpm -q openssl
         then
             LogError "Failed to install openssl."
@@ -29,7 +29,7 @@ v_script_name="centos7/httpd.vhost.sh"
     if ! rpm --quiet -q httpd
     then
         LogInfo "bash# yum -y install httpd"
-        yum -y install httpd 2>/dev/stdout
+        yum -y install httpd 2>&1
         if ! rpm -q httpd
         then
             LogError "Failed to install httpd."
@@ -39,7 +39,7 @@ v_script_name="centos7/httpd.vhost.sh"
     if ! rpm --quiet -q mod_ssl
     then
         LogInfo "bash# yum -y install mod_ssl"
-        yum -y install mod_ssl 2>/dev/stdout
+        yum -y install mod_ssl 2>&1
         if ! rpm -q mod_ssl
         then
             LogError "Failed to install mod_ssl."
@@ -72,9 +72,9 @@ v_script_name="centos7/httpd.vhost.sh"
     v_fqdn_csr="/etc/pki/tls/certs/${v_fqdn}.csr"
     v_fqdn_crt="/etc/pki/tls/certs/${v_fqdn}.crt"
     LogInfo "Generate SSL Keys."
-    [ -f "${v_fqdn_key}" ] || openssl genrsa 2048 >${v_fqdn_key} 2>/dev/stdout
-    [ -f "${v_fqdn_csr}" ] || openssl req -new -key ${v_fqdn_key} -subj "/C=JP/CN=${v_fqdn}" >${v_fqdn_csr} 2>/dev/stdout
-    [ -f "${v_fqdn_crt}" ] || openssl x509 -days 3650 -req -signkey ${v_fqdn_key} <${v_fqdn_csr} >${v_fqdn_crt} 2>/dev/stdout
+    [ -f "${v_fqdn_key}" ] || openssl genrsa 2048 >${v_fqdn_key} 2>&1
+    [ -f "${v_fqdn_csr}" ] || openssl req -new -key ${v_fqdn_key} -subj "/C=JP/CN=${v_fqdn}" >${v_fqdn_csr} 2>&1
+    [ -f "${v_fqdn_crt}" ] || openssl x509 -days 3650 -req -signkey ${v_fqdn_key} <${v_fqdn_csr} >${v_fqdn_crt} 2>&1
     LogInfo "$(ls -dl "${v_fqdn_key}" "${v_fqdn_csr}" "${v_fqdn_crt}")"
 
     # edit fqdn conf
@@ -122,7 +122,7 @@ __EOD__
     LogInfo "$(ls -dl "${v_httpd_vhost_fqdn_conf}"*)"
 
     # check conf error
-    v_judge="$(httpd -S >/dev/null 2>/dev/stdout)"
+    v_judge="$(httpd -S >/dev/null 2>>/dev/stdout)"
     LogInfo "Check conf."
     if [ "${v_judge}" ]
     then
