@@ -91,7 +91,7 @@ __EOD__
 		
 		expect <<__EOD__
 set timeout 10
-spawn certbot certonly --agree-tos --email ${v_email_addr} --webroot -w ${v_fqdn_docroot} -d ${v_fqdn}
+spawn certbot certonly --agree-tos --email ${v_email_addr} --webroot -w ${v_fqdn_docroot} -d ${v_fqdn} --preferred-challenges tls-sni-01
 expect "(press 'c' to cancel): "
 send "c\n"
 interact
