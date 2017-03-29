@@ -55,7 +55,7 @@ v_script_name="centos7/certbot.sh"
 		LogInfo "Generate SSL Keys."
 		LogInfo "$(echo '{"v_email_addr": "'"${v_email_addr}"'", "v_fqdn": "'"${v_fqdn}"'"}' | jq .)"
 		
-		v_expect_num="$(expect <<__EOD__ | awk -F: '/standalone/{print $1}'
+		v_expect_num="$(expect <<__EOD__ 2>/dev/null | awk -F: '/standalone/{print $1}'
 set timeout 10
 spawn certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01
 expect "(press 'c' to cancel): "
@@ -63,7 +63,7 @@ send "c\n"
 __EOD__
 )"
 		
-		expect <<__EOD__
+		expect <<__EOD__ 2>&1
 set timeout 10
 spawn certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01
 expect "(press 'c' to cancel): "
@@ -91,7 +91,7 @@ __EOD__
 		
 		expect <<__EOD__
 set timeout 10
-spawn certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01 --webroot -w ${v_fqdn_docroot}
+spawn certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --webroot -w ${v_fqdn_docroot}
 expect "(press 'c' to cancel): "
 send "c\n"
 interact
