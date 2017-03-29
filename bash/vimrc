@@ -32,11 +32,11 @@ au BufWritePre * let &bex = '_' . strftime("%Y%m%d_%H%M%S") . '.backup'
 				"バックアップファイルの名称にタイムスタンプと.backup拡張子を付与する
 
 "## tab ##
-"set expandtab			"タブの挿入をスペース文字にする
+set expandtab			"タブの挿入をスペース文字にする
+set tabstop=4			"tabキーの入力文字幅を設定
 "set autoindent			"自動インデントを有効
 "set cindent			"自動インデント(C言語仕様)を有効
 "set shiftwidth=4		"Vimの自動インデント等によって挿入されるタブの幅
-set tabstop=8			"tabキーの入力文字幅を設定
 
 "## search ##
 set incsearch			"インクリメンタルサーチを有効
