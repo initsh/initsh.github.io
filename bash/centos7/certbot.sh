@@ -35,12 +35,12 @@ v_script_name="centos7/certbot.sh"
     # install certbot
     if ! rpm --quiet -q certbot
     then
-        LogInfo "bash# yum --enablerepo=* -y install certbot"
-        yum --enablerepo=* -y install certbot 2>&1
+        LogInfo "bash# yum --enablerepo=extra,optional,epel -y install certbot"
+        yum --enablerepo=extra,optional,epel -y install certbot 2>&1
         if ! rpm --quiet -q certbot
         then
-            LogInfo "bash# yum --enablerepo=extra,optional,epel -y install certbot"
-            yum --enablerepo=extra,optional,epel -y install certbot 2>&1
+            LogInfo "bash# yum --enablerepo=* -y install certbot"
+            yum --enablerepo=* -y install certbot 2>&1
             if ! rpm -q certbot
             then
                 LogError "Failed to install certbot."
