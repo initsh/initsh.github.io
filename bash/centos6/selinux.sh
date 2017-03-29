@@ -15,7 +15,7 @@ v_script_name="centos6/selinux.sh"
     
     if [ -z "$(getenforce | grep "^Disabled")" ]; then setenforce 0; fi
     \cp -p "${v_selinux_conf}" "${v_selinux_conf}${v_backup_suffix:?}"
-    sed -r -e 's/^[ \t]*(SELINUX=[^d].+)/#\1\n# '"${v_comment}"'\nSELINUX=disabled/g' "${v_selinux_conf}" -i
+    sed -r -e 's/^[ \t]*(SELINUX=[^d].+)/#\1\n# '"$(date +'Edit %Y%m%d')"'\nSELINUX=disabled/g' "${v_selinux_conf}" -i
     if [ -z "$(diff "${v_selinux_conf}${v_backup_suffix}" "${v_selinux_conf}")" ]; then \mv -f "${v_selinux_conf}${v_backup_suffix}" "${v_selinux_conf}"; fi
     LogInfo "$(ls -dl "${v_selinux_conf}"*)"
     
