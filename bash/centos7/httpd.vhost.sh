@@ -2,7 +2,7 @@
 
 # Edit 20170329
 set -eu
-v_github_dir="raw.githubusercontent.com/initsh/initsh.github.io/master/bash"
+v_github_dir="raw.githubusercontent.com/initsh/initsh.github.io/master/bash-err"
 v_script_name="centos7/httpd.vhost.sh"
 
 # functions
