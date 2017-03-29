@@ -1,6 +1,7 @@
 ```
 
 
+
 curl -LRs initsh.github.io/bash/centos6/awscli.sh
 curl -LRs initsh.github.io/bash/centos6/epel.sh
 curl -LRs initsh.github.io/bash/centos6/memory.sh
@@ -25,8 +26,10 @@ curl -LRs initsh.github.io/bash/check/root.sh
 curl -LRs initsh.github.io/bash/check/x86_64.sh
 curl -LRs initsh.github.io/bash/functions.sh
 
+curl -LRs initsh.github.io/id_rsa.pub
+
 curl -LRs initsh.github.io/bash/z-profile.sh -o /etc/profile.d/z-profile.sh
-curl -LRs initsh.github.io/id_rsa.pub >> $HOME/.ssh/authorized_keys
 curl -LRs initsh.github.io/bash/vimrc -o $HOME/.vimrc
+
 
 ```
