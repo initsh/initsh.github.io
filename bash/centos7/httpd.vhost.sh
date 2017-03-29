@@ -86,7 +86,7 @@ v_script_name="centos7/httpd.vhost.sh"
     \cp -p "${v_httpd_vhost_fqdn_conf}" "${v_httpd_vhost_fqdn_conf}${v_backup_suffix}"
 
     cat <<__EOD__ >"${v_httpd_vhost_fqdn_conf}"
-# Edit 20170304
+# Edit 20170329
 # https://github.com/initsh/initsh.github.io
 
 ## http
@@ -95,8 +95,8 @@ NameVirtualhost *:80
     ServerName ${v_fqdn}
     DocumentRoot ${v_vhost_fqdn_docroot}
 
-    ErrorLog logs/${v_fqdn}-error_log
-    CustomLog logs/${v_fqdn}-access_log combined
+    ErrorLog logs/${v_fqdn}.error_log
+    CustomLog logs/${v_fqdn}.access_log combined
 </VirtualHost>
 
 ## https
@@ -113,8 +113,8 @@ NameVirtualhost *:443
 #    SSLCertificateFile /etc/letsencrypt/live/${v_fqdn}/cert.pem
 #    SSLCertificateKeyFile /etc/letsencrypt/live/${v_fqdn}/privkey.pem
 
-    ErrorLog logs/${v_fqdn}-error_log
-    CustomLog logs/${v_fqdn}-access_log combined
+    ErrorLog logs/${v_fqdn}.error_log
+    CustomLog logs/${v_fqdn}.access_log combined
 </VirtualHost>
 __EOD__
 
