@@ -67,6 +67,7 @@ send "c\n"
 __EOD__
 )"
 
+        set +e
         expect <<__EOD__ 2>&1
 set timeout 10
 spawn certbot certonly --agree-tos --email ${v_email_addr} -d ${v_fqdn} --preferred-challenges tls-sni-01
@@ -76,6 +77,7 @@ expect "(press 'c' to cancel): "
 send "c\n"
 interact
 __EOD__
+        set -eu
 
     else
         LogError "Port 443:tcp already used. Please stop daemon using port 443:tcp."
