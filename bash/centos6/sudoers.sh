@@ -22,6 +22,8 @@ v_script_name="centos6/sudoers.sh"
         LogError "\$1 needs Linux local user."
         exit 1
     fi
+    
+    USERNAME="$1"
 
     usermod -G wheel "${USERNAME}"
     LogNotice "Modify \"${USERNAME}\" group \"wheel\"."
