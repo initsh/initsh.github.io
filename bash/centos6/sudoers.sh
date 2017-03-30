@@ -17,7 +17,7 @@ v_script_name="centos6/sudoers.sh"
     . <(curl -LRs "${v_github_dir}/check/args.sh")
 
     # check args
-    if [ -z "$(grep "^$1:" /etc/password)" ]
+    if [ -z "$(grep "^$1:" /etc/passwd)" ]
     then
         LogError "\$1 needs Linux local user."
         exit 1
