@@ -12,9 +12,8 @@ v_script_name="centos6/sudoers.sh"
     LogInfo "Start \"${v_script_name}\"."
 
     # checks
-    . <(curl -LRs "${v_github_dir}/check/centos7.sh")
-    . <(curl -LRs "${v_github_dir}/check/root.sh")
-    . <(curl -LRs "${v_github_dir}/check/args.sh")
+    curl -LRs "${v_github_dir}/check/root.sh" | . /dev/stdin
+    curl -LRs "${v_github_dir}/check/args.sh" | . /dev/stdin
 
     # check args
     if [ -z "$(grep "^$1:" /etc/passwd)" ]
