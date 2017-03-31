@@ -23,13 +23,18 @@ v_script_name="centos6/sudoers.sh"
     fi
     
     USERNAME="$1"
-
-    if [ -z "$(grep "^wheel:.*${USERNAME}" ${v_sudoers_d})" ]; then usermod -G wheel "${USERNAME}"; fi
-    LogNotice "Modify \"${USERNAME}\" group \"wheel\"."
+    if [ -z "$(grep "^wheel:.*${USERNAME}" ${v_sudoers_d})" ]
+    then
+        usermod -G wheel "${USERNAME}"
+        LogNotice "Modify \"${USERNAME}\" group \"wheel\"."
+    fi
     
     v_sudoers_d="/etc/sudoers.d/${USERNAME}"
-    if [ -f "${v_sudoers_d}" ]; then echo -e "# $(date +%Y%m%d) #\n${USERNAME} ALL=(ALL) NOPASSWD: ALL" >"${v_sudoers_d}"; fi
-    LogNotice "Generate sudoers.d file(${v_sudoers_d})."
+    if [ -f "${v_sudoers_d}" ]
+    then
+        echo -e "# $(date +%Y%m%d) #\n${USERNAME} ALL=(ALL) NOPASSWD: ALL" >"${v_sudoers_d}"
+        LogNotice "Generate sudoers.d file(${v_sudoers_d})."
+    fi
 
     LogInfo "End \"${v_script_name}\"."
 } >>"${v_log_file}"
