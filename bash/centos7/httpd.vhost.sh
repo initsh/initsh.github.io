@@ -6,7 +6,7 @@ v_github_dir="raw.githubusercontent.com/initsh/initsh.github.io/master/bash"
 v_script_name="centos7/httpd.vhost.sh"
 
 # functions
-curl -LRs "${v_github_dir}/functions.sh" | . /dev/stdin
+source <(curl -LRs "${v_github_dir}/functions.sh")
 
 {
     LogInfo "Start \"${v_script_name}\"."
