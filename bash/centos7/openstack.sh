@@ -23,18 +23,23 @@ v_script_name="centos7/httpd.vhost.sh"
         exit 1
     fi
     
+    # variables
+    v_fqdn="$1"
+    
     # requirement
     curl -LRs "${v_github_dir}/centos7/selinux.sh"  | bash /dev/stdin
     curl -LRs "${v_github_dir}/centos7/tz.tokyo.sh" | bash /dev/stdin
     curl -LRs "${v_github_dir}/centos7/utils.sh"    | bash /dev/stdin
     curl -LRs "${v_github_dir}/centos7/epel.sh"     | bash /dev/stdin
     
-    # variables
-    v_fqdn="$1"
-    
-    hostnamectl set-hostname "${v_fqdn}"
+    # hostname
     sed -r -e 's/(127\.0\.0\.1[ ]+)/\1'"${v_fqdn}"' /g' /etc/hosts -i
+    hostnamectl set-hostname "${v_fqdn}"
     
+    # locale
+    localectl set-locale en_US.UTF-8
+    
+    # rdp - packstack
     # https://www.rdoproject.org/install/quickstart/
     systemctl disable firewalld
     systemctl stop firewalld
