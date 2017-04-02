@@ -37,7 +37,8 @@ v_script_name="centos7/httpd.vhost.sh"
     hostnamectl set-hostname "${v_fqdn}"
     
     # locale
-    localectl set-locale en_US.utf8
+    localectl set-locale LANG=en_US.utf8
+    localectl set-locale LC_ALL=en_US.utf8
     
     # rdp - packstack
     # https://www.rdoproject.org/install/quickstart/
