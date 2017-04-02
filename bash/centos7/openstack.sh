@@ -33,24 +33,38 @@ source <(curl -LRs "${v_github_dir}/functions.sh")
     curl -LRs "${v_github_dir}/centos7/epel.sh"     | bash /dev/stdin
     
     # hostname
+    LogInfo "Set hostname."
     sed -r -e 's/(127\.0\.0\.1[ ]+)/\1'"${v_fqdn}"' /g' /etc/hosts -i
     hostnamectl set-hostname "${v_fqdn}"
     
     # locale
+    LogInfo "Set locale."
     localectl set-locale LANG=en_US.utf8
     echo -e "# $(date +%Y%m%d) #\nLANG=en_US.utf-8\nLC_ALL=en_US.utf-8" >/etc/environment
     
     # rdp - packstack
-    v_series=ocata
     # https://www.rdoproject.org/install/quickstart/
+    v_series=ocata
+    
+    LogInfo "disable firewalld."
     systemctl disable firewalld                         2>&1
     systemctl stop firewalld                            2>&1
+    
+    LogInfo "disable NetworkManager."
     systemctl disable NetworkManager                    2>&1
     systemctl stop NetworkManager                       2>&1
+    
+    LogInfo "enable network."
     systemctl enable network                            2>&1
     systemctl start network                             2>&1
+    
+    LogInfo "bash# yum install -y centos-release-openstack-${v_series}"
     yum install -y centos-release-openstack-${v_series} 2>&1
+    
+    LogInfo "bash# yum update -y"
     yum update -y                                       2>&1
+    
+    LogInfo "bash# yum install -y openstack-packstack"
     yum install -y openstack-packstack                  2>&1
     
     LogNotice "Ref: Packstack quickstart - RDO"
