@@ -72,6 +72,7 @@ source <(curl -LRs "${v_github_dir}/functions.sh")
     
     LogNotice "Ref: Neutron with existing external network - RDO"
     LogNotice "Url: https://www.rdoproject.org/networking/neutron-with-existing-external-network/"
+    LogNotice "Cmd: packstack --allinone --provision-demo=n --os-neutron-ovs-bridge-mappings=extnet:br-ex --os-neutron-ovs-bridge-interfaces=br-ex:eth0 --os-neutron-ml2-type-drivers=vxlan,flat --use-epel=y"
     
     LogNotice "Please reboot for save settings."
     
