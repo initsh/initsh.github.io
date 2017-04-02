@@ -56,6 +56,9 @@ curl -LRs "${v_github_dir}/functions.sh" | . /dev/stdin
     LogNotice "Ref: Packstack quickstart - RDO"
     LogNotice "Url: https://www.rdoproject.org/install/quickstart/"
     
+    LogNotice "Ref: Neutron with existing external network - RDO"
+    LogNotice "Url: https://www.rdoproject.org/networking/neutron-with-existing-external-network/"
+    
     LogNotice "Please reboot for save settings."
     
     LogInfo "End \"${v_script_name}\"."
