@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Edit 20170329
+# Edit 20170402
 set -eu
 v_github_dir="raw.githubusercontent.com/initsh/initsh.github.io/master/bash"
-v_script_name="centos7/httpd.vhost.sh"
+v_script_name="centos7/openstack.sh"
 
 # functions
 . <(curl -LRs "${v_github_dir}/functions.sh")
@@ -42,15 +42,15 @@ v_script_name="centos7/httpd.vhost.sh"
     
     # rdp - packstack
     # https://www.rdoproject.org/install/quickstart/
-    systemctl disable firewalld
-    systemctl stop firewalld
-    systemctl disable NetworkManager
-    systemctl stop NetworkManager
-    systemctl enable network
-    systemctl start network
-    yum install -y centos-release-openstack-ocata
-    yum update -y
-    yum install -y openstack-packstack
+    systemctl disable firewalld                     2>&1
+    systemctl stop firewalld                        2>&1
+    systemctl disable NetworkManager                2>&1
+    systemctl stop NetworkManager                   2>&1
+    systemctl enable network                        2>&1
+    systemctl start network                         2>&1
+    yum install -y centos-release-openstack-ocata   2>&1
+    yum update -y                                   2>&1
+    yum install -y openstack-packstack              2>&1
     
     LogNotice "Ref: Packstack quickstart - RDO"
     LogNotice "Url: https://www.rdoproject.org/install/quickstart/"
