@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Edit 20170329
+# Edit 20170403
 set -eu
 v_github_dir="raw.githubusercontent.com/initsh/initsh.github.io/master/bash"
 v_script_name="centos7/httpd.vhost.sh"
