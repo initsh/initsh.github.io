@@ -6,15 +6,15 @@ v_github_dir="raw.githubusercontent.com/initsh/initsh.github.io/master/bash"
 v_script_name="centos7/httpd.vhost.sh"
 
 # functions
-. <(curl -LRs "${v_github_dir}/functions.sh")
+curl -LRs "${v_github_dir}/functions.sh" | . /dev/stdin
 
 {
     LogInfo "Start \"${v_script_name}\"."
 
     # checks
-    . <(curl -LRs "${v_github_dir}/check/centos7.sh")
-    . <(curl -LRs "${v_github_dir}/check/root.sh")
-    . <(curl -LRs "${v_github_dir}/check/args.sh")
+    curl -LRs "${v_github_dir}/check/centos7.sh" | . /dev/stdin
+    curl -LRs "${v_github_dir}/check/root.sh"    | . /dev/stdin
+    curl -LRs "${v_github_dir}/check/args.sh"    | . /dev/stdin
 
     # install httpd
     if ! rpm --quiet -q openssl
@@ -54,7 +54,7 @@ v_script_name="centos7/httpd.vhost.sh"
     # edit conf
     v_httpd_conf="/etc/httpd/conf/httpd.conf"
     LogInfo "Edit ${v_httpd_conf}"
-    [ -f ${v_httpd_conf} ] || touch ${v_httpd_conf}
+    if [ ! -f ${v_httpd_conf} ]; then touch ${v_httpd_conf}; fi
     cp -p "${v_httpd_conf}" "${v_httpd_conf}${v_backup_suffix}"
     # edit edit edit edit
     # if no diff, overwrite file.
