@@ -6,15 +6,15 @@ v_github_dir="raw.githubusercontent.com/initsh/initsh.github.io/master/bash"
 v_script_name="centos7/openstack.sh"
 
 # functions
-. <(curl -LRs "${v_github_dir}/functions.sh")
+source <(curl -LRs "${v_github_dir}/functions.sh")
 
 {
     LogInfo "Start \"${v_script_name}\"."
 
     # checks
-    curl -LRs "${v_github_dir}/check/centos7.sh" | . /dev/stdin
-    curl -LRs "${v_github_dir}/check/root.sh"    | . /dev/stdin
-    curl -LRs "${v_github_dir}/check/args.sh"    | . /dev/stdin
+    source <(curl -LRs "${v_github_dir}/check/centos7.sh")
+    source <(curl -LRs "${v_github_dir}/check/root.sh")
+    source <(curl -LRs "${v_github_dir}/check/args.sh")
     
     # check $1 fqdn
     if [ -z "$(echo "$1" | egrep "^[0-9a-zA-Z\-\.]*[0-9a-zA-Z\-]+\.[a-z]+")" ]
