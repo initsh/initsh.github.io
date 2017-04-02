@@ -41,16 +41,17 @@ curl -LRs "${v_github_dir}/functions.sh" | . /dev/stdin
     echo -e "# $(date +%Y%m%d) #\nLANG=en_US.utf-8\nLC_ALL=en_US.utf-8" >/etc/environment
     
     # rdp - packstack
+    v_series=ocata
     # https://www.rdoproject.org/install/quickstart/
-    systemctl disable firewalld                     2>&1
-    systemctl stop firewalld                        2>&1
-    systemctl disable NetworkManager                2>&1
-    systemctl stop NetworkManager                   2>&1
-    systemctl enable network                        2>&1
-    systemctl start network                         2>&1
-    yum install -y centos-release-openstack-ocata   2>&1
-    yum update -y                                   2>&1
-    yum install -y openstack-packstack              2>&1
+    systemctl disable firewalld                         2>&1
+    systemctl stop firewalld                            2>&1
+    systemctl disable NetworkManager                    2>&1
+    systemctl stop NetworkManager                       2>&1
+    systemctl enable network                            2>&1
+    systemctl start network                             2>&1
+    yum install -y centos-release-openstack-${v_series} 2>&1
+    yum update -y                                       2>&1
+    yum install -y openstack-packstack                  2>&1
     
     LogNotice "Ref: Packstack quickstart - RDO"
     LogNotice "Url: https://www.rdoproject.org/install/quickstart/"
