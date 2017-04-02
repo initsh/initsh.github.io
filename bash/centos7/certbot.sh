@@ -19,12 +19,12 @@ v_script_name="centos7/certbot.sh"
     # check args
     if [ -z "$(echo "$1" | egrep '[^@]+@[^@\.]+\.[^@\.]+')" ]
     then
-        LogError "\$1 needs e-mail address."
+        LogError "\$1 expect e-mail address."
         exit 1
     fi
     if [ -z "$(echo "$2" | egrep "^[0-9a-zA-Z\-]+\.[a-z]+")" ]
     then
-        LogError "\$2 needs web server's fqdn."
+        LogError "\$2 expect web server's fqdn."
         exit 1
     fi
 
