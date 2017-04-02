@@ -38,7 +38,7 @@ v_script_name="centos7/httpd.vhost.sh"
     
     # locale
     localectl set-locale LANG=en_US.utf8
-    localectl set-locale LC_ALL=en_US.utf8
+    echo -e "# $(date +%Y%m%d) #\nLANG=en_US.utf-8\nLC_ALL=en_US.utf-8" >/etc/environment
     
     # rdp - packstack
     # https://www.rdoproject.org/install/quickstart/
