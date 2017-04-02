@@ -51,8 +51,8 @@ v_script_name="centos7/httpd.vhost.sh"
     yum update -y
     yum install -y openstack-packstack
     
-    LogNotice "Url: Packstack quickstart - RDO"
-    LogNotice "Ref: https://www.rdoproject.org/install/quickstart/"
+    LogNotice "Ref: Packstack quickstart - RDO"
+    LogNotice "Url: https://www.rdoproject.org/install/quickstart/"
     
     LogInfo "End \"${v_script_name}\"."
 } >>"${v_log_file}"
