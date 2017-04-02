@@ -12,9 +12,9 @@ v_script_name="centos7/httpd.vhost.sh"
     LogInfo "Start \"${v_script_name}\"."
 
     # checks
-    . <(curl -LRs "${v_github_dir}/check/centos7.sh")
-    . <(curl -LRs "${v_github_dir}/check/root.sh")
-    . <(curl -LRs "${v_github_dir}/check/args.sh")
+    curl -LRs "${v_github_dir}/check/centos7.sh" | . /dev/stdin
+    curl -LRs "${v_github_dir}/check/root.sh"    | . /dev/stdin
+    curl -LRs "${v_github_dir}/check/args.sh"    | . /dev/stdin
     
     # check $1 fqdn
     if [ ! -d "$1" -o -z "$(echo "$1" | egrep "^[0-9a-zA-Z\-]+\.[a-z]+")" ]
@@ -23,6 +23,13 @@ v_script_name="centos7/httpd.vhost.sh"
         exit 1
     fi
     
+    # requirement
+    curl -LRs "${v_github_dir}/centos7/selinux.sh"  | bash /dev/stdin
+    curl -LRs "${v_github_dir}/centos7/tz.tokyo.sh" | bash /dev/stdin
+    curl -LRs "${v_github_dir}/centos7/utils.sh"    | bash /dev/stdin
+    curl -LRs "${v_github_dir}/centos7/epel.sh"     | bash /dev/stdin
+    
+    # variables
     v_fqdn="$1"
     
     hostnamectl set-hostname "${v_fqdn}"
