@@ -17,7 +17,7 @@ v_script_name="centos7/httpd.vhost.sh"
     curl -LRs "${v_github_dir}/check/args.sh"    | . /dev/stdin
     
     # check $1 fqdn
-    if [ ! -d "$1" -o -z "$(echo "$1" | egrep "^[0-9a-zA-Z\-]+\.[a-z]+")" ]
+    if [ ! -d "$1" -o -z "$(echo "$1" | egrep "^[0-9a-zA-Z\-\.]*[0-9a-zA-Z\-]+\.[a-z]+")" ]
     then
         LogError "\$1 expect fqdn."
         exit 1
