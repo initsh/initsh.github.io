@@ -55,6 +55,8 @@ v_script_name="centos7/httpd.vhost.sh"
     LogNotice "Ref: Packstack quickstart - RDO"
     LogNotice "Url: https://www.rdoproject.org/install/quickstart/"
     
+    LogNotice "Please reboot for save settings."
+    
     LogInfo "End \"${v_script_name}\"."
 } >>"${v_log_file}"
 
