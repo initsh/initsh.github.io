@@ -4,6 +4,8 @@
 
 1. Check **`Hyper-V`**
 
+1. **<kbd>Windows</kbd> + <kbd>R</kbd> => `shutdown /r /t 0`**
+
 1. **<kbd>Windows</kbd> + <kbd>R</kbd> => `vertmgmt.msc`**
 
 1. **`仮想スイッチマネージャー` => `内部` => `仮想スイッチの作成 [vSwitch,Hyper-V]`**
