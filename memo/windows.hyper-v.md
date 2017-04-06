@@ -4,7 +4,7 @@
 
 1. Check **`Hyper-V`**
 
-1. **<kbd>Windows</kbd> + <kbd>R</kbd> => `shutdown /r /t 0`**
+1. Reboot **<kbd>Windows</kbd> + <kbd>R</kbd> => `shutdown /r /t 0`**
 
 1. **<kbd>Windows</kbd> + <kbd>R</kbd> => `vertmgmt.msc`**
 
