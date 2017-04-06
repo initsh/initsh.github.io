@@ -2,7 +2,7 @@
 
 1. **<kbd>Windows</kbd> + <kbd>R</kbd> => `OptionalFeatures`**
 
-1. Check Hyper-V
+1. Check **Hyper-V**
 
 1. **<kbd>Windows</kbd> + <kbd>R</kbd> => `ncpa.cpl`**
 
