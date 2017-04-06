@@ -19,6 +19,7 @@ mstsc /v:127.0.0.1:33389
 ### `cmd`
 ```bat
 cmd /k ipconfig
+cmd /k route -p add 192.168.0.0 mask 255.255.0.0 192.168.254.254 metric 10
 ```
 ### `shutdown`
 ```
