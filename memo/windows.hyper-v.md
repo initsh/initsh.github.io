@@ -2,9 +2,9 @@
 
 1. **<kbd>Windows</kbd> + <kbd>R</kbd> => `OptionalFeatures`**
 
-1. Check => **`Hyper-V`**
+1. [Check] **`Hyper-V`**
 
-1. Reboot => **<kbd>Windows</kbd> + <kbd>R</kbd> => `shutdown /r /t 0`**
+1. [Reboot] **<kbd>Windows</kbd> + <kbd>R</kbd> => `shutdown /r /t 0`**
 
 1. **<kbd>Windows</kbd> + <kbd>R</kbd> => `vertmgmt.msc`**
 
@@ -12,7 +12,7 @@
 
 1. **<kbd>Windows</kbd> + <kbd>R</kbd> => `ncpa.cpl`**
 
-1. **`NIC右クリック`** => **`プロパティ(R)`** => タブ: **`共有`** => Check: **`ネットワークの他のユーザーに、このコンピュータのインターネット接続をとおしての接続を許可する(N)`** => **`ホームネットワーク接続(H):`** **`vEthernet`** => **`OK`**
+1. **`NIC右クリック`** => **`プロパティ(R)`** => [タブ] **`共有`** => [Check] **`ネットワークの他のユーザーに、このコンピュータのインターネット接続をとおしての接続を許可する(N)`** => **`ホームネットワーク接続(H):`** **`vEthernet`** => **`OK`**
 
 
 
