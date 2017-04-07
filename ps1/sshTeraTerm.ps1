@@ -20,11 +20,12 @@
 [System.String] $tz = Get-Date -Format zzz
 
 # Directory
-[System.String] $ssh_dir = $Env:Userprofile + "\GoogleDrive\ssh" # 作業ディレクトリ
+[System.String] $base_dir = $Env:Userprofile + "\GoogleDrive" # 作業ディレクトリ
+[System.String] $ssh_dir = $base_dir + "\ssh" # 作業ディレクトリ
 [System.String] $log_dir = $ssh_dir + "\log" # teratermログ出力ディレクトリ
 [System.String] $key_dir = $ssh_dir + "\key" # 秘密鍵設置ディレクトリ
 
-[System.String] $ps1_dir = $Env:Userprofile + "\GoogleDrive\ps1" # powershell格納ディレクトリ
+[System.String] $ps1_dir = $base_dir + "\ps1" # powershell格納ディレクトリ
 # Csv = Hostname,Port,Username,AuthType,Value,Alias
 [System.String] $csv_file = $ps1_dir + "\sshTeraTerm.csv" # 任意の場所にログイン情報を記載したCSVを設置
 
@@ -74,17 +75,9 @@ if ( $args )
     }
     else 
     {
-        # Compose Options
-        [System.String] $opt_dir = "/FD=" + $ssh_dir
-        [System.String] $opt_log = "/L=" + $ssh_log
-
-        [System.Array] $opt_array = @($opt_dir,$opt_log,"/ssh-v","/LA=J")
-
-        # Execute $ssh_client
+        # Write-Host Alias
         Import-Csv $csv_file | Select-Object Alias,Hostname,Username | Write-Host
-        #Start-Process -FilePath $ssh_client -ArgumentList $opt_array
-        Start-Process -FilePath $ssh_client -ArgumentList $opt_array -Wait
-        Start-Process -FilePath notepad -ArgumentList $ssh_log
+        [Console]::ReadKey() | Out-Null
     }
 }
 else
