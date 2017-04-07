@@ -1,6 +1,7 @@
 @echo off
 
 rem ### sshTeraTerm.ps1 インストール＆実行バッチ
+rem ### 前提条件: teratermがインストールされていること
 
 set "SSH_POWERSHELL_URL=https://raw.githubusercontent.com/initsh/initsh.github.io/master/ps1/sshTeraTerm.ps1"
 set "SSH_POWERSHELL_DIR=%USERPROFILE%\GoogleDrive\ps1"
