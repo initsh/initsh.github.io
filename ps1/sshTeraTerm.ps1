@@ -70,8 +70,11 @@ if ( $args )
         # Execute $ssh_client
         #Start-Process -FilePath $ssh_client -ArgumentList $opt_array
         Start-Process -FilePath $ssh_client -ArgumentList $opt_array -Wait
-        Set-ItemProperty -path $ssh_log -name Attributes -value Readonly
-        Start-Process -FilePath notepad -ArgumentList $ssh_log
+        if (Test-Path -Path $ssh_log)
+        {
+            Set-ItemProperty -Path $ssh_log -Name Attributes -Value Readonly
+            Start-Process -FilePath notepad -ArgumentList $ssh_log
+        }
     }
     else 
     {
