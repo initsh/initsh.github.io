@@ -73,18 +73,13 @@ if ( $args )
         # Execute $ssh_client
         #Start-Process -FilePath $ssh_client -ArgumentList $opt_array
         $ssh_process = Start-Process -FilePath $ssh_client -ArgumentList $opt_array -Wait -PassThru
-        # ログファイルを読み込み専用にする
-        Set-ItemProperty -Path $ssh_log -Name Attributes -Value Readonly
-        # logファイルが存在 かつ TeraTermが異常終了
-        #  => 既に確立済みのsshセッションが、ネットワーク切断等により強制終了した場合
-        if ((Test-Path -Path $ssh_log) -And ($ssh_process.ExitCode -ne 0))
+        Set-ItemProperty -Path $ssh_log -Name Attributes -Value Readonly # ログファイルを読み込み専用にする
+        if ((Test-Path -Path $ssh_log) -And ($ssh_process.ExitCode -ne 0)) # logファイルが存在 かつ TeraTermが異常終了 => 既に確立済みのsshセッションが、ネットワーク切断等により強制終了した場合
         {
-            # ログファイルをメモ帳で開く
-            Start-Process -FilePath notepad -ArgumentList $ssh_log
+            Start-Process -FilePath notepad -ArgumentList $ssh_log # ログファイルをメモ帳で開く
         }
     }
-    # CSV内のAliasの値と、渡された引数とで、一致するものが存在しない場合
-    else 
+    else # CSV内のAliasの値と、渡された引数とで、一致するものが存在しない場合
     {
         Import-Csv $csv_file | Select-Object Alias,Hostname,Username | Write-Host
         [Console]::ReadKey() | Out-Null
