@@ -26,7 +26,10 @@
 [System.String] $key_dir = $ssh_dir + "\key" # 秘密鍵設置ディレクトリ
 
 [System.String] $ps1_dir = $base_dir + "\ps1" # powershell格納ディレクトリ
-# Csv = Hostname,Port,Username,AuthType,Value,Alias
+# sshTeraTerm.csv
+# |#Hostname,Port,Username,AuthType,Value,Alias
+# |localhost,22,root,publickey,id_rsa,root@localhost
+# |localhost,22,root,password,pasuwa-do,root@localhost
 [System.String] $csv_file = $ps1_dir + "\sshTeraTerm.csv" # 任意の場所にログイン情報を記載したCSVを設置
 
 # Get full path (ttermpro.exe)
@@ -69,8 +72,8 @@ if ( $args )
 
         # Execute $ssh_client
         #Start-Process -FilePath $ssh_client -ArgumentList $opt_array
-        Start-Process -FilePath $ssh_client -ArgumentList $opt_array -Wait
-        if (Test-Path -Path $ssh_log)
+        $ssh_process = Start-Process -FilePath $ssh_client -ArgumentList $opt_array -Wait -PassThru
+        if ((Test-Path -Path $ssh_log) -And $ssh_process.ExitCode -ne 0)
         {
             Set-ItemProperty -Path $ssh_log -Name Attributes -Value Readonly
             Start-Process -FilePath notepad -ArgumentList $ssh_log
