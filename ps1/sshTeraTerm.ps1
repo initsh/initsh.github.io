@@ -4,6 +4,7 @@
 # 
 # - Contents
 #     Simplify SSH Connect by Tera Term.
+#     <Windows> + <R> => ssh user@remotehost
 # 
 # - Revision
 #     2016-12-28 created.
@@ -28,8 +29,8 @@
 [System.String] $ps1_dir = $base_dir + "\ps1" # powershell格納ディレクトリ
 # sshTeraTerm.csv
 # |#Hostname,Port,Username,AuthType,Value,Alias
-# |localhost,22,root,publickey,id_rsa,root@localhost
-# |localhost,22,root,password,pasuwa-do,root@localhost
+# |localhost,22,root,publickey,id_rsa,user@remotehost
+# |localhost,22,root,password,pasuwa-do,user@remotehost
 [System.String] $csv_file = $ps1_dir + "\sshTeraTerm.csv" # 任意の場所にログイン情報を記載したCSVを設置
 
 # Get full path (ttermpro.exe)
