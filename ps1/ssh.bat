@@ -15,6 +15,6 @@ if not exist "%SSH_POWERSHELL%" bitsadmin.exe /TRANSFER get_sshTeraTerm "%SSH_PO
 
 start powershell.exe "%SSH_POWERSHELL%" %*
 
-move "%~dp0%~nx0" "%USERPROFILE%" 1>nul
+move "%~dp0%~nx0" "%PATH_DIR%" 1>nul
 
 rem # EOF
