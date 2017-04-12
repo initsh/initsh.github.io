@@ -69,7 +69,7 @@ if ( $args )
         [System.String] $opt_dir = "/FD=" + $ssh_dir
         [System.String] $opt_log = "/L=" + $ssh_log
 
-        [System.String] $opt_array = @($opt_host,$opt_user,$opt_auth,$opt_value,$opt_dir,$opt_log,"/ssh-v","/LA=J")
+        [System.Array] $opt_array = @($opt_host,$opt_user,$opt_auth,$opt_value,$opt_dir,$opt_log,"/ssh-v","/LA=J")
 
         # Execute $ssh_client
         #Start-Process -FilePath $ssh_client -ArgumentList $opt_array
