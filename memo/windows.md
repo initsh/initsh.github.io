@@ -6,6 +6,12 @@ $Env:Path += ";%USERPROFILE%\AppData\Roaming\Python\Python35\Scripts;"
 
 
 ## System Files
+
+### `regedit`
+```
+HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+```
+
 ### `hosts`
 ```PowerShell
 %SYSTEMROOT%\system32\drivers\etc
