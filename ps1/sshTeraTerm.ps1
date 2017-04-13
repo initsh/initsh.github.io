@@ -36,11 +36,9 @@
 # Get full path (ttermpro.exe)
 [System.String] $ssh_client = Get-ChildItem -recurse "C:\Program Files*\teraterm" | Where-Object { $_.Name -match "ttermpro" } | ForEach-Object { $_.FullName } # teratemrインストールディレクトリからttermpro.exeを検索
 if ( $ssh_client -notlike "*ttermpro.exe" ) {
-    Write-Output "[ERROR]: ttermpro.exe not found in `"C:\Program Files*`"."
-    Start-Sleep 5
-    exit 1
+    Write-Output "$(get-date -Format yyyy-MM-ddThh:mm:sszzz) [ERROR]: ttermpro.exe not found in `"C:\Program Files*`"."
+    [Console]::ReadKey() | Out-Null
 }
-
 
 if ( $args )
 {
@@ -62,7 +60,7 @@ if ( $args )
         {
             [System.String] $opt_value = "/passwd=" + $csv_data[0].Value
         }
-        elseif ( $csv_data[0].AuthType  -eq "publickey" )
+        elseif ( $csv_data[0].AuthType -eq "publickey" )
         {
             [System.String] $opt_value = "/keyfile=" + $key_dir + "\" + $csv_data[0].Value
         }
@@ -72,17 +70,18 @@ if ( $args )
         [System.Array] $opt_array = @($opt_host,$opt_user,$opt_auth,$opt_value,$opt_dir,$opt_log,"/ssh-v","/LA=J")
 
         # Execute $ssh_client
-        #Start-Process -FilePath $ssh_client -ArgumentList $opt_array
-        $ssh_process = Start-Process -FilePath $ssh_client -ArgumentList $opt_array -Wait -PassThru
+        $ssh_process = Start-Process -FilePath $ssh_client -ArgumentList $opt_array -PassThru -Wait
         Set-ItemProperty -Path $ssh_log -Name Attributes -Value Readonly # ログファイルを読み込み専用にする
-        if ((Test-Path -Path $ssh_log) -And ($ssh_process.ExitCode -ne 0)) # logファイルが存在 かつ TeraTermが異常終了 => 既に確立済みのsshセッションが、ネットワーク切断等により強制終了した場合
+        Get-Content -Path $ssh_log # ログファイルの内容を表示
+        if ($ssh_process.ExitCode -ne 0) # TeraTermが異常終了 => 既に確立済みのsshセッションが、ネットワーク切断等により強制終了した場合
         {
-            Start-Process -FilePath notepad -ArgumentList $ssh_log # ログファイルをメモ帳で開く
+            Write-Output "$(get-date -Format yyyy-MM-ddThh:mm:sszzz) [ERROR]: ttermpro.exe exit code NOT equal 0."
         }
+        [Console]::ReadKey() | Out-Null
     }
     else # CSV内のAliasの値と、渡された引数とで、一致するものが存在しない場合
     {
-        Import-Csv $csv_file | Select-Object Alias,Hostname,Username | Write-Host
+        Import-Csv $csv_file | Where-Object { ($_.Alias) } | Select-Object Username,Hostname,Alias | Format-Table -AutoSize
         [Console]::ReadKey() | Out-Null
     }
 }
