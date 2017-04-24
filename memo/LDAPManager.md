@@ -8,5 +8,4 @@ Ref: [CentOS6 OpenLDAPのインストールと基本設定](http://www.unix-powe
 
 
 
-Ref: http://www.unix-power.net/linux/openldap.html
-Ref: http://www.unix-power.net/linux/openldap_schema.html
+Ref: [CentOS6 OpenLDAPのスキーマ管理](http://www.unix-power.net/linux/openldap_schema.html)
