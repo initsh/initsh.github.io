@@ -83,7 +83,7 @@ if (-Not($currentHostname -eq $addsHostname))
 ################
 Import-Module ServerManager
 Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Install AD-Domain-Services." | Tee-Object -Append $logFile
-$_tmp = Install-WindowsFeature -IncludeManagementTools -Restart AD-Domain-Services
+$_tmp = Install-WindowsFeature -IncludeManagementTools -Restart AD-Domain-Services 2>&1 | Tee-Object -Append $logFile
 Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:       Success: " + $_tmp.Success)       | Tee-Object -Append $logFile
 Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: RestartNeeded: " + $_tmp.RestartNeeded) | Tee-Object -Append $logFile
 Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:      ExitCode: " + $_tmp.ExitCode)      | Tee-Object -Append $logFile
@@ -108,7 +108,8 @@ $_tmp = Install-ADDSForest `
     -InstallDns:$addsInstallDns `
     -CreateDnsDelegation:$addsCreateDnsDelegation `
     -NoRebootOnCompletion:$addsNoRebootOnCompletion `
-    -Force:$addsForce
+    -Force:$addsForce `
+    2>&1 | Tee-Object -Append $logFile
 Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:       Success: " + $_tmp.Success)       | Tee-Object -Append $logFile
 Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: RestartNeeded: " + $_tmp.RestartNeeded) | Tee-Object -Append $logFile
 Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:      ExitCode: " + $_tmp.ExitCode)      | Tee-Object -Append $logFile
