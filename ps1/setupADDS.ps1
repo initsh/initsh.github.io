@@ -4,7 +4,7 @@
 # 
 # - Contents
 #     Setup Active Directory Domain Services and Domain Controller.
-#     C:\> Invoke-WebRequest -Uri https://initsh.github.io/ps1/setupADDS.ps1 | powershell.exe -Command -
+#     C:\> Invoke-RestMethod https://initsh.github.io/ps1/setupADDS.ps1 | powershell.exe -Command -
 # 
 # - Revision
 #     2017-05-01 created.
