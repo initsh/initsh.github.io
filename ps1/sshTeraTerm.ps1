@@ -38,7 +38,7 @@
 ### teratemrインストールディレクトリからttermpro.exeを検索し、ttermpro.exeのフルパスを取得する
 [System.String] $ssh_client = Get-ChildItem -recurse "C:\Program Files*\teraterm" | Where-Object { $_.Name -match "ttermpro" } | ForEach-Object { $_.FullName }
 ### 
-if (-Not(Test-Path -Path $ssh_client))
+if (-Not $? -Or -Not(Test-Path -Path $ssh_client))
 {
     Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [ERROR]: ttermpro.exe not found in `"C:\Program Files*`"."
     [Console]::ReadKey() | Out-Null
@@ -93,12 +93,16 @@ else
     [System.Array] $opt_array = @($opt_dir,$opt_log,"/ssh-v","/LA=J")
 }
 
-# Execute $ssh_client
+### teratermを実行
 $ssh_process = Start-Process -FilePath $ssh_client -ArgumentList $opt_array -PassThru -Wait
-Set-ItemProperty -Path $ssh_log -Name Attributes -Value Readonly # ログファイルを読み込み専用にする
-Get-Content -Path $ssh_log # ログファイルの内容を表示
+### teratermログファイルの属性を読み込み専用に変更
+Set-ItemProperty -Path $ssh_log -Name Attributes -Value Readonly
+### teratermログファイルの内容を表示(個人的な趣味)
+Get-Content -Path $ssh_log
+### teratermログファイルの情報を画面に出力
 Write-Output "$(Get-Date -Format yyyy-MM-ddThh:mm:sszzz) [INFO]: Log file: $ssh_log"
-if ($ssh_process.ExitCode -ne 0) # TeraTermが異常終了 => 既に確立済みのsshセッションが、ネットワーク切断等により強制終了した場合
+### TeraTermが異常終了 => 既に確立済みのsshセッションが、ネットワーク切断等により強制終了した場合
+if ($ssh_process.ExitCode -ne 0)
 {
     Write-Output "$(Get-Date -Format yyyy-MM-ddThh:mm:sszzz) [ERROR]: ttermpro.exe exit code NOT equal 0."
 }
