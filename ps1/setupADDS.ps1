@@ -83,11 +83,7 @@ if (-Not($currentHostname -eq $addsHostname))
 ################
 Import-Module ServerManager
 Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Install AD-Domain-Services." | Tee-Object -Append $logFile
-$_tmp = Install-WindowsFeature -IncludeManagementTools -Restart AD-Domain-Services 2>&1 | Tee-Object -Append $logFile
-Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:       Success: " + $_tmp.Success)       | Tee-Object -Append $logFile
-Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: RestartNeeded: " + $_tmp.RestartNeeded) | Tee-Object -Append $logFile
-Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:      ExitCode: " + $_tmp.ExitCode)      | Tee-Object -Append $logFile
-Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: FeatureResult: " + $_tmp.FeatureResult) | Tee-Object -Append $logFile
+Install-WindowsFeature -IncludeManagementTools -Restart AD-Domain-Services 2>&1 | Tee-Object -Append $logFile
 
 
 ################
@@ -96,7 +92,7 @@ Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: FeatureResult:
 Import-Module ADDSDeployment
 # 新しいフォレスト及びドメインコントローラーをセットアップ
 Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Setup New Forest and Domain Controller." | Tee-Object -Append $logFile
-$_tmp = Install-ADDSForest `
+Install-ADDSForest `
     -DomainName $addsDomainName `
     -DomainNetbiosName $addsDomainNetbiosName `
     -ForestMode $addsForestMode `
@@ -110,10 +106,6 @@ $_tmp = Install-ADDSForest `
     -NoRebootOnCompletion:$addsNoRebootOnCompletion `
     -Force:$addsForce `
     2>&1 | Tee-Object -Append $logFile
-Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:       Success: " + $_tmp.Success)       | Tee-Object -Append $logFile
-Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: RestartNeeded: " + $_tmp.RestartNeeded) | Tee-Object -Append $logFile
-Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:      ExitCode: " + $_tmp.ExitCode)      | Tee-Object -Append $logFile
-Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: FeatureResult: " + $_tmp.FeatureResult) | Tee-Object -Append $logFile
 
 
 ################
