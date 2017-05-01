@@ -109,7 +109,7 @@ Install-ADDSForest `
 ################
 Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [NOTICE]: End script: $scriptBasename"
 Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [NOTICE]: Reboot."
-Stop-Transcript -Append $logFile
+Stop-Transcript
 
 
 # EOF
