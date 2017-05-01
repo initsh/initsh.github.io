@@ -40,13 +40,12 @@ $addsForce                = $True
 # Initialize
 ################
 # Initialize Variables for script
-$scriptBasename = "setupADDS"
-$logDir         = "C:"
-$logTranscript  = "$logDir\$scriptBasename" + ".transcript.log"
-$logFile        = "$logDir\$scriptBasename" + ".log"
-# Initialize Variables for Build-Parameter of Active Directory Domain Services Server
-$currentHostname          = [Net.Dns]::GetHostName()
-$addsAdminPasswordSecure  = ConvertTo-SecureString $addsAdminPassword -AsPlainText -Force
+$scriptBasename          = "setupADDS"
+$logDir                  = "C:"
+$logTranscript           = "$logDir\$scriptBasename" + ".transcript.log"
+$logFile                 = "$logDir\$scriptBasename" + ".log"
+$currentHostname         = [Net.Dns]::GetHostName()
+$addsAdminPasswordSecure = ConvertTo-SecureString $addsAdminPassword -AsPlainText -Force
 
 
 ################
