@@ -4,7 +4,7 @@
 # 
 # - Contents
 #     Setup Active Directory Domain Services and Domain Controller.
-#     C:\> Invoke-WebRequest -Uri https://initsh.github.io/ps1/setupADDS.ps1
+#     C:\> Invoke-WebRequest -Uri https://initsh.github.io/ps1/setupADDS.ps1 | powershell.exe -Command -
 # 
 # - Revision
 #     2017-05-01 created.
@@ -38,10 +38,8 @@ $addsForce                = $True
 # 初期化
 ################
 # スクリプトで利用する変数を初期化
-$script         = Get-Item $MyInvocation.MyCommand.Path
-$scriptDir      = $script.DirectoryName
-$scriptBasename = $script.Basename
-$logFile        = "$scriptDir\" + $scriptBasename + ".log"
+$scriptBasename = "setupADDS"
+$logFile        = "C:\" + $scriptBasename + ".log"
 # 一部設定に用いる変数を初期化
 $currentHostname          = [Net.Dns]::GetHostName()
 $addsAdminPasswordSecure  = (ConvertTo-SecureString $addsAdminPassword -AsPlainText -Force)
