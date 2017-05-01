@@ -80,7 +80,9 @@ if (-Not($currentHostname -eq $addsHostname))
 ################
 Import-Module ServerManager
 Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [NOTICE]: Install AD-Domain-Services."
-Install-WindowsFeature -IncludeManagementTools -Restart AD-Domain-Services
+$_tmp = Install-WindowsFeature -IncludeManagementTools -Restart AD-Domain-Services
+Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:   Success:" + $_tmp.Success
+Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Exit Code:" + $_tmp.{Exit Code}
 
 
 ################
@@ -89,7 +91,7 @@ Install-WindowsFeature -IncludeManagementTools -Restart AD-Domain-Services
 Import-Module ADDSDeployment
 # 新しいフォレスト及びドメインコントローラーをセットアップ
 Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [NOTICE]: Setup New Forest and Domain Controller."
-Install-ADDSForest `
+$_tmp = Install-ADDSForest `
     -DomainName $addsDomainName `
     -DomainNetbiosName $addsDomainNetbiosName `
     -ForestMode $addsForestMode `
@@ -102,6 +104,8 @@ Install-ADDSForest `
     -CreateDnsDelegation:$addsCreateDnsDelegation `
     -NoRebootOnCompletion:$addsNoRebootOnCompletion `
     -Force:$addsForce
+Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:   Success:" + $_tmp.Success
+Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Exit Code:" + $_tmp.{Exit Code}
 
 
 ################
