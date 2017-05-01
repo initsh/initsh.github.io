@@ -60,7 +60,7 @@ Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Start script: $
 ################
 # Setup OS
 ################
-# RDP許可が未設定かつ、上記 OS設定 にて $addsAllowTsConnections が $True の場合
+# if Deny RDP and $addsAllowTsConnections (above Settings OS) equal $True
 if (((Get-WmiObject Win32_TerminalServiceSetting -Namespace root\cimv2\TerminalServices).AllowTsConnections -eq 0) -And $addsAllowTsConnections)
 {
     # Allow Remote Desktop
@@ -68,7 +68,7 @@ if (((Get-WmiObject Win32_TerminalServiceSetting -Namespace root\cimv2\TerminalS
     (Get-WmiObject Win32_TerminalServiceSetting -Namespace root\cimv2\TerminalServices).SetAllowTsConnections(1,1) | Out-Null
 }
 
-# 現在のホスト名が上記 設定 記載のものと異なる場合
+# if $currentHostname (above Initialize Variables) not equal $addsHostname (above Settings OS)
 if (-Not($currentHostname -eq $addsHostname))
 {
     # Change Hostname $currentHostname to $addsHostname and Reboot
