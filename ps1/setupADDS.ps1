@@ -71,8 +71,8 @@ if (-Not($currentHostname -eq $addsHostname))
     # ホスト名を変更し、再起動する
     Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Change Hostname $currentHostname to $addsHostname."
     Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Reboot."
-    Stop-Transcript -Append $logFile
     Rename-Computer -NewName $addsHostname -Force -Restart
+    Stop-Transcript
 }
 
 
