@@ -43,7 +43,7 @@ $scriptBasename = "setupADDS"
 $logFile        = "C:\" + $scriptBasename + ".log"
 # 一部設定に用いる変数を初期化
 $currentHostname          = [Net.Dns]::GetHostName()
-$addsAdminPasswordSecure  = (ConvertTo-SecureString $addsAdminPassword -AsPlainText -Force)
+$addsAdminPasswordSecure  = ConvertTo-SecureString $addsAdminPassword -AsPlainText -Force
 
 
 ################
@@ -98,7 +98,7 @@ Install-ADDSForest `
     -DatabasePath $addsDatabasePath `
     -LogPath $addsLogPath `
     -SysvolPath $addsSysvolPath `
-    -SafeModeAdministratorPassword $addsAdminPassword `
+    -SafeModeAdministratorPassword $addsAdminPasswordSecure `
     -InstallDns:$addsInstallDns `
     -CreateDnsDelegation:$addsCreateDnsDelegation `
     -NoRebootOnCompletion:$addsNoRebootOnCompletion `
