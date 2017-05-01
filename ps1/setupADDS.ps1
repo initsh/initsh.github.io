@@ -9,7 +9,6 @@
 # - Revision
 #     2017-05-01 created.
 #     yyyy-MM-dd modified.
-#     yyyy-MM-dd modified.
 # 
 
 
