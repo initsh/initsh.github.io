@@ -40,7 +40,9 @@ $addsForce                = $True
 ################
 # スクリプトで利用する変数を初期化
 $scriptBasename = "setupADDS"
-$logFile        = "C:\" + $scriptBasename + ".log"
+$logDir         = "C:"
+$logTranscript  = "$logDir\$scriptBasename" + ".transcript.log"
+$logFile        = "$logDir\$scriptBasename" + ".log"
 # 一部設定に用いる変数を初期化
 $currentHostname          = [Net.Dns]::GetHostName()
 $addsAdminPasswordSecure  = ConvertTo-SecureString $addsAdminPassword -AsPlainText -Force
@@ -50,8 +52,8 @@ $addsAdminPasswordSecure  = ConvertTo-SecureString $addsAdminPassword -AsPlainTe
 # スクリプト開始
 ################
 # コンソール内容をログ出力
-Start-Transcript -Append $logFile
-Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Start script: $scriptBasename"
+Start-Transcript -Append $logTranscript
+Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Start script: $scriptBasename" | Tee-Object -Append $logFile
 
 
 ################
@@ -61,7 +63,7 @@ Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Start script: $
 if (((Get-WmiObject Win32_TerminalServiceSetting -Namespace root\cimv2\TerminalServices).AllowTsConnections -eq 0) -And $addsAllowTsConnections)
 {
     # リモートデスクトップを許可
-    Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Allow Remote Desktop."
+    Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Allow Remote Desktop." | Tee-Object -Append $logFile
     (Get-WmiObject Win32_TerminalServiceSetting -Namespace root\cimv2\TerminalServices).SetAllowTsConnections(1,1) | Out-Null
 }
 
@@ -69,8 +71,8 @@ if (((Get-WmiObject Win32_TerminalServiceSetting -Namespace root\cimv2\TerminalS
 if (-Not($currentHostname -eq $addsHostname))
 {
     # ホスト名を変更し、再起動する
-    Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Change Hostname $currentHostname to $addsHostname."
-    Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Reboot."
+    Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Change Hostname $currentHostname to $addsHostname." | Tee-Object -Append $logFile
+    Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Reboot." | Tee-Object -Append $logFile
     Rename-Computer -NewName $addsHostname -Force -Restart
     Stop-Transcript
 }
@@ -80,12 +82,12 @@ if (-Not($currentHostname -eq $addsHostname))
 # Active Directory ドメインサービス をインストール
 ################
 Import-Module ServerManager
-Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Install AD-Domain-Services."
+Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Install AD-Domain-Services." | Tee-Object -Append $logFile
 $_tmp = Install-WindowsFeature -IncludeManagementTools -Restart AD-Domain-Services
-Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:       Success: " + $_tmp.Success)
-Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: RestartNeeded: " + $_tmp.RestartNeeded)
-Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:      ExitCode: " + $_tmp.ExitCode)
-Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: FeatureResult: " + $_tmp.FeatureResult)
+Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:       Success: " + $_tmp.Success)       | Tee-Object -Append $logFile
+Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: RestartNeeded: " + $_tmp.RestartNeeded) | Tee-Object -Append $logFile
+Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:      ExitCode: " + $_tmp.ExitCode)      | Tee-Object -Append $logFile
+Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: FeatureResult: " + $_tmp.FeatureResult) | Tee-Object -Append $logFile
 
 
 ################
@@ -93,7 +95,7 @@ Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: FeatureResult:
 ################
 Import-Module ADDSDeployment
 # 新しいフォレスト及びドメインコントローラーをセットアップ
-Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Setup New Forest and Domain Controller."
+Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Setup New Forest and Domain Controller." | Tee-Object -Append $logFile
 $_tmp = Install-ADDSForest `
     -DomainName $addsDomainName `
     -DomainNetbiosName $addsDomainNetbiosName `
@@ -107,17 +109,17 @@ $_tmp = Install-ADDSForest `
     -CreateDnsDelegation:$addsCreateDnsDelegation `
     -NoRebootOnCompletion:$addsNoRebootOnCompletion `
     -Force:$addsForce
-Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:       Success: " + $_tmp.Success)
-Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: RestartNeeded: " + $_tmp.RestartNeeded)
-Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:      ExitCode: " + $_tmp.ExitCode)
-Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: FeatureResult: " + $_tmp.FeatureResult)
+Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:       Success: " + $_tmp.Success)       | Tee-Object -Append $logFile
+Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: RestartNeeded: " + $_tmp.RestartNeeded) | Tee-Object -Append $logFile
+Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:      ExitCode: " + $_tmp.ExitCode)      | Tee-Object -Append $logFile
+Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: FeatureResult: " + $_tmp.FeatureResult) | Tee-Object -Append $logFile
 
 
 ################
 # スクリプト終了
 ################
-Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: End script: $scriptBasename"
-Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Reboot."
+Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: End script: $scriptBasename" | Tee-Object -Append $logFile
+Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Reboot." | Tee-Object -Append $logFile
 Stop-Transcript
 
 
