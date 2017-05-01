@@ -5,6 +5,8 @@
 
 ```
 
+## [BasicAuth](http://winscript.jp/powershell/?s=-credential%83p%83%89%83%81%81%5B%83%5E)
 ```PowerShell
 $cred = Get-Credential $userName
+Invoke-RestMethod https://basic.auth/ -Credential $cred
 ```
