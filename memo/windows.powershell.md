@@ -5,4 +5,6 @@
 
 ```
 
-
+```PowerShell
+$cred = Get-Credential $userName
+```
