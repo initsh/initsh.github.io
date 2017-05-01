@@ -82,8 +82,8 @@ if (-Not($currentHostname -eq $addsHostname))
 Import-Module ServerManager
 Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [NOTICE]: Install AD-Domain-Services."
 $_tmp = Install-WindowsFeature -IncludeManagementTools -Restart AD-Domain-Services
-Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:   Success:" + $_tmp.Success
-Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Exit Code:" + $_tmp.{Exit Code}
+Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Success: " + $_tmp.Success)
+Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: ExitCode: " + $_tmp.ExitCode)
 
 
 ################
@@ -105,8 +105,8 @@ $_tmp = Install-ADDSForest `
     -CreateDnsDelegation:$addsCreateDnsDelegation `
     -NoRebootOnCompletion:$addsNoRebootOnCompletion `
     -Force:$addsForce
-Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]:   Success:" + $_tmp.Success
-Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Exit Code:" + $_tmp.{Exit Code}
+Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Success: " + $_tmp.Success)
+Write-Output ("$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: ExitCode: " + $_tmp.ExitCode)
 
 
 ################
