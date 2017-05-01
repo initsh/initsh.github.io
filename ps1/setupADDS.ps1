@@ -1,3 +1,17 @@
+# 
+# - Name
+#     setupADDS.ps1
+# 
+# - Contents
+#     Setup Active Directory Domain Services and Domain Controller.
+#     C:\> Invoke-WebRequest -Uri 
+# 
+# - Revision
+#     2017-05-01 created.
+#     yyyy-MM-dd modified.
+# 
+
+
 ################
 # 設定
 ################
