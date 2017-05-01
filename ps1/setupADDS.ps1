@@ -4,7 +4,8 @@
 # 
 # - Contents
 #     Setup Active Directory Domain Services and Domain Controller.
-#     C:\> Invoke-RestMethod https://initsh.github.io/ps1/setupADDS.ps1 | powershell.exe -Command -
+#     To run this script, follow the command below.
+#       C:\> Invoke-RestMethod https://initsh.github.io/ps1/setupADDS.ps1 | powershell.exe -Command -
 # 
 # - Revision
 #     2017-05-01 created.
@@ -14,13 +15,13 @@
 
 
 ################
-# 設定
+# Settings
 ################
-# OS設定
+# Settings OS
 $addsAllowTsConnections   = $True
 $addsHostname             = "adds-01"
-# ADDS設定
-# ADDSサーバ構築用の設定を変数として初期化
+# Settings Active Directory Domain Services
+# Initialize Variables for Build-Parameter of Active Directory Domain Services Server
 $addsDomainName           = "report.local"
 $addsDomainNetbiosName    = "REPORT"
 $addsForestMode           = "Win2012R2"
@@ -36,33 +37,33 @@ $addsForce                = $True
 
 
 ################
-# 初期化
+# Initialize
 ################
-# スクリプトで利用する変数を初期化
+# Initialize Variables for script
 $scriptBasename = "setupADDS"
 $logDir         = "C:"
 $logTranscript  = "$logDir\$scriptBasename" + ".transcript.log"
 $logFile        = "$logDir\$scriptBasename" + ".log"
-# 一部設定に用いる変数を初期化
+# Initialize Variables for Build-Parameter of Active Directory Domain Services Server
 $currentHostname          = [Net.Dns]::GetHostName()
 $addsAdminPasswordSecure  = ConvertTo-SecureString $addsAdminPassword -AsPlainText -Force
 
 
 ################
-# スクリプト開始
+# Start script
 ################
-# コンソール内容をログ出力
+# Output console log
 Start-Transcript -Append $logTranscript
 Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Start script: $scriptBasename" | Tee-Object -Append $logFile
 
 
 ################
-# OSのセットアップ
+# Setup OS
 ################
 # RDP許可が未設定かつ、上記 OS設定 にて $addsAllowTsConnections が $True の場合
 if (((Get-WmiObject Win32_TerminalServiceSetting -Namespace root\cimv2\TerminalServices).AllowTsConnections -eq 0) -And $addsAllowTsConnections)
 {
-    # リモートデスクトップを許可
+    # Allow Remote Desktop
     Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Allow Remote Desktop." | Tee-Object -Append $logFile
     (Get-WmiObject Win32_TerminalServiceSetting -Namespace root\cimv2\TerminalServices).SetAllowTsConnections(1,1) | Out-Null
 }
@@ -70,7 +71,7 @@ if (((Get-WmiObject Win32_TerminalServiceSetting -Namespace root\cimv2\TerminalS
 # 現在のホスト名が上記 設定 記載のものと異なる場合
 if (-Not($currentHostname -eq $addsHostname))
 {
-    # ホスト名を変更し、再起動する
+    # Change Hostname $currentHostname to $addsHostname and Reboot
     Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Change Hostname $currentHostname to $addsHostname." | Tee-Object -Append $logFile
     Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Reboot." | Tee-Object -Append $logFile
     Rename-Computer -NewName $addsHostname -Force -Restart
@@ -79,7 +80,7 @@ if (-Not($currentHostname -eq $addsHostname))
 
 
 ################
-# Active Directory ドメインサービス をインストール
+# Install Active Directory Domain Services
 ################
 Import-Module ServerManager
 Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Install AD-Domain-Services." | Tee-Object -Append $logFile
@@ -87,10 +88,10 @@ Install-WindowsFeature -IncludeManagementTools -Restart AD-Domain-Services 2>&1 
 
 
 ################
-# Active Directory の構成
+# Setup Active Directory Forest and Domain Controller
 ################
 Import-Module ADDSDeployment
-# 新しいフォレスト及びドメインコントローラーをセットアップ
+# Setup net Forest and Domain Controller
 Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Setup New Forest and Domain Controller." | Tee-Object -Append $logFile
 Install-ADDSForest `
     -DomainName $addsDomainName `
@@ -109,7 +110,7 @@ Install-ADDSForest `
 
 
 ################
-# スクリプト終了
+# End script
 ################
 Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: End script: $scriptBasename" | Tee-Object -Append $logFile
 Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Reboot." | Tee-Object -Append $logFile
