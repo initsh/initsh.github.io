@@ -19,7 +19,7 @@
 ################
 # Settings OS
 $addsAllowTsConnections   = $True
-$addsHostname             = "adds-01"
+$addsHostname             = "ws2012r2-01"
 
 
 ################
