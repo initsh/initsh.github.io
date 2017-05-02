@@ -9,9 +9,6 @@
 # 
 # - Precondition
 #     - Windows Server 2012 R2
-#     - Completed:
-#         Setting Static IP Address
-#         Setting Hostname ( I mean "$env:COMPUTERNAME" )
 # 
 # - Revision
 #     2017-05-01 created.
