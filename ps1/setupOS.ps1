@@ -32,7 +32,7 @@ $addsHostname             = "ws2012r2-01"
 # Initialize
 ################
 # Initialize Variables for script
-$scriptBasename  = "setupOS
+$scriptBasename  = "setupOS"
 $logDir          = "C:"
 $logTranscript   = "$logDir\$scriptBasename" + ".transcript.log"
 $logFile         = "$logDir\$scriptBasename" + ".log"
