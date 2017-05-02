@@ -7,6 +7,12 @@
 #     To run this script, follow the command below.
 #       C:\> Invoke-RestMethod https://initsh.github.io/ps1/setupOS.ps1 | powershell.exe -Command -
 # 
+# - Precondition
+#     - Windows Server 2012 R2
+#     - Completed:
+#         Setting Static IP Address
+#         Setting Hostname ( I mean "$env:COMPUTERNAME" )
+# 
 # - Revision
 #     2017-05-01 created.
 #     yyyy-MM-dd modified.
