@@ -71,6 +71,9 @@ $addsCreateDnsDelegation = $false
 # 設定値(後段で使用)：完了後にコンピュータを再起動させる
 $addsNoRebootOnCompletion = $false
 
+# 設定値(後段で使用)：すべての操作に対して [Y] はい(Y) を選択する
+$addsForce = $True
+
 # 新規フォレスト及びドメインコントローラーを構築します。
 Install-ADDSForest `
     -DomainName $addsDomainName `
@@ -83,7 +86,8 @@ Install-ADDSForest `
     -SafeModeAdministratorPassword (ConvertTo-SecureString $addsSafeModePassword -AsPlainText -Force) `
     -InstallDns:$addsInstallDns `
     -CreateDnsDelegation:$addsCreateDnsDelegation `
-    -NoRebootOnCompletion:$addsNoRebootOnCompletion
+    -NoRebootOnCompletion:$addsNoRebootOnCompletion `
+    -Force:$addsForce
 
 
 ```
