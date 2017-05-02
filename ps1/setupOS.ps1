@@ -73,7 +73,6 @@ if (-Not($currentHostname -eq $addsHostname))
 # End script
 ################
 Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: End script: $scriptBasename" | Tee-Object -Append $logFile
-Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Reboot." | Tee-Object -Append $logFile
 Stop-Transcript
 
 
