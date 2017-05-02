@@ -75,19 +75,7 @@ $addsNoRebootOnCompletion = $false
 $addsForce = $True
 
 # 新規フォレスト及びドメインコントローラーを構築します。
-Install-ADDSForest `
-    -DomainName $addsDomainName `
-    -DomainNetbiosName $addsDomainNetbiosName `
-    -ForestMode $addsForestMode `
-    -DomainMode $addsDomainMode `
-    -DatabasePath $addsDatabasePath `
-    -LogPath $addsLogPath `
-    -SysvolPath $addsSysvolPath `
-    -SafeModeAdministratorPassword (ConvertTo-SecureString $addsSafeModePassword -AsPlainText -Force) `
-    -InstallDns:$addsInstallDns `
-    -CreateDnsDelegation:$addsCreateDnsDelegation `
-    -NoRebootOnCompletion:$addsNoRebootOnCompletion `
-    -Force:$addsForce
+Install-ADDSForest -DomainName $addsDomainName -DomainNetbiosName $addsDomainNetbiosName -ForestMode $addsForestMode -DomainMode $addsDomainMode -DatabasePath $addsDatabasePath -LogPath $addsLogPath -SysvolPath $addsSysvolPath -SafeModeAdministratorPassword (ConvertTo-SecureString $addsSafeModePassword -AsPlainText -Force) -InstallDns:$addsInstallDns -CreateDnsDelegation:$addsCreateDnsDelegation -NoRebootOnCompletion:$addsNoRebootOnCompletion -Force:$addsForce
 
 
 ```
