@@ -80,7 +80,7 @@ Install-ADDSForest `
     -DatabasePath $addsDatabasePath `
     -LogPath $addsLogPath `
     -SysvolPath $addsSysvolPath `
-    -SafeModeAdministratorPassword $addsSafeModePasswordSecure `
+    -SafeModeAdministratorPassword (ConvertTo-SecureString $addsSafeModePassword -AsPlainText -Force) `
     -InstallDns:$addsInstallDns `
     -CreateDnsDelegation:$addsCreateDnsDelegation `
     -NoRebootOnCompletion:$addsNoRebootOnCompletion
