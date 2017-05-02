@@ -8,26 +8,34 @@
 - サーバに静的IPアドレスが設定済みであること
 - サーバにホスト名が設定済みであること
 
+#### 以下、作業はすべてPowerShell上で行うものとします。
+
 ### 確認
-```
-# 作業対象サーバを確認する。
+
+```PowerShell
+# 作業対象サーバを確認します。
 hostname
 
-# ビルトイン Administrator ユーザでログインしていることを確認する。
+# ビルトイン Administrator ユーザでログインしていることを確認します。
 whoami
 ```
 
 ### 作業
-```
-# ServerManager モジュールをインポートする。
+
+#### Active Directory Domain Services をインストールします。
+
+```PowerShell
+# ServerManager モジュールをインポートします。
 Import-Module ServerManager
 
-# Active Directory Domain Services をインストールする。
+# Active Directory Domain Services をインストールします。
 Install-WindowsFeature -IncludeManagementTools -Restart AD-Domain-Services
 ```
 
-```
-# ADDSDeployment モジュールをインポートする。
+#### 新規フォレスト及びドメインコントローラーを構築します。
+
+```PowerShell
+# ADDSDeployment モジュールをインポートします。
 Import-Module ADDSDeployment
 
 # 設定値(後段で使用)：ADで使用するドメイン
@@ -63,7 +71,7 @@ $addsCreateDnsDelegation = $false
 # 設定値(後段で使用)：完了後にコンピュータを再起動させる
 $addsNoRebootOnCompletion = $false
 
-# 新規フォレスト及びドメインコントローラーを構築
+# 新規フォレスト及びドメインコントローラーを構築します。
 Install-ADDSForest `
     -DomainName $addsDomainName `
     -DomainNetbiosName $addsDomainNetbiosName `
