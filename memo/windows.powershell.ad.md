@@ -85,6 +85,7 @@ Install-ADDSForest `
     -CreateDnsDelegation:$addsCreateDnsDelegation `
     -NoRebootOnCompletion:$addsNoRebootOnCompletion
 
+
 ```
 
 ## 手順：既存のフォレストにドメインコントローラーを追加
