@@ -1,6 +1,6 @@
 # Setup Active Directory on CLI
 
-## 新規フォレスト及びドメインコントローラーの構築
+## 手順：新規フォレスト及びドメインコントローラーの構築
 
 ### 前提条件
 - サーバのOS が Windows Server 2012 R2 であること
@@ -85,12 +85,16 @@ Install-ADDSForest `
     -CreateDnsDelegation:$addsCreateDnsDelegation `
     -NoRebootOnCompletion:$addsNoRebootOnCompletion
 
-
-
-
-
-
 ```
 
+## 手順：既存のフォレストにドメインコントローラーを追加
+
+### 前提条件
+- サーバのOS が Windows Server 2012 R2 であること
+- サーバにビルトイン Administrator ユーザでログインできること
+- サーバに静的IPアドレスが設定済みであること
+- サーバにホスト名が設定済みであること
+
+#### 以下、作業はすべてPowerShell上で行うものとします。
 
 
