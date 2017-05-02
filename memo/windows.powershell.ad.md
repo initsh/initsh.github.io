@@ -1,12 +1,12 @@
 # Setup Active Directory on CLI
 
-## Active Directory のインストール
+## 新規フォレスト及びドメインコントローラーの構築
 
 ### 前提条件
 - OS が Windows Server 2012 R2 であること
 - ビルトイン Administrator ユーザでログインできること
-- サーバに静的IPアドレスが割り振られていること
-- 新規に構築されるフォレストであること
+- サーバに静的IPアドレスが設定済みであること
+- サーバにホスト名が設定済みであること
 
 ### 確認
 ```
@@ -30,44 +30,53 @@ Install-WindowsFeature -IncludeManagementTools -Restart AD-Domain-Services
 # ADDSDeployment モジュールをインポートする。
 Import-Module ADDSDeployment
 
+# 設定値(後段で使用)：ADで使用するドメイン
+$addsDomainName = "report.local"
 
-# 後述のコマンドに渡すパラメータを設定する。
+# 設定値(後段で使用)：ADで使用するドメインのNetBIOS名
+$addsDomainNetbiosName = "REPORT"
 
-# ADで使用するドメイン
-$addsDomainName           = "report.local"
+# 設定値(後段で使用)：作成するフォレストの機能レベル
+$addsForestMode = "Win2012R2"
 
-# ADで使用するドメインのNetBIOS名
-$addsDomainNetbiosName    = "REPORT"
+# 設定値(後段で使用)：作成するドメインの機能レベル
+$addsDomainMode = "Win2012R2"
 
-# 作成するフォレストの機能レベル
-$addsForestMode           = "Win2012R2"
+# 設定値(後段で使用)：セーフモード起動時のAdministratorユーザのパスワード
+$addsAdminPassword = "P@ssw0rd"
 
-# 作成するドメインの機能レベル
-$addsDomainMode           = "Win2012R2"
+# 設定値(後段で使用)：ADのデータベース格納パス
+$addsDatabasePath = "C:\Windows\NTDS"
 
-# セーフモード起動時のAdministratorユーザのパスワード
-$addsAdminPassword        = "P@ssw0rd"
+# 設定値(後段で使用)：ADのトランザクションログ格納パス
+$addsLogPath = "C:\Windows\NTDS"
 
-# ADのデータベース格納パス
-$addsDatabasePath         = "C:\Windows\NTDS"
+# 設定値(後段で使用)：システムボリュームのパス
+$addsSysvolPath = "C:\Windows\SYSVOL"
 
-# ADのトランザクションログ格納パス
-$addsLogPath              = "C:\Windows\NTDS"
+# 設定値(後段で使用)：DNSをインストールする
+$addsInstallDns = $True
 
-# システムボリュームのパス
-$addsSysvolPath           = "C:\Windows\SYSVOL"
+# 設定値(後段で使用)：DNS委任を作成しない
+$addsCreateDnsDelegation = $false
 
-# DNSをインストールする
-$addsInstallDns           = $True
-
-# DNS委任を作成しない
-$addsCreateDnsDelegation  = $false
-
-# 完了後にコンピュータを再起動させる
+# 設定値(後段で使用)：完了後にコンピュータを再起動させる
 $addsNoRebootOnCompletion = $false
 
-# 
-$addsForce                = $True
+# 新規フォレスト及びドメインコントローラーを構築
+Install-ADDSForest `
+    -DomainName $addsDomainName `
+    -DomainNetbiosName $addsDomainNetbiosName `
+    -ForestMode $addsForestMode `
+    -DomainMode $addsDomainMode `
+    -DatabasePath $addsDatabasePath `
+    -LogPath $addsLogPath `
+    -SysvolPath $addsSysvolPath `
+    -SafeModeAdministratorPassword $addsSafeModePasswordSecure `
+    -InstallDns:$addsInstallDns `
+    -CreateDnsDelegation:$addsCreateDnsDelegation `
+    -NoRebootOnCompletion:$addsNoRebootOnCompletion
+
 
 
 
