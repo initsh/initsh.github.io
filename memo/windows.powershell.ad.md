@@ -51,7 +51,7 @@ $addsForestMode = "Win2012R2"
 $addsDomainMode = "Win2012R2"
 
 # 設定値(後段で使用)：セーフモード起動時のAdministratorユーザのパスワード
-$addsAdminPassword = "P@ssw0rd"
+$addsSafeModePassword = "P@ssw0rd"
 
 # 設定値(後段で使用)：ADのデータベース格納パス
 $addsDatabasePath = "C:\Windows\NTDS"
