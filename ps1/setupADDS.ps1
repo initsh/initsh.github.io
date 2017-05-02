@@ -24,33 +24,33 @@
 # Settings
 ################
 # Settings OS
-$addsAllowTsConnections   = $True
+$addsAllowTsConnections     = $True
 # Settings Active Directory Domain Services
 # Initialize Variables for Build-Parameter of Active Directory Domain Services Server
-$addsDomainName           = "report.local"
-$addsDomainNetbiosName    = "REPORT"
-$addsForestMode           = "Win2012R2"
-$addsDomainMode           = "Win2012R2"
-$addsAdminPassword        = "P@ssw0rd"
-$addsDatabasePath         = "C:\Windows\NTDS"
-$addsLogPath              = "C:\Windows\NTDS"
-$addsSysvolPath           = "C:\Windows\SYSVOL"
-$addsInstallDns           = $True
-$addsCreateDnsDelegation  = $false
-$addsNoRebootOnCompletion = $false
-$addsForce                = $True
+$addsDomainName             = "report.local"
+$addsDomainNetbiosName      = "REPORT"
+$addsForestMode             = "Win2012R2"
+$addsDomainMode             = "Win2012R2"
+$addsSafeModePassword       = "P@ssw0rd"
+$addsDatabasePath           = "C:\Windows\NTDS"
+$addsLogPath                = "C:\Windows\NTDS"
+$addsSysvolPath             = "C:\Windows\SYSVOL"
+$addsInstallDns             = $True
+$addsCreateDnsDelegation    = $false
+$addsNoRebootOnCompletion   = $false
+$addsForce                  = $True
 
 
 ################
 # Initialize
 ################
 # Initialize Variables for script
-$scriptBasename          = "setupADDS"
-$logDir                  = "C:"
-$logTranscript           = "$logDir\$scriptBasename" + ".transcript.log"
-$logFile                 = "$logDir\$scriptBasename" + ".log"
-$currentHostname         = [Net.Dns]::GetHostName()
-$addsAdminPasswordSecure = ConvertTo-SecureString $addsAdminPassword -AsPlainText -Force
+$scriptBasename             = "setupADDS"
+$logDir                     = "C:"
+$logTranscript              = "$logDir\$scriptBasename" + ".transcript.log"
+$logFile                    = "$logDir\$scriptBasename" + ".log"
+$currentHostname            = [Net.Dns]::GetHostName()
+$addsSafeModePasswordSecure = ConvertTo-SecureString $addsSafeModePassword -AsPlainText -Force
 
 
 ################
@@ -95,7 +95,7 @@ Install-ADDSForest `
     -DatabasePath $addsDatabasePath `
     -LogPath $addsLogPath `
     -SysvolPath $addsSysvolPath `
-    -SafeModeAdministratorPassword $addsAdminPasswordSecure `
+    -SafeModeAdministratorPassword $addsSafeModePasswordSecure `
     -InstallDns:$addsInstallDns `
     -CreateDnsDelegation:$addsCreateDnsDelegation `
     -NoRebootOnCompletion:$addsNoRebootOnCompletion `
