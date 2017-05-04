@@ -10,3 +10,11 @@
 $cred = Get-Credential $userName
 Invoke-RestMethod https://basic.auth/ -Credential $cred
 ```
+
+### プロダクトキー確認
+```PowerShell
+(Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKey
+```
+
+
+
