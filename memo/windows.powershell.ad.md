@@ -33,7 +33,7 @@ Import-Module ServerManager
 Install-WindowsFeature -IncludeManagementTools -Restart AD-Domain-Services
 ```
 
-#### 新規フォレスト及びドメインコントローラーを構築します。
+#### 新規フォレスト及びドメインコントローラーを構築します。(※サーバが再起動されます)
 
 ```PowerShell
 # ADDSDeployment モジュールをインポートします。
@@ -75,7 +75,7 @@ $addsNoRebootOnCompletion = $false
 # 設定値(後段で使用)：すべての操作に対して [Y] はい(Y) を選択する
 $addsForce = $True
 
-# 新規フォレスト及びドメインコントローラーを構築します。
+# 新規フォレスト及びドメインコントローラーを構築します。 ※サーバが再起動されます
 Install-ADDSForest -DomainName $addsDomainName -DomainNetbiosName $addsDomainNetbiosName -ForestMode $addsForestMode -DomainMode $addsDomainMode -DatabasePath $addsDatabasePath -LogPath $addsLogPath -SysvolPath $addsSysvolPath -SafeModeAdministratorPassword (ConvertTo-SecureString $addsSafeModePassword -AsPlainText -Force) -InstallDns:$addsInstallDns -CreateDnsDelegation:$addsCreateDnsDelegation -NoRebootOnCompletion:$addsNoRebootOnCompletion -Force:$addsForce
 
 
