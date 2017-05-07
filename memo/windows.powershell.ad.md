@@ -12,7 +12,7 @@ Setup Active Directory on CLI
 ### 前提条件
 - サーバのOS が Windows Server 2012 R2 であること
 - サーバに静的IPアドレスが設定済みであること
-- サーバにビルトイン Administrator ユーザでログインできること
+- サーバに Administrator ユーザでログインできること
 - サーバにホスト名が設定済みであること
   -  右記コマンドにて変更可能: `Rename-Computer -NewName $Hostname -Force -Restart`
 
@@ -24,7 +24,7 @@ Setup Active Directory on CLI
 # 作業対象サーバを確認します。
 hostname
 
-# ビルトイン Administrator ユーザでログインしていることを確認します。
+# Administrator ユーザでログインしていることを確認します。
 whoami
 ```
 
@@ -107,7 +107,7 @@ Get-ADForest
 ### 前提条件
 - サーバのOS が Windows Server 2012 R2 であること
 - サーバに静的IPアドレスが設定済みであること
-- サーバにビルトイン Administrator ユーザでログインできること
+- サーバに Administrator ユーザでログインできること
 - サーバにホスト名が設定済みであること
   -  右記コマンドにて変更可能: `Rename-Computer -NewName $Hostname -Force -Restart`
 
@@ -119,7 +119,7 @@ Get-ADForest
 # 作業対象サーバを確認します。
 hostname
 
-# ビルトイン Administrator ユーザでログインしていることを確認します。
+# Administrator ユーザでログインしていることを確認します。
 whoami
 ```
 
@@ -205,7 +205,7 @@ Get-ADForest
 # 作業対象サーバを確認します。
 hostname
 
-# ビルトイン Administrator ユーザでログインしていることを確認します。
+# Administrator ユーザでログインしていることを確認します。
 whoami
 ```
 
@@ -236,4 +236,3 @@ Move-ADDirectoryServerOperationMasterRole -Identity $addsFsmoHostname -Operation
 # Reference
 - [Windows PowerShell を使用して AD DS をインストールする - MSDN](https://msdn.microsoft.com/ja-jp/library/hh472162.aspx#BKMK_PS)
 - [Active Directory Cmdlets Move-ADDirectoryServerOperationMasterRole](https://technet.microsoft.com/en-us/library/ee617229.aspx)
-- [WindowsServer 2012R2 + PowerShellでAD構築 - Hogex spotted](http://www.nanajo.com/blog/hogex/?p=451)
