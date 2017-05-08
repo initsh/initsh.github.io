@@ -16,6 +16,7 @@ curl -LRs initsh.github.io/bash/centos7/epel.sh
 curl -LRs initsh.github.io/bash/centos7/firewalld.sh
 curl -LRs initsh.github.io/bash/centos7/httpd.vhost.sh
 curl -LRs initsh.github.io/bash/centos7/init.sh
+curl -LRs initsh.github.io/bash/centos7/openstack.sh
 curl -LRs initsh.github.io/bash/centos7/owncloud.sh
 curl -LRs initsh.github.io/bash/centos7/selinux.sh
 curl -LRs initsh.github.io/bash/centos7/tz.tokyo.sh
