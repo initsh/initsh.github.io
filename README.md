@@ -21,12 +21,6 @@ curl -LRs initsh.github.io/bash/centos7/owncloud.sh
 curl -LRs initsh.github.io/bash/centos7/selinux.sh
 curl -LRs initsh.github.io/bash/centos7/tz.tokyo.sh
 curl -LRs initsh.github.io/bash/centos7/utils.sh
-curl -LRs initsh.github.io/bash/check/args.sh
-curl -LRs initsh.github.io/bash/check/centos6.sh
-curl -LRs initsh.github.io/bash/check/centos7.sh
-curl -LRs initsh.github.io/bash/check/root.sh
-curl -LRs initsh.github.io/bash/check/x86_64.sh
-curl -LRs initsh.github.io/bash/functions.sh
 
 curl -LRs initsh.github.io/id_rsa.pub
 
