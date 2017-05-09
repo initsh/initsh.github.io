@@ -1,7 +1,7 @@
 # Samba
 
 ## CentOS 6.x
-#### 以下スクリプトを使用する。
+#### 下記スクリプトを使用する。
 ```bash
 #!/bin/bash
 
@@ -24,11 +24,11 @@ service httpd start
 yum -y install samba
 echo -n "TYPE SAMBA USER \"root\" PASSWORD(use [a-zA-Z0-9\.]): "
 read -s _READ
-cat <<__EOD__ >/root/samba.cred
+echo -e "${_READ}\n${_READ}" | pdbedit --password-from-stdin -a root
+cat <<__EOD__ > /root/samba.cred
 user,password
 root,${_READ}
 __EOD__
-echo -e "${_READ}\n${_READ}" | pdbedit -a root --password-from-stdin
 if [ ! -f /etc/samba/smb.conf.org ]; then \cp -p /etc/samba/smb.conf /etc/samba/smb.conf.org; fi
 curl -LRsS initsh.github.io/memo/smb.conf > /etc/samba/smb.conf
 ln -s / /root/rootdir
