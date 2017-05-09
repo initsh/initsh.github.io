@@ -1,14 +1,43 @@
 # Samba
 
 ## CentOS 6.x
+#### 以下スクリプトを使用する。
 ```bash
+#!/bin/bash
+
+# utils
+yum -y install bind-utils expect lsof mailx net-tools nmap openssh-clients parted tcpdump telnet traceroute unzip vim-enhanced yum-utils zip
+
+# vm-tools
+yum -y install open-vm-tools
+
+# php 5.6
+yum -y install epel-release
+yum -y install http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+yum -y install --enablerepo=remi,remi-php56 php php-devel php-mbstring php-pdo php-gd
+chkconfig httpd on
+lokkit -s http
+lokkit -s https
+service httpd start
+
+# samba
 yum -y install samba
+echo -n "TYPE SAMBA USER \"root\" PASSWORD(use [a-zA-Z0-9\.]): "
+read -s _READ
+cat <<__EOD__ >/root/samba.cred
+user,password
+root,${_READ}
+__EOD__
+echo -e "${_READ}\n${_READ}" | pdbedit -a root --password-from-stdin
+if [ ! -f /etc/samba/smb.conf.org ]; then \cp -p /etc/samba/smb.conf /etc/samba/smb.conf.org; fi
+curl -LRsS initsh.github.io/memo/smb.conf > /etc/samba/smb.conf
+ln -s / /root/rootdir
+ln -s /var /root/var
 chkconfig smb on
 chkconfig nmb on
-cp -p /etc/samba/smb.conf /etc/samba/smb.conf.org
-vim /etc/samba/smb.conf
-pdbedit -a $USERNAME
 service smb start
 service nmb start
 lokkit -s samba
+
+# EOF
 ```
