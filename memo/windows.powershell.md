@@ -19,4 +19,8 @@ Invoke-RestMethod https://basic.auth/ -Credential $cred
 (Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKey
 -->
 
+### DCOMの無効/有効 ([参考](http://www.geekpage.jp/practical/winxp-tips/dcomcnfg.php))
+```cmd
+dcomcnfg.exe
+```
 
