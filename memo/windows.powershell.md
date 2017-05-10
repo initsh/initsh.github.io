@@ -1,3 +1,13 @@
+### ログ確認
+```PowerShell
+# ログの種類一覧の表示
+Get-EventLog -List
+
+# システムログの確認
+Get-EventLog -LogName System
+```
+
+
 ## [SetAllowTSConnections method of the Win32_TerminalServiceSetting class (Windows)](https://msdn.microsoft.com/ja-jp/library/aa383644(v=vs.85).aspx)
 
 ```PowerShell
