@@ -4,7 +4,7 @@ rem # - Name
 rem #     sudo.bat
 rem # 
 rem # - Contents
-rem #     RUNAS rundll32.exe shell32.dll,#61
+rem #     C:\Windows\System32\runas.exe rundll32.exe shell32.dll,#61
 rem # 
 rem # - Revision
 rem #     2017-05-10 created.
