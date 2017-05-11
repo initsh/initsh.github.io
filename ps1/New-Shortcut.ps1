@@ -16,7 +16,6 @@
 if(-Not("$($args[0])"))
 {
     Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [ERROR]: `$args[0] is null."
-    [Console]::ReadKey() | Out-Null
     exit 1
 }
 
@@ -24,7 +23,6 @@ if(-Not("$($args[0])"))
 if (-Not(Resolve-Path "$($args[0])" 2>$null))
 {
     Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [ERROR]: Incorrect path: `"$($args[0])`""
-    [Console]::ReadKey() | Out-Null
     exit 1
 }
 
@@ -54,11 +52,9 @@ $lnk.Save()
 if (-Not(Test-Path -Path $lnkDstPath))
 {
     Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [ERROR]: Fail to generate shortcut: `"$lnkDstPath`""
-    [Console]::ReadKey() | Out-Null
     exit 1
 }
 
 # exit 0
 Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [INFO]: Generate shortcut: `"$lnkDstPath`""
-[Console]::ReadKey() | Out-Null
 exit 0
