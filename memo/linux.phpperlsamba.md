@@ -11,9 +11,6 @@ yum -y install bind-utils expect lsof mailx net-tools nmap openssh-clients parte
 # vm-tools
 yum -y install open-vm-tools
 
-# perl-CGI
-yum -y install perl-CGI
-
 # php 5.6
 yum -y install epel-release
 yum -y install http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
@@ -22,6 +19,9 @@ chkconfig httpd on
 lokkit -s http
 lokkit -s https
 service httpd start
+
+# perl-CGI
+yum -y install perl-CGI
 
 # samba
 yum -y install samba
