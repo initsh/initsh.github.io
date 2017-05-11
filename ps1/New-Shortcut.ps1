@@ -11,8 +11,6 @@
 #     yyyy-MM-dd modified.
 # 
 
-# 
-
 # Check $args
 if(-Not("$($args[0])"))
 {
