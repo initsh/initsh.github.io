@@ -1,7 +1,7 @@
 @echo off
 rem # 
 rem # - Name
-rem #     edit-hosts.bat
+rem #     Edit-Hosts.bat
 rem # 
 rem # - Contents
 rem #     C:\Windows\System32\runas.exe notepad C:\Windows\System32\drivers\etc\hosts
