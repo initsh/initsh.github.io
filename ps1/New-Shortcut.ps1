@@ -15,14 +15,14 @@
 # Check $args
 if(-Not("$($args[0])"))
 {
-    Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [ERROR]: `$args[0] is null."
+    Write-Error "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [ERROR]: `$args[0] is null."
     exit 1
 }
 
 # Check source file path of shortcut(*.lnk).
 if (-Not(Resolve-Path "$($args[0])" 2>$null))
 {
-    Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [ERROR]: Incorrect path: `"$($args[0])`""
+    Write-Error "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [ERROR]: Incorrect path: `"$($args[0])`""
     exit 1
 }
 
@@ -51,7 +51,7 @@ $lnk.Save()
 # Check generated shortcut(*.lnk)
 if (-Not(Test-Path -Path $lnkDstPath))
 {
-    Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [ERROR]: Fail to generate shortcut: `"$lnkDstPath`""
+    Write-Error "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [ERROR]: Fail to generate shortcut: `"$lnkDstPath`""
     exit 1
 }
 
