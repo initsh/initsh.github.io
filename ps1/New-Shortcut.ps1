@@ -5,6 +5,7 @@
 # - Contents
 #     Generate shortcut.
 #     C:\> New-Shortcut.ps1 "C:\Users\j.doe\Documents\foobar.docx"
+#     C:\> Invoke-RestMethod https://initsh.github.io/ps1/New-Shortcut.ps1 | powershell.exe -Command -
 # 
 # - Revision
 #     2016-05-11 created.
