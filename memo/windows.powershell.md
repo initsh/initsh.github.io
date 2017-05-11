@@ -34,3 +34,7 @@ Invoke-RestMethod https://basic.auth/ -Credential $cred
 dcomcnfg.exe
 ```
 
+### pause
+```PowerShell
+[Console]::ReadKey() | Out-Null
+```
