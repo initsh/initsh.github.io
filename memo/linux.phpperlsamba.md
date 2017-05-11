@@ -11,6 +11,9 @@ yum -y install bind-utils expect lsof mailx net-tools nmap openssh-clients parte
 # vm-tools
 yum -y install open-vm-tools
 
+# mod_ssl
+yum -y install mod_ssl
+
 # php 5.6
 yum -y install epel-release
 yum -y install http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
