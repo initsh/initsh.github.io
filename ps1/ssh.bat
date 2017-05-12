@@ -23,8 +23,7 @@
 [System.String] $ssh_dir  = "$base_dir\ssh"                # teraterm起動ディレクトリ
 [System.String] $log_dir  = "$ssh_dir\log"                 # teratermログ出力ディレクトリ
 [System.String] $key_dir  = "$ssh_dir\key"                 # 秘密鍵設置ディレクトリ
-[System.String] $ps1_dir  = "$base_dir\ps1"                # powershellスクリプト格納ディレクトリ
-[System.String] $csv_file = "$ps1_dir\sshTeraTerm.csv"     # ログイン情報CSVファイル
+[System.String] $csv_file = "$ssh_dir\hosts.csv"           # ログイン情報CSVファイル
 ### ログイン情報CSVファイル/記載内容について
 ###  +-----------------------------------------------------------------
 ###  |#Hostname,Port,Username,AuthType,Value,Alias
