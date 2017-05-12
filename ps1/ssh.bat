@@ -104,8 +104,7 @@ else
 }
 
 ### teratermを実行
-#$ssh_process = Start-Process -FilePath $ssh_client -ArgumentList $opt_array -PassThru -Wait
-Start-Process -FilePath $ssh_client -ArgumentList $opt_array -PassThru -Wait
+$ssh_process = Start-Process -FilePath $ssh_client -ArgumentList $opt_array -PassThru -Wait
 ### teratermログファイルの属性を読み込み専用に変更
 Set-ItemProperty -Path $ssh_log -Name Attributes -Value Readonly
 ### teratermログファイルの内容を表示(個人的な趣味)
