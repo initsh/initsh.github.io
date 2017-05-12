@@ -30,7 +30,8 @@
 ###  |192.168.1.100,22,root,publickey,id_rsa,root@192.168.1.100
 ###  |www.contoso.com,10022,admin,password,P@ssw0rd,admin@www.contoso.com
 ###  +-----------------------------------------------------------------
-
+[System.String] $tt_install_uri = "https://ja.osdn.net/frs/redir.php?m=ymu&f=%2Fttssh2%2F67179%2Fteraterm-4.94.exe"
+[System.String] $tt_install_exe = "$env:USERPROFILE\Downloads\teraterm-4.94.exe"
 
 # variable
 [System.String] $date = Get-Date -Format yyyyMMdd
@@ -39,13 +40,18 @@
 
 # main
 ### teratemrインストールディレクトリからttermpro.exeを検索し、ttermpro.exeのフルパスを取得する
-[System.String] $ssh_client = Get-ChildItem -recurse "C:\Program Files*\teraterm" | Where-Object { $_.Name -match "ttermpro" } | ForEach-Object { $_.FullName }
+#[System.String] $ssh_client = Get-ChildItem -recurse "C:\Program Files*\teraterm" | Where-Object { $_.Name -match "ttermpro" } | ForEach-Object { $_.FullName }
 ### 
-if (-Not $? -Or -Not(Test-Path -Path $ssh_client))
+if (-Not $? -Or -Not(Test-Path -Path (Get-ChildItem -recurse "C:\Program Files*\teraterm" | Where-Object { $_.Name -match "ttermpro" } | ForEach-Object { $_.FullName })))
 {
-    Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [ERROR]: ttermpro.exe not found in `"C:\Program Files*`"."
-    [Console]::ReadKey() | Out-Null
-    exit 1
+    Invoke-WebRequest -Uri $tt_install_uri -OutFile $tt_install_exe
+    Start-Process -FilePath $tt_install_exe -PassThru -Wait
+    if (-Not $? -Or -Not(Test-Path -Path (Get-ChildItem -recurse "C:\Program Files*\teraterm" | Where-Object { $_.Name -match "ttermpro" } | ForEach-Object { $_.FullName })))
+    {
+        Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [ERROR]: ttermpro.exe not found in `"C:\Program Files*`"."
+        [Console]::ReadKey() | Out-Null
+        exit 1
+    }
 }
 
 if ($args)
@@ -97,7 +103,8 @@ else
 }
 
 ### teratermを実行
-$ssh_process = Start-Process -FilePath $ssh_client -ArgumentList $opt_array -PassThru -Wait
+#$ssh_process = Start-Process -FilePath $ssh_client -ArgumentList $opt_array -PassThru -Wait
+Start-Process -FilePath $ssh_client -ArgumentList $opt_array -PassThru -Wait
 ### teratermログファイルの属性を読み込み専用に変更
 Set-ItemProperty -Path $ssh_log -Name Attributes -Value Readonly
 ### teratermログファイルの内容を表示(個人的な趣味)
