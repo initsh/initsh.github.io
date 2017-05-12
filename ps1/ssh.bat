@@ -1,7 +1,7 @@
 @setlocal enableextensions enabledelayedexpansion & set "PATH0=%~f0" & PowerShell.exe -Command "& (Invoke-Expression -Command ('{#' + ((Get-Content '!PATH0:'=''!') -join \"`n\") + '}'))" %* & exit /b !errorlevel!
 # 
 # - Name
-#     sshTeraTerm.ps1
+#     ssh.bat
 # 
 # - Contents
 #     Simplify SSH Connect by Tera Term.
