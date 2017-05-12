@@ -40,13 +40,14 @@
 
 # main
 ### teratemrインストールディレクトリからttermpro.exeを検索し、ttermpro.exeのフルパスを取得する
-#[System.String] $ssh_client = Get-ChildItem -recurse "C:\Program Files*\teraterm" | Where-Object { $_.Name -match "ttermpro" } | ForEach-Object { $_.FullName }
+[System.String] $ssh_client = Get-ChildItem -recurse "C:\Program Files*\teraterm" | Where-Object { $_.Name -match "ttermpro" } | ForEach-Object { $_.FullName }
 ### 
-if (-Not $? -Or -Not(Test-Path -Path (Get-ChildItem -recurse "C:\Program Files*\teraterm" | Where-Object { $_.Name -match "ttermpro" } | ForEach-Object { $_.FullName })))
+if (-Not $? -Or -Not(Test-Path -Path $ssh_client))
 {
     Invoke-WebRequest -Uri $tt_install_uri -OutFile $tt_install_exe
     Start-Process -FilePath $tt_install_exe -PassThru -Wait
-    if (-Not $? -Or -Not(Test-Path -Path (Get-ChildItem -recurse "C:\Program Files*\teraterm" | Where-Object { $_.Name -match "ttermpro" } | ForEach-Object { $_.FullName })))
+    [System.String] $ssh_client = Get-ChildItem -recurse "C:\Program Files*\teraterm" | Where-Object { $_.Name -match "ttermpro" } | ForEach-Object { $_.FullName }
+    if (-Not $? -Or -Not(Test-Path -Path $ssh_client))
     {
         Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [ERROR]: ttermpro.exe not found in `"C:\Program Files*`"."
         [Console]::ReadKey() | Out-Null
