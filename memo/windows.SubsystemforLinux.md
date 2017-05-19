@@ -1,6 +1,9 @@
 # Windows Subsystem for Linux
 
+## インストール手順
 
+1. 管理者権限でPowerShellを起動。
+1. 以下一連のコマンドを実行。
 ```PowerShell
 Get-WindowsOptionalFeature -Online
 
@@ -12,7 +15,15 @@ lxrun
 
 lxrun /install /y
 ```
+#### 以上。
 
+
+
+
+
+
+
+## `lxrun`コマンドについて
 
 ```
 C:\> lxrun
