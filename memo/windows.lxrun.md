@@ -1,6 +1,16 @@
 # Windows Subsystem for Linux
 
 
+```PowerShell
+Get-WindowsOptionalFeature -Online
+
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+```
+
+----------------------------------
+
+## 以下、旧手順。
+
 1. **<kbd>Windows</kbd> + <kbd>R</kbd> => `OptionalFeatures`**
 
 1. **Check `Windows Subsystem for Linux`**
