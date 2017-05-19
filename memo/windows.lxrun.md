@@ -5,6 +5,12 @@
 Get-WindowsOptionalFeature -Online
 
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
+
+lxrun
+
+lxrun /install /y
 ```
 
 ----------------------------------
