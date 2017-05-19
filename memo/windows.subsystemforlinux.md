@@ -5,8 +5,7 @@
 1. <kbd>Windows</kbd>+<kbd>R</kbd> => ```powershell.exe -Command "Start-Process -Verb RUNAS powershell.exe"```
 1. 以下一連のコマンドを実行。
 ```PowerShell
-if (-not((Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq 'Microsoft-Windows-Subsystem-Linux' }).State -eq 'E
-nabled_'))
+if (-not((Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq 'Microsoft-Windows-Subsystem-Linux' }).State -eq 'Enabled'))
 {
    Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
    reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
