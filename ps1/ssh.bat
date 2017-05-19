@@ -7,6 +7,10 @@
 #     Simplify SSH Connect by Tera Term.
 #     <Windows> + <R> => ssh root@192.168.1.100
 #
+# - Install
+#     PS C:\> Invoke-WebRequest -Uri "https://initsh.github.io/ps1/ssh.bat" -OutFile "$env:USERPROFILE\ssh.bat"
+#
+#
 # - Reference
 #     http://pf-j.sakura.ne.jp/program/tips/ps1bat2.htm
 # 
