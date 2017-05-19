@@ -2,7 +2,7 @@
 
 ## インストール手順
 
-1. 管理者権限でPowerShellを起動。
+1. <kbd>Windows</kbd>+<kbd>R</kbd> => ```powershell.exe -Command "Start-Process -Verb RUNAS rundll32.exe shell32.dll,`#61"```
 1. 以下一連のコマンドを実行。
 ```PowerShell
 Get-WindowsOptionalFeature -Online
