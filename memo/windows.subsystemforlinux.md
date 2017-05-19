@@ -6,9 +6,11 @@
 1. 以下一連のコマンドを実行。
 ```PowerShell
 if (-not((Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq 'Microsoft-Windows-Subsystem-Linux' }).State -eq 'E
-nabled_')) { Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux }
-
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
+nabled_'))
+{
+   Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+   reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
+}
 
 lxrun
 
