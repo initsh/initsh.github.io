@@ -5,11 +5,9 @@
 1. <kbd>Windows</kbd>+<kbd>R</kbd> => ```powershell.exe -Command "Start-Process -Verb RUNAS powershell.exe"```
 1. 以下一連のコマンドを実行。
 ```PowerShell
-if (-not((Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq 'Microsoft-Windows-Subsystem-Linux' }).State -eq 'Enabled'))
-{
-   Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
-   reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
-}
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
 
 lxrun
 
@@ -53,6 +51,10 @@ C:\> lxrun /uninstall /y
 
 <!--
 
+
+
+
+
 ## 以下、旧手順。
 
 1. **<kbd>Windows</kbd> + <kbd>R</kbd> => `OptionalFeatures`**
@@ -62,6 +64,18 @@ C:\> lxrun /uninstall /y
 1. **<kbd>Windows</kbd> + <kbd>U</kbd> => `developer`** (OR **<kbd>Windows</kbd> + <kbd>R</kbd> => `powershell -Command "Start-Process -Verb runas powershell Show-WindowsDeveloperLicenseRegistration"`**)
 
 1. **Check `Developer mode`**
+
+```
+if (-not((Get-WindowsOptionalFeature -Online | Where-Object { $_.FeatureName -eq 'Microsoft-Windows-Subsystem-Linux' }).State -eq 'Enabled'))
+{
+   Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+   reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
+}
+
+lxrun
+
+lxrun /install /y
+```
 
 -->
 
