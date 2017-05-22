@@ -16,41 +16,65 @@
 # - Revision
 #     2016-12-28 created.
 #     2017-04-14 modified.
+#     2017-05-22 modified.
 #     yyyy-MM-dd modified.
 # 
 
+################
 # constant
+################
 ### 作業ディレクトリ
-#[System.String] $base_dir = "$Env:Userprofile"             # ベースディレクトリ
-[System.String] $base_dir = "$Env:Userprofile\GoogleDrive" # ベースディレクトリ
+#[System.String] $base_dir = "$env:Userprofile"             # ベースディレクトリ
+[System.String] $base_dir = "$env:Userprofile\GoogleDrive" # ベースディレクトリ
 [System.String] $ssh_dir  = "$base_dir\ssh"                # teraterm起動ディレクトリ
 [System.String] $log_dir  = "$ssh_dir\log"                 # teratermログ出力ディレクトリ
 [System.String] $key_dir  = "$ssh_dir\key"                 # 秘密鍵設置ディレクトリ
 [System.String] $csv_file = "$ssh_dir\hosts.csv"           # ログイン情報CSVファイル
-### ログイン情報CSVファイル/記載内容について
-###  +-----------------------------------------------------------------
-###  |#Hostname,Port,Username,AuthType,Value,Alias
-###  |192.168.1.100,22,root,publickey,id_rsa,root@192.168.1.100
-###  |www.contoso.com,10022,admin,password,P@ssw0rd,admin@www.contoso.com
-###  +-----------------------------------------------------------------
 [System.String] $tt_install_uri = "https://ja.osdn.net/frs/redir.php?m=ymu&f=%2Fttssh2%2F67179%2Fteraterm-4.94.exe"
 [System.String] $tt_install_exe = "$env:USERPROFILE\Downloads\teraterm-4.94.exe"
 
+################
 # variable
+################
 [System.String] $date = Get-Date -Format yyyyMMdd
 [System.String] $time = Get-Date -Format HHmmss
 
-
+################
 # main
+################
+### ディレクトリを作成
+if ((Get-Item $ssh_dir).Mode | Select-String -NotMatch '^d') { mkdir $ssh_dir; }
+if ((Get-Item $log_dir).Mode | Select-String -NotMatch '^d') { mkdir $log_dir; }
+if ((Get-Item $key_dir).Mode | Select-String -NotMatch '^d') { mkdir $ssh_dir; }
+if (-Not (Test-Path $csv_file))
+{
+    Write-Output @'
+Hostname,Port,Username,AuthType,Value,Alias
+# 1行目はヘッダー情報となります。編集しないでください。
+
+# 以下を参照の上、記載例のように設定してください。
+# ホスト名,ポート番号,ユーザ名,認証タイプ[password|publickey],値[パスワード|keyディレクトリ配下の秘密鍵の名前],sshコマンドの引数とする任意のエイリアス文字列を指定。UPN表記を推奨。
+
+# 以下、記載例。
+www.example.com,22,admin,publickey,id_rsa,admin@www.example.com
+192.168.1.100,22,root,password,P@ssw0rd,root@192.168.1.100
+'@ > $csv_file
+    Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [NOTICE]: Check the file( $csv_file ) and set it as shown in the description example."
+    Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [NOTICE]: Edit the file( $csv_file ) and try again."
+    notepad $csv_file
+    [Console]::ReadKey() | Out-Null
+    exit 1
+}
+
 ### teratemrインストールディレクトリからttermpro.exeを検索し、ttermpro.exeのフルパスを取得する
 [System.String] $ssh_client = Get-ChildItem -recurse "C:\Program Files*\teraterm" | Where-Object { $_.Name -match "ttermpro" } | ForEach-Object { $_.FullName }
 ### 
-if (-Not $? -Or -Not(Test-Path -Path $ssh_client))
+if (-Not ($?) -Or -Not (Test-Path -Path $ssh_client))
 {
     Invoke-WebRequest -Uri $tt_install_uri -OutFile $tt_install_exe
     Start-Process -FilePath $tt_install_exe -PassThru -Wait
     [System.String] $ssh_client = Get-ChildItem -recurse "C:\Program Files*\teraterm" | Where-Object { $_.Name -match "ttermpro" } | ForEach-Object { $_.FullName }
-    if (-Not $? -Or -Not(Test-Path -Path $ssh_client))
+    if (-Not ($?) -Or -Not (Test-Path -Path $ssh_client))
     {
         Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [ERROR]: ttermpro.exe not found in `"C:\Program Files*`"."
         [Console]::ReadKey() | Out-Null
@@ -58,7 +82,7 @@ if (-Not $? -Or -Not(Test-Path -Path $ssh_client))
     }
 }
 
-if ($args)
+if ($args[0])
 {
     ### $args[0]には<username>@<hostname>形式を想定
     [System.String] $ssh_alias = $args[0]
@@ -93,6 +117,7 @@ if ($args)
     else
     {
         ### CSVの内容を表示
+        Get-Item $csv_file
         Import-Csv $csv_file | Where-Object { ($_.Alias) } | Select-Object Username,Hostname,Alias | Format-Table -AutoSize
         [Console]::ReadKey() | Out-Null
         exit 0
