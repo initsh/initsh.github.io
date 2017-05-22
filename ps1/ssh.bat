@@ -5,7 +5,7 @@
 # 
 # - Contents
 #     Simplify SSH Connect by Tera Term.
-#     <Windows> + <R> => ssh root@192.168.1.100
+#     <kbd>Windows</kbd> + <kbd>R</kbd> => ssh root@192.168.1.100
 #
 # - Install
 #     powershell.exe -Command "Invoke-RestMethod -Uri "https://initsh.github.io/ps1/ssh.bat" -OutFile "$env:USERPROFILE\ssh.bat""
