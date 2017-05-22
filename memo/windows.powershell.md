@@ -8,14 +8,14 @@ Get-EventLog -LogName System
 ```
 
 
-## [SetAllowTSConnections method of the Win32_TerminalServiceSetting class (Windows)](https://msdn.microsoft.com/ja-jp/library/aa383644(v=vs.85).aspx)
+## [リモートデスクトップ接続の有効](https://msdn.microsoft.com/ja-jp/library/aa383644(v=vs.85).aspx)
 
 ```PowerShell
 (Get-WmiObject -Class Win32_TerminalServiceSetting -Namespace root\cimv2\TerminalServices).SetAllowTsConnections(1,1)
 
 ```
 
-## [BasicAuth](http://winscript.jp/powershell/?s=-credential%83p%83%89%83%81%81%5B%83%5E)
+## [Basic認証](http://winscript.jp/powershell/?s=-credential%83p%83%89%83%81%81%5B%83%5E)
 ```PowerShell
 $cred = Get-Credential $userName
 Invoke-RestMethod https://basic.auth/ -Credential $cred
@@ -38,3 +38,14 @@ dcomcnfg.exe
 ```PowerShell
 [Console]::ReadKey() | Out-Null
 ```
+
+### Windowsの機能の有効化
+```PowerShell
+# Windowsの機能のステータスの確認
+Get-WindowsOptionalFeature -Online
+
+# Windowsの機能の有効化(例はHyper-V)
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
+
+```
+
