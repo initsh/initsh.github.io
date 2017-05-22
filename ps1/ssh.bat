@@ -5,7 +5,7 @@
 # 
 # - Contents
 #     Simplify SSH Connect by Tera Term.
-#     <kbd>Windows</kbd> + <kbd>R</kbd> => ssh root@192.168.1.100
+#     <Windows> + <R> => ssh root@192.168.1.100
 #
 # - Install
 #     powershell.exe -Command "Invoke-RestMethod -Uri "https://initsh.github.io/ps1/ssh.bat" -OutFile "$env:USERPROFILE\ssh.bat""
@@ -67,13 +67,13 @@ www.example.com,22,admin,publickey,id_rsa,admin@www.example.com
 
 ### Search for ttermpro.exe from the directory where teraterm was installed and get the full path of ttermpro.exe.
 [System.String] $ssh_client = Get-ChildItem -recurse "C:\Program Files*\teraterm" | Where-Object { $_.Name -match "ttermpro" } | ForEach-Object { $_.FullName }
-### 
-if (-Not ($?) -Or -Not (Test-Path -Path $ssh_client))
+### If ttermpro.exe does not exist,
+if (-Not ($ssh_client))
 {
     Invoke-WebRequest -Uri $tt_install_uri -OutFile $tt_install_exe
     Start-Process -FilePath $tt_install_exe -PassThru -Wait
     [System.String] $ssh_client = Get-ChildItem -recurse "C:\Program Files*\teraterm" | Where-Object { $_.Name -match "ttermpro" } | ForEach-Object { $_.FullName }
-    if (-Not ($?) -Or -Not (Test-Path -Path $ssh_client))
+    if (-Not ($ssh_client))
     {
         Write-Output "$(Get-Date -Format yyyy-MM-ddTHH:mm:sszzz) [ERROR]: ttermpro.exe not found in `"C:\Program Files*`"."
         [Console]::ReadKey() | Out-Null
