@@ -23,13 +23,12 @@
 ################
 # constant
 ################
-### 作業ディレクトリ
-#[System.String] $base_dir = "$env:Userprofile"             # ベースディレクトリ
-[System.String] $base_dir = "$env:Userprofile\GoogleDrive" # ベースディレクトリ
-[System.String] $ssh_dir  = "$base_dir\ssh"                # teraterm起動ディレクトリ
-[System.String] $log_dir  = "$ssh_dir\log"                 # teratermログ出力ディレクトリ
-[System.String] $key_dir  = "$ssh_dir\key"                 # 秘密鍵設置ディレクトリ
-[System.String] $csv_file = "$ssh_dir\hosts.csv"           # ログイン情報CSVファイル
+#[System.String] $base_dir = "$env:Userprofile"
+[System.String] $base_dir = "$env:Userprofile\GoogleDrive"
+[System.String] $ssh_dir  = "$base_dir\ssh"
+[System.String] $log_dir  = "$ssh_dir\log"
+[System.String] $key_dir  = "$ssh_dir\key"
+[System.String] $csv_file = "$ssh_dir\hosts.csv"
 [System.String] $tt_install_uri = "https://ja.osdn.net/frs/redir.php?m=ymu&f=%2Fttssh2%2F67179%2Fteraterm-4.94.exe"
 [System.String] $tt_install_exe = "$env:USERPROFILE\Downloads\teraterm-4.94.exe"
 
@@ -42,7 +41,7 @@
 ################
 # main
 ################
-### ディレクトリを作成
+### Create directorys.
 if ((Get-Item $ssh_dir).Mode | Select-String -NotMatch '^d') { mkdir $ssh_dir; }
 if ((Get-Item $log_dir).Mode | Select-String -NotMatch '^d') { mkdir $log_dir; }
 if ((Get-Item $key_dir).Mode | Select-String -NotMatch '^d') { mkdir $ssh_dir; }
@@ -50,12 +49,12 @@ if (-Not (Test-Path $csv_file))
 {
     Write-Output @'
 Hostname,Port,Username,AuthType,Value,Alias
-# 1行目はヘッダー情報となります。編集しないでください。
+# In the first line, Header information is written. Please do not edit!
 
-# 以下を参照の上、記載例のように設定してください。
-# ホスト名,ポート番号,ユーザ名,認証タイプ[password|publickey],値[パスワード|keyディレクトリ配下の秘密鍵の名前],sshコマンドの引数とする任意のエイリアス文字列を指定。UPN表記を推奨。
+# Please refer to the following and set it like the description example.
+# Hostname,PortNumber,Username,AuthenticationType[password|publickey],Value[Passphrase|NameOfSecretKey],Set an alias character string as an argument of ssh command. UPN notation is recommended.
 
-# 以下、記載例。
+# description example:
 www.example.com,22,admin,publickey,id_rsa,admin@www.example.com
 192.168.1.100,22,root,password,P@ssw0rd,root@192.168.1.100
 '@ > $csv_file
@@ -66,7 +65,7 @@ www.example.com,22,admin,publickey,id_rsa,admin@www.example.com
     exit 1
 }
 
-### teratemrインストールディレクトリからttermpro.exeを検索し、ttermpro.exeのフルパスを取得する
+### Search for ttermpro.exe from the directory where teraterm was installed and get the full path of ttermpro.exe.
 [System.String] $ssh_client = Get-ChildItem -recurse "C:\Program Files*\teraterm" | Where-Object { $_.Name -match "ttermpro" } | ForEach-Object { $_.FullName }
 ### 
 if (-Not ($?) -Or -Not (Test-Path -Path $ssh_client))
@@ -84,18 +83,18 @@ if (-Not ($?) -Or -Not (Test-Path -Path $ssh_client))
 
 if ($args[0])
 {
-    ### $args[0]には<username>@<hostname>形式を想定
+    ### $args[0] = Alias. UPN notation is recommended.
     [System.String] $ssh_alias = $args[0]
     [System.Array] $ssh_args = $args[0] -split "@"
     [System.String] $ssh_log = "$log_dir\" + $ssh_args[1] + "_" + $ssh_args[0] + "_" + $date + "_" + $time + ".log"
     
-    ### $args[0]の値と、CSV内のAliasの値で、一致するものを取得する
+    ### Get a match with the value of $args[0] and the value of Alias in CSV.
     [System.Array] $csv_data = Import-Csv $csv_file | Where-Object { $_.Alias -eq $ssh_alias }
     
-    ### $args[0]の値と、CSV内のAliasの値で、一致するものが存在する場合
+    ### If there is a match between the value of $args[0] and the value of Alias in CSV,
     if ($csv_data)
     {
-        ### TeraTermに渡す引数を作成
+        ### Create arguments to pass to ttermpro.exe.
         [System.String] $opt_host = "ssh2://" + $csv_data[0].Hostname + ":" + $csv_data[0].Port
         [System.String] $opt_user = "/user=" + $csv_data[0].Username
         [System.String] $opt_auth = "/auth=" + $csv_data[0].AuthType
@@ -113,10 +112,10 @@ if ($args[0])
         [System.Array] $opt_array = @($opt_host,$opt_user,$opt_auth,$opt_value,$opt_dir,$opt_log,"/ssh-v","/LA=J")
 
     }
-    ### $args[0]の値と、CSV内のAliasの値で、一致するものが存在しない場合
+    ### If there is no matching match between the value of $args[0] and the value of Alias in CSV,
     else
     {
-        ### CSVの内容を表示
+        ### Show contents of CSV.
         Get-Item $csv_file
         Import-Csv $csv_file | Where-Object { ($_.Alias) } | Select-Object Username,Hostname,Alias | Format-Table -AutoSize
         [Console]::ReadKey() | Out-Null
@@ -131,15 +130,15 @@ else
     [System.Array] $opt_array = @($opt_dir,$opt_log,"/ssh-v","/LA=J")
 }
 
-### teratermを実行
+### Run teraterm.
 $ssh_process = Start-Process -FilePath $ssh_client -ArgumentList $opt_array -PassThru -Wait
-### teratermログファイルの属性を読み込み専用に変更
+### Change attribute of teraterm log file to read only.
 Set-ItemProperty -Path $ssh_log -Name Attributes -Value Readonly
-### teratermログファイルの内容を表示(個人的な趣味)
+### Display the contents of teraterm log file (personal preference...).
 Get-Content -Path $ssh_log
-### teratermログファイルの情報を画面に出力
+### Output contents of teraterm log file to screen.
 Write-Output "$(Get-Date -Format yyyy-MM-ddThh:mm:sszzz) [INFO]: Log file: $ssh_log"
-### TeraTermが異常終了 => 既に確立済みのsshセッションが、ネットワーク切断等により強制終了した場合
+### TeraTerm abnormal termination: A case where an already established ssh session is forcibly terminated due to network disconnection or the like.
 if ($ssh_process.ExitCode -ne 0)
 {
     Write-Output "$(Get-Date -Format yyyy-MM-ddThh:mm:sszzz) [ERROR]: ttermpro.exe exit code NOT equal 0."
