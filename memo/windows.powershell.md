@@ -49,12 +49,12 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 
 ```
 
-### ファイル名取得(`basename $filename`),フルパス取得(`readlink -f $filename`), 拡張子取得
+### ファイル名取得(`basename $file`),フルパス取得(`readlink -f $file`), 拡張子取得
 ```PowerShell
-(Get-Item $filename).BaseName
+(Get-Item $file).BaseName
 
-(Get-Item $filename).FullName
+(Get-Item $file).FullName
 
-(Get-Item $filename).Extension
+(Get-Item $file).Extension
 ```
 
