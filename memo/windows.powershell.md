@@ -39,7 +39,7 @@ dcomcnfg.exe
 [Console]::ReadKey() | Out-Null
 ```
 
-### Windowsの機能の有効化
+### Windowsの機能の有効化（Windows10用）
 ```PowerShell
 # Windowsの機能のステータスの確認
 Get-WindowsOptionalFeature -Online
@@ -47,5 +47,14 @@ Get-WindowsOptionalFeature -Online
 # Windowsの機能の有効化(例はHyper-V)
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 
+```
+
+### ファイル名取得(`basename $filename`),フルパス取得(`readlink -f $filename`), 拡張子取得
+```PowerShell
+(Get-Item $filename).BaseName
+
+(Get-Item $filename).FullName
+
+(Get-Item $filename).Extension
 ```
 
