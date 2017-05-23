@@ -1,4 +1,4 @@
-### ログ確認
+## ログ確認
 ```PowerShell
 # ログの種類一覧の表示
 Get-EventLog -List
@@ -21,7 +21,7 @@ $cred = Get-Credential $userName
 Invoke-RestMethod -Uri https://basic.auth/ -Credential $cred
 ```
 
-### プロダクトキー確認
+## プロダクトキー確認
 ```PowerShell
 (Get-WmiObject -Class SoftwareLicensingService).OA3xOriginalProductKey
 ```
@@ -29,17 +29,17 @@ Invoke-RestMethod -Uri https://basic.auth/ -Credential $cred
 (Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKey
 -->
 
-### DCOMの無効/有効 ([参考](http://www.geekpage.jp/practical/winxp-tips/dcomcnfg.php))
+## DCOMの無効/有効 ([参考](http://www.geekpage.jp/practical/winxp-tips/dcomcnfg.php))
 ```cmd
 dcomcnfg.exe
 ```
 
-### `cmd.exe`で言うところの`pause`
+## `cmd.exe`で言うところの`pause`
 ```PowerShell
 [Console]::ReadKey() | Out-Null
 ```
 
-### Windowsの機能の有効化（Windows10用）
+## Windowsの機能の有効化（Windows10用）
 ```PowerShell
 # Windowsの機能のステータスの確認
 Get-WindowsOptionalFeature -Online
@@ -49,7 +49,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 
 ```
 
-### ファイル名取得(`basename $file`),フルパス取得(`readlink -f $file`), 拡張子取得
+## ファイル名取得(`basename $file`),フルパス取得(`readlink -f $file`), 拡張子取得
 ```PowerShell
 (Get-Item $file).BaseName
 
