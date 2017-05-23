@@ -1,3 +1,8 @@
+## nslookup
+```
+nslookup -q=mx mail.initsh.com
+```
+
 ## ログ確認
 ```PowerShell
 # ログの種類一覧の表示
