@@ -19,7 +19,7 @@
 ################
 # constant
 ################
-$psDir = "$env:USERPROFILE\Documents\WindowsPowerShell"; if (-Not(Test-Path -Path $psDir)) { mkdir $psDir }
+$psDir = "$env:USERPROFILE\Documents\WindowsPowerShell"; if (-Not(Test-Path -Path $psDir)) { mkdir $psDir 1>$null 2>$null }
 $psProfile = "$psDir\Microsoft.PowerShell_profile.ps1"
 $vimZip = "$env:USERPROFILE\Documents\vim.zip"
 $vimUri = 'https://github.com/koron/vim-kaoriya/releases/download/v8.0.0596-20170502/vim80-kaoriya-win64-8.0.0596-20170502.zip'
@@ -59,7 +59,7 @@ else
 }
 
 # If there is no description about Vim in Profile,
-if (-Not((Get-Content $psProfile | Select-String '# vim').Matches.Success))
+if (-Not((Get-Content $psProfile 2>$null | Select-String '# vim').Matches.Success))
 {
     # Add a description about Vim.
     Write-Output "# vim`r`nNew-Alias vi $vimExe`r`nNew-Alias vim $vimExe`r`nfunction view() { $vimExe -R `$args }`r`n" >> $psProfile
@@ -72,4 +72,3 @@ Write-Output "================================"
 Get-Content $psProfile
 Write-Output "================================"
 [Console]::ReadKey() | Out-Null
-
