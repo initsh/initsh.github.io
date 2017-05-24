@@ -32,7 +32,7 @@ $vimUri = 'https://github.com/koron/vim-kaoriya/releases/download/v8.0.0596-2017
 if (-Not(Test-Path -Path $vimZip)) { Invoke-RestMethod -Uri $vimUri -OutFile $vimZip -UseBasicParsing }
 
 # Unzip vim.zip.
-if (-Not(Test-Path -Path $vimZip))
+if (Test-Path -Path $vimZip)
 {
     if (-Not(Test-Path -Path "$env:USERPROFILE\Documents\vim*\vim.exe"))
     {
