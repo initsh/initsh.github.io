@@ -67,7 +67,9 @@ if (-Not((Get-Content $psProfile | Select-String '# vim').Matches.Success))
 
 # Display Profile information.
 Get-Item $psProfile
-Write-Output '================'
+Write-Output "`r`n"
+Write-Output "================================"
 Get-Content $psProfile
-Write-Output '================'
+Write-Output "================================"
+[Console]::ReadKey() | Out-Null
 
