@@ -42,7 +42,7 @@ if (-Not(Test-Path -Path $vimZip))
     }
 }
 else
-}
+{
     Write-Output "[ERROR]: Failed to download from Uri($vimUri)."
     exit 1
 }
