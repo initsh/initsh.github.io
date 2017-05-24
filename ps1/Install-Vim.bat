@@ -21,7 +21,7 @@
 ################
 $psDir = "$env:USERPROFILE\Documents\WindowsPowerShell"; if (-Not(Test-Path -Path $psDir)) { mkdir $psDir }
 $psProfile = "$psDir\Microsoft.PowerShell_profile.ps1"
-$vimZip = "$docDir\vim.zip"
+$vimZip = "$env:USERPROFILE\Documents\vim.zip"
 $vimUri = 'https://github.com/koron/vim-kaoriya/releases/download/v8.0.0596-20170502/vim80-kaoriya-win64-8.0.0596-20170502.zip'
 
 
@@ -29,15 +29,34 @@ $vimUri = 'https://github.com/koron/vim-kaoriya/releases/download/v8.0.0596-2017
 # main
 ################
 # Get vim.zip.
-Invoke-RestMethod -Uri $vimUri -OutFile $vimZip -UseBasicParsing
+if (-Not(Test-Path -Path $vimZip)) { Invoke-RestMethod -Uri $vimUri -OutFile $vimZip -UseBasicParsing }
 
 # Unzip vim.zip.
-$shApp = New-Object -Com shell.application
-$unzip = $shApp.NameSpace($vimZip)
-foreach ($item in $unzip.items()) { $shApp.Namespace("$env:USERPROFILE\Documents").copyhere($item, 0x8); }
+if (-Not(Test-Path -Path $vimZip))
+{
+    if (-Not(Test-Path -Path "$env:USERPROFILE\Documents\vim*\vim.exe"))
+    {
+        $shApp = New-Object -Com shell.application
+        $unzip = $shApp.NameSpace($vimZip)
+        foreach ($item in $unzip.items()) { $shApp.Namespace("$env:USERPROFILE\Documents").copyhere($item, 0x8); }
+    }
+}
+else
+}
+    Write-Output "[ERROR]: Failed to download from Uri($vimUri)."
+    exit 1
+}
 
 # Get the full path of the vim.exe.
-$vimExe = (Get-Item "$env:USERPROFILE\Documents\vim*\vim.exe").FullName
+if (Test-Path -Path "$env:USERPROFILE\Documents\vim*\vim.exe")
+{
+    $vimExe = (Get-Item "$env:USERPROFILE\Documents\vim*\vim.exe").FullName
+}
+else
+{
+    Write-Output "[ERROR]: Failed to unzip file($vimZip)."
+    exit 1
+}
 
 # If there is no description about Vim in Profile,
 if (-Not((Get-Content $psProfile | Select-String '# vim').Matches.Success))
@@ -48,7 +67,7 @@ if (-Not((Get-Content $psProfile | Select-String '# vim').Matches.Success))
 
 # Display Profile information.
 Get-Item $psProfile
+Write-Output '================'
 Get-Content $psProfile
+Write-Output '================'
 
-
-# EOF
