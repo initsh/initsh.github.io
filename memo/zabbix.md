@@ -8,7 +8,7 @@
 yum -y install httpd
 yum -y install mysql-server
 yum -y install http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
-yum-config-manager --disablerepo=zabbiz*
+yum-config-manager --disablerepo=zabbix*
 yum -y --enablerepo=zabbix install zabbix-server-mysql zabbix-web-mysql zabbix-web-japanese
 chkconfig mysqld on
 service mysqld start
@@ -36,7 +36,7 @@ lokkit -p 10051:tcp
 - ListenPort 10050
 ```
 yum -y install http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
-yum-config-manager --disablerepo=zabbiz*
+yum-config-manager --disablerepo=zabbix*
 yum -y --enablerepo=zabbix install zabbix-agent
 sed -r -e 's/^(# )(HostnameItem=system.hostname)$/\1\2\n# '"$(date +%Y%m%d)"' #\n\2\n# '"$(date +%Y%m%d)"' #/g' /etc/zabbix/zabbix_agentd.conf -i
 sed -r -e 's/^(Hostname=Zabbix server)$/# '"$(date +%Y%m%d)"' #\1/g' /etc/zabbix/zabbix_agentd.conf -i
